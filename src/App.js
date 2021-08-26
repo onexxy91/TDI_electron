@@ -18,6 +18,7 @@ import Signup from './component/Signup';
 import SignupMain from './component/SignupMain';
 import DisitalInterviewReal from './component/DisitalInterviewList';
 import DisitalInterviewDutyList from './component/DisitalInterviewDutyList';
+import TodayEng from './component/TodayEng';
 import './App.css';
 import InterviewRecord from './component/InterviewRecord';
 
@@ -109,6 +110,7 @@ function App() {
               <Route path="/signupMain" component={SignupMain} />
               <Route path="/interviewDutyList" component={DisitalInterviewDutyList} />
               <Route path="/interviewRecord" component={InterviewRecord} />
+              <Route path="/todayEng" component={TodayEng} />
               {/* <Route path="/test" component={test} /> */}
             </Switch>
           </section>

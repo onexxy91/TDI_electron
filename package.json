@@ -2,26 +2,95 @@
   "name": "electron-forge",
   "version": "0.1.0",
   "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
   "dependencies": {
+    "@tensorflow-models/blazeface": "^0.0.7",
+    "@tensorflow-models/face-landmarks-detection": "0.0.1",
+    "@tensorflow-models/facemesh": "^0.0.5",
+    "@tensorflow/tfjs-backend-cpu": "2.4.0",
+    "@tensorflow/tfjs-backend-webgl": "2.4.0",
+    "@tensorflow/tfjs-converter": "2.4.0",
+    "@tensorflow/tfjs-core": "^2.4.0",
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
+    "electron-is-dev": "^1.2.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "font-awesome": "^4.7.0",
+    "form-data": "^4.0.0",
+    "fs": "^0.0.1-security",
+    "global": "^4.4.0",
+    "hangul-js": "^0.2.6",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
+    "react-background-slider": "^2.0.0",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
+    "react-hangul-virtual-keyboard": "^1.0.0",
+    "react-icons": "^4.2.0",
+    "react-modal": "^3.14.3",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "react-slick": "^0.28.1",
+    "react-transition-group": "^4.4.2",
+    "react-video-recorder": "^3.18.4",
+    "react-webcam": "^5.2.4",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6",
+    "request": "^2.88.2",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^5.3.0",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "rescripts start",
+    "build": "rescripts build",
+    "test": "rescripts test",
+    "eject": "react-scripts eject",
+    "dev": "concurrently -k \"yarn start\" \"yarn:electron\"",
+    "electron": "wait-on tcp:3000 && electron .",
+    "package": "react-scripts build && electron-forge package",
+    "deploy": "rescripts build && electron-builder --windows nsis:ia32",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "electron-builder build -mwl"
   },
+  "proxy": "http://cms.innospeech.com",
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "build": {
+    "productName": "HelloElectron",
+    "appId": "com.innospeech.client",
+    "asar": true,
+    "protocols": {
+      "name": "helloElectron",
+      "schemes": [
+        "helloelectron"
+      ]
+    },
+    "win": {
+      "target": [
+        "zip",
+        "nsis"
+      ],
+      "icon": "./resources/installer/spark1.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": {
+      "buildResources": "./resources/installer/",
+      "output": "./dist/",
+      "app": "."
+    }
   },
   "browserslist": {
     "production": [
@@ -34,5 +103,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@rescripts/cli": "^0.0.16",
+    "@rescripts/rescript-env": "^0.0.14",
+    "concurrently": "^6.2.0",
+    "electron": "^9.1.1",
+    "electron-builder": "^22.11.7",
+    "typescript": "^4.3.5",
+    "wait-on": "^5.3.0"
   }
 }

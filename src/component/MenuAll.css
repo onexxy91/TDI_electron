@@ -1,0 +1,216 @@
+.aontainer {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    height: 100vh;
+    justify-content: flex-start;
+    background-color: rgba(4, 4, 14, 0.774);
+    align-items: center;
+    overflow: hidden;
+    background-size: cover;
+    -webkit-user-select:none; 
+    -moz-user-select:none; 
+    -ms-user-select:none; 
+    user-select:none;
+    font-family: "gmaget";
+}
+.topContainer {
+    display: flex;
+    flex-direction: row;
+    height: 7vh;
+    width: 90%;
+    color: white;
+    justify-content: space-between;
+    border-bottom: 0.01rem solid;
+    border-color: grey;
+    /* background-color: blanchedalmond; */
+}
+p {
+    margin-left: 7px;
+}
+.topContainer button {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.007);
+    font-size: 22px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: "gmaget";
+}
+.firContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 90%;
+    /* background-color: orchid; */
+    margin-top: 5vh;
+    
+}
+.firItem1 {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(253, 252, 252);
+    width: 48%;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+}
+h2 {
+    display: flex;
+    background-color: rgb(253, 131, 16);
+    width: 100%;
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 6vh;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+ul {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding-left: 30px;
+    width: 80%;
+}
+li {
+    border-bottom: 0.01rem solid;
+    border-color: rgba(90, 88, 88, 0.315);
+    margin-bottom: 1.5vh;
+    height: 3.5vh;
+}
+.firItem1 button {
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: rgb(253, 252, 252);
+    font-family: "gmaget";
+}
+.firItem2 {
+    background-color: rgb(253, 252, 252);
+    width: 48%;
+    height: 88%;
+}
+.firItem2 button {
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: rgb(253, 252, 252);
+    font-family: "gmaget";
+}
+.secContainer {
+    margin-top: 3vh;
+    display: flex;
+    width: 90%;
+    /* background-color: honeydew; */
+    justify-content: space-around;
+    height: 8vh;
+    
+}
+.menuLink {
+    width: 100%;
+    height: 6vh;
+}
+.realtime {
+    margin: 0px;
+    padding-bottom: 5px;
+    width: 99%;
+    height: 6vh;
+    color: white;
+    background-color: rgb(253, 131, 16);
+    font-size: 24px;
+    border:none;
+    outline: none;
+    cursor: pointer;
+    font-family: "gmaget";
+}
+.notice {
+    margin: 0px;
+    padding-bottom: 5px;
+    width: 99%;
+    height: 6vh;
+    color: white;
+    background-color: rgb(40, 54, 182);
+    font-size: 24px;
+    border:none;
+    outline: none;
+    cursor: pointer;
+    font-family: "gmaget";
+}
+.thrContainer {
+    display: flex;
+    width: 89%;
+    background-color: teal;
+    justify-content: space-around;
+    
+}
+
+.disitalIn {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+    background-color:rgb(253, 252, 252);
+}
+
+.disitalIn button {
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: rgb(253, 252, 252);
+    font-family: "gmaget";
+}
+
+.disitalIn h2 {
+    display: flex;
+    background-color: rgb(137, 192, 34);
+    width: 100%;
+    color: white;
+    margin: 0;
+    height: 6vh;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+.fourContainer {
+    display: flex;
+    width: 90%;
+    /* background-color: violet; */
+    margin-top: 20px;
+    justify-content: space-around;
+    
+}
+
+
+.quest {
+    margin: 0px;
+    padding-bottom: 5px;
+    width: 99%;
+    height: 6vh;
+    color: white;
+    background-color: rgb(226, 212, 19);
+    font-size: 24px;
+    border:none;
+    outline: none;
+    cursor: pointer;
+    font-family: "gmaget";
+}
+.centerde {
+    margin: 0px;
+    padding-bottom: 5px;
+    width: 99%;
+    height: 6vh;
+    color: white;
+    background-color: rgb(253, 131, 16);
+    font-size: 24px;
+    border:none;
+    outline: none;
+    cursor: pointer;
+    font-family: "gmaget";
+}
+

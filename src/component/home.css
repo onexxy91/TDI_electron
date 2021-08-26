@@ -1,0 +1,338 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap; 
+    height: 100%;
+    width:100%;
+    background-repeat: no-repeat;
+    background-color: rgb(51, 49, 63);
+    background-size: 100%;
+    justify-content: space-between;
+    overflow: hidden;
+    align-items: center;
+    -webkit-user-select:none; 
+    -moz-user-select:none; 
+    -ms-user-select:none; 
+    user-select:none;
+    font-family: "gmaget";
+    transition: all 500ms ease-in 0s;
+    /* background-image: url(http://cms.innospeech.com/file/down/image/23146) */
+}
+
+.logoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+     /* background-color: tomato;   */
+    border-bottom: 0.01rem solid;
+    border-color: rgba(197, 197, 197, 0.466);
+    height: 6vh;
+    width: 91%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.logoBtn {
+    width: 16vh;
+    height: 5vh;
+    border: none;
+    background-color: rgba(24, 114, 231, 0);
+    outline: none;
+    cursor: pointer;
+    flex: 1;
+    color: white;
+}
+.settingBtn {
+    border: none;
+    background-color: rgba(24, 114, 231, 0);
+    outline: none;
+    cursor: pointer;
+    color: white;
+    font-family: "gmaget"
+}
+.logoContainer button img {
+    width: 15vh;
+    height:5vh;
+    position: relative;
+    -webkit-user-drag: none;
+}
+.weatherContainer {
+    display: flex;
+    flex-direction: row;
+       /* background-color: teal;   */
+    justify-content: flex-end;
+    align-items: center;
+    width: 25vh;
+    height: 7vh;
+    margin-right: 20px;
+}
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.left p, .right p{
+    margin: 0;
+    padding: 0;;
+}
+#today {
+    font-size: 12px;
+    font-weight: 1;
+}
+#temp {
+    font-size: 22px;
+    font-weight: 600;
+}
+.weatherContainer .right {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2vh;
+}
+
+.placardContainer {
+    margin-top: 4.9vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 47vh;
+    height: 16vh;
+    /* overflow: hidden;  */
+    /* background-color: honeydew; */
+}
+
+.plImage {
+    width: 47vh;
+    height: 16vh; 
+}
+
+ p { /* 임시로 */
+    color: white;
+}
+.centerSlide {
+    display: flex;
+    height: 5vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16vh;
+    margin-bottom: 1vh;
+}
+.menuBtnContainer {
+    display: flex;
+    flex-flow: row wrap;
+    /* background-color: rgba(184, 164, 192, 0.553);  */
+    width: 99%;
+    height: 10vh;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 7px;
+    margin-top: 0.2vh;
+    /* padding-left: 3vh; */
+}
+.menuBtnContainer1 {
+    display: flex;
+    flex-flow: row wrap;
+    /* background-color: rgba(184, 164, 192, 0.553);  */
+    width: 99%;
+    height: 10vh;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 7px;
+    margin-top: 0.1vh;
+    /* padding-left: 3vh; */
+}
+.menuBtnContainer button {
+    height: 10vh;
+    width: 18.4vh;
+    border: none;
+    /* border-radius: 50%; */
+    background-color: rgb(163, 8, 8, 0.8); 
+    /* margin-top: 5px; */
+    outline: none;
+    cursor: pointer;
+    color: white;
+    font-size: x-large;
+    font-family: "gmaget";
+    /* margin-right: 1vh; */
+}
+.menuBtnContainer1 button {
+    height: 10vh;
+    width: 18.4vh;
+    border: none;
+    /* border-radius: 50%; */
+    background-color: rgb(23, 103, 168, 0.855); 
+    /* margin-top: 5px; */
+    outline: none;
+    cursor: pointer;
+    color: white;
+    font-family: "gmaget";
+    font-size: x-large;
+    /* margin-right: 1vh; */
+}
+.menuBtnContainer button:active {
+    /* box-shadow:200px 0 0 0 rgba(43, 143, 209, 0.5) inset; */
+}
+
+.menuBtnContainer button img {
+    width: 11vh;
+    height: 11vh;
+    -webkit-user-drag: none;
+}
+
+.contentBtnContainer {
+    display: flex;
+    flex-direction: row;
+    /* background-color: tomato; */
+    height: 23vh;
+    width: 95%;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 3vh;
+}
+.sub1 {
+    flex:1;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* background-color: honeydew;    */
+    align-items: center;
+}
+a{
+    -webkit-user-drag: none;
+    -webkit-user-select:none; 
+    -moz-user-select:none; 
+    -ms-user-select:none; 
+    user-select:none;
+}
+.sub1 button {
+    width: 25vh;
+    height: 7vh;
+    border-radius: 10px;
+    color: white;
+    background-color: rgba(13, 241, 135, 0);
+    margin-top: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.sub1 button:active {
+    /* box-shadow:25vh 0 0 0 rgba(43, 143, 209, 0.5) inset; */
+}
+
+.sub1 button img {
+    width: 24vh;
+    height: 7vh;
+    -webkit-user-drag: none;
+}
+.sub2 {
+    flex:1;
+    height: 100%;
+    /* margin-left: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: honeydew; */
+}
+.sub2 button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: white;
+    background-color: rgba(200, 219, 30, 0);
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.sub2 button:active {
+    /* box-shadow:25vh 0 0 0 rgba(43, 143, 209, 0.5) inset; */
+}
+.sub2 button img {
+    width: 100%;
+    height: 100%;
+    -webkit-user-drag: none;
+}
+
+.footMenuContainer {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(85, 81, 81, 0.4);
+    width: 100%;
+    height: 8vh;
+    justify-content: space-evenly;
+    font-family: "gmaget";
+   
+}
+.footMenuContainer a {
+    height: 8vh;
+    flex: 1;
+    background-color: rgb(85, 81, 81, 0.4);
+    color: rgb(170, 165, 165);
+    outline: none;
+    cursor: pointer;
+    border-radius: 1vh;
+    width: 100%;
+    font-family: "gmaget";
+}
+
+.footMenuContainer button {
+    height: 8vh;
+    flex: 1;
+    background-color: rgb(85, 81, 81, 0.4);
+    color: rgb(170, 165, 165);
+    outline: none;
+    cursor: pointer;
+    border-radius: 1vh;
+    width: 100%;
+    font-family: "gmaget";
+    font-size: 16px;
+    font-weight: 600;
+}
+.hidden {
+    display: none;
+  }
+.simple-keyboard {
+    width:100%;
+    
+}
+.simple-keyboard.hg-theme-default.myTheme {
+    border: 5px solid rgb(255, 0, 0, 0.7);
+    border-radius: 10px;
+    margin: 10px;
+    width: calc(100% - 20px);
+}
+  
+.simple-keyboard.hg-layout-default .hg-button.hg-red {
+    background: rgba(255, 255, 255);
+    width: 5vh;
+    height: 7.5vh;
+    color: black;
+}
+.simple-keyboard.hg-theme-shift.myTheme {
+    border: 5px solid rgb(255, 0, 0, 0.7);
+    border-radius: 10px;
+    margin: 10px;
+    width: calc(100% - 20px);
+}
+  
+.simple-keyboard.hg-layout-shift .hg-button.hg-red {
+    background: rgba(255, 255, 255);
+    width: 5vh;
+    height: 7.5vh;
+    color: black;
+}
+.keyboardContainer {
+    margin: 0 auto;
+    margin-top: 63vh;
+    text-align: center;
+    background-color: black;
+    width:100%;
+    height: 30vh;
+    position: absolute;
+  }

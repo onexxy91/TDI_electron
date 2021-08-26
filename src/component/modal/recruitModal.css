@@ -1,0 +1,155 @@
+.modalContainer {
+    display: flex;
+    flex-flow: column;
+    /* background-color: rgb(218, 168, 168); */
+    height: 100%; 
+    width: 100%;
+    overflow: hidden;
+    justify-content: space-between;
+    -webkit-user-select:none; 
+    -moz-user-select:none; 
+    -ms-user-select:none; 
+    user-select:none;
+    font-family: "gmaget";
+}
+.top {
+    display: flex;
+    justify-content: center;
+    flex-flow: column nowrap;
+    align-items: center;
+    /* overflow: hidden; */
+    width: 100%;
+    border-bottom: 0.1rem solid rgba(156, 149, 149, 0.315);
+    /* background-color: hotpink; */
+}
+#title {
+    color: black;
+    font-size: 25px;
+    font-weight: 600;
+    /* background-color: blanchedalmond; */
+}
+.recruitInfo {
+    display: flex;
+    flex-flow: column;
+    /* background-color: grey; */
+    /* height: 100%; */
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: scroll;
+    overflow-x:hidden;
+}
+.recruitInfo::-webkit-scrollbar {
+    width: 10px;
+}
+.recruitInfo::-webkit-scrollbar-thumb {
+    background-color: rgb(247, 134, 28);
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+.recruitInfo::-webkit-scrollbar-track {
+    background-color: rgb(241, 219, 197);
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+.subTitle {
+    font-size: 26px;
+    color: rgb(240, 114, 64);
+    font-weight: 600;
+    margin-bottom: 5px;
+    margin-top: 3vh;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    /* min-height: 6vh; */
+    /* background-color: rgb(236, 169, 169); */
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 0.1rem solid rgba(128, 128, 128, 0.226);
+    border-bottom: 0.1rem solid rgba(128, 128, 128, 0.226);
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+#text {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 600;
+    border-right: 0.1rem solid rgba(128, 128, 128, 0.329);
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#value {
+    flex: 2;
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 7px;
+    white-space: pre-wrap;
+    color: rgb(116, 113, 112);
+    /* background-color: honeydew;  */
+}
+.jobiframe {
+    width: 100%;
+    /* background-color: blueviolet; */
+}
+ .jobDetailView{
+    margin-right: 30px;
+    overflow-x:hidden;
+} 
+.btnGroup {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* background-color: burlywood; */
+    justify-content: space-between;
+}
+.closeBtn {
+    flex: 1;
+    color: white;
+    background-color: tomato;
+    border: none;
+    border-radius: 3px;
+    height: 7vh;
+    outline: none;
+    cursor: pointer;
+    /* margin-right: 3px; */
+    font-family: "gmaget";
+}
+.btnGroup :nth-child(1) {
+    flex: 1;
+    color: white;
+    background-color: rgb(255, 123, 0);
+    border: none;
+    height: 7vh;
+    outline: none;
+    cursor: pointer;
+    /* margin-right: 3px; */
+    font-family: "gmaget";
+    font-size: 21px;
+}
+.btnGroup :nth-child(2) {
+    flex: 1;
+    color: white;
+    background-color: rgb(204, 97, 9);
+    border: none;
+    height: 7vh;
+    outline: none;
+    cursor: pointer;
+    /* margin-right: 3px; */
+    font-family: "gmaget";
+    font-size: 21px;
+}
+.btnGroup :nth-child(3) {
+    flex: 1;
+    color: white;
+    background-color: rgb(102, 100, 100);
+    border: none;
+    height: 7vh;
+    outline: none;
+    cursor: pointer;
+    /* margin-right: 3px; */
+    font-family: "gmaget";
+    font-size: 21px;
+}

@@ -3,10 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import rootReducer from './redux/reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
+import { HashRouter } from 'react-router-dom';
+
+const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={store}>
+    <HashRouter>
     <App />
+    </HashRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

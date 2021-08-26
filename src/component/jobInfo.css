@@ -1,0 +1,141 @@
+.bontainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    justify-content: space-between;
+    overflow: hidden;
+    align-items: center;
+    -webkit-user-select:none; 
+    -moz-user-select:none; 
+    -ms-user-select:none; 
+    user-select:none;
+    background-repeat: no-repeat;
+    background-color: rgb(241, 237, 233);
+    background-size: 100%;
+    /* background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%); */
+    font-family: "gmaget";
+}
+.titleContainer {
+    width: 100%;
+    height: 24vh;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: grey; */
+    font-family: "gmaget";
+    
+    
+}
+.titleContainer h1 {
+    color: rgb(251, 250, 250);
+    font-weight: 300;
+    font-size: 3.5vh;
+}
+.titleContainer button {
+    color: white;
+    background-color: rgba(19, 18, 18, 0.486);
+    width: 7vh;
+    height: 7vh;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-family: "gmaget";
+}
+
+.infobtnContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    /* background-color: hotpink; */
+    width: 90%;
+    height: 50vh;
+}
+.infobtnContainer button {
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    font-size: 22px;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+    border-color: rgb(206, 210, 211);
+    padding-bottom: 8vh;
+    box-shadow:  5px 5px 5px gray;
+    font-family: "gmaget";
+}
+.default-link {
+    height: 8vh;
+    width: 97%;
+    /* background-color: blanchedalmond; */
+}
+.half-link {
+    height: 8vh;
+    width: 48%;
+    /* background-color: blue; */
+}
+.allBtn {
+    height: 8vh;
+    width: 100%;
+}
+.youthBtn {
+    height: 8vh;
+    width: 100%;
+}
+.middleBtn {
+    height: 8vh;
+    width: 100%;
+}
+.womenBtn {
+    height: 8vh;
+    width: 100%;
+}
+.disBtn {
+    height: 8vh;
+    width: 100%;
+}
+.smallBtn {
+    height: 8vh;
+    width: 49%;
+}
+.kongchaeContainer{
+    display: flex;
+    height: 13.5vh; 
+    width: 90%;
+    /* background-color: khaki; */
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vh;
+    margin-bottom: 0.5vh;
+    border-top:  0.01rem solid;
+    border-color: rgba(160, 165, 168, 0.719);
+    
+}
+.kongchaeContainer button {
+    height: 8vh;
+    width: 98%;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    font-size: 22px;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+    border-color: rgb(190, 201, 202);
+    padding-bottom: 8vh;
+    box-shadow:  5px 5px 5px gray;
+    font-family: "gmaget";
+}
+.footer {
+    display: flex;
+    height: 5vh;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: rgb(51, 49, 63, 0.38);
+}

@@ -52,7 +52,7 @@ export default function FunFunMain({ history }) {
                 <Link  to="/middleJobInfo">
                     <button style={btnStyle}><FaRegWindowMinimize size="30" color="#4158D0"/><br/>크로마키 촬영</button>
                 </Link>
-                <Link  to="/womenJobInfo">
+                <Link  to="/jobTest">
                     <button style={btnStyle}><FaRegWindowMinimize size="30" color="#FBAB7E"/><br/>직업테스트</button>
                 </Link>
                 <Link  to="/disJobInfo">

@@ -21,6 +21,7 @@ import DisitalInterviewDutyList from './component/DisitalInterviewDutyList';
 import TodayEng from './component/TodayEng';
 import './App.css';
 import InterviewRecord from './component/InterviewRecord';
+import JobTest from './component/jobTest/JobTest';
 
 const electron = window.require('electron');
 
@@ -111,6 +112,7 @@ function App() {
               <Route path="/interviewDutyList" component={DisitalInterviewDutyList} />
               <Route path="/interviewRecord" component={InterviewRecord} />
               <Route path="/todayEng" component={TodayEng} />
+              <Route path="/jobTest" component={JobTest} />
               {/* <Route path="/test" component={test} /> */}
             </Switch>
           </section>

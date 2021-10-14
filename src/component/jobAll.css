@@ -12,7 +12,7 @@
     background-color: rgba(19, 18, 18, 0.486);
     width: 7vh;
     height: 7vh;
-    font-size: 12px;
+    font-size: 1.5vh;
     outline: none;
     cursor: pointer;
     border: none;
@@ -41,7 +41,7 @@ p {
     width: 14vh;
     height: 6vh;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 2vh;
     font-weight: 560;
     margin-right: 2px;
     border: 2px solid rgb(255, 123, 0);
@@ -67,7 +67,7 @@ p {
 
 option {
     color: rgb(39, 39, 43);
-    font-size: 28px;
+    font-size: 2vh;
     background-color: rgb(243, 230, 213);
     border: 2px solid black;
     border-radius: 10px;
@@ -80,7 +80,7 @@ option {
     border-bottom-left-radius: 8px;
     border: 0.1px solid;
     border-color: rgba(194, 182, 182, 0.534);
-    font-size: 20px;
+    font-size: 2vh;
     color: grey;
     font-family: "gmaget";
 }

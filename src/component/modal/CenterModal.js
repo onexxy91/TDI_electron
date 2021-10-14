@@ -25,5 +25,4 @@ const CenterModal = (props) =>{
         </ReactModal>
     )
 }
-
 export default CenterModal;

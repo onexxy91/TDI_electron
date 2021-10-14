@@ -8,7 +8,7 @@ export default function JobAType( props ) {
         justifyContent: "flex-start",
         alignItems: "center",
         width: "90%",
-        height: "75vh",
+        height: "78vh",
        
     }
     return (<section style={style}>
@@ -17,11 +17,11 @@ export default function JobAType( props ) {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        height: "72vh",
-        backgroundImage:"url(./AType.png)", 
-        backgroundSize: "100%", 
+        height: "74vh",
+        // backgroundImage:"url(./AType.png)", 
+        // backgroundSize: "100%", 
         }}>
-           
+        <img style={{width:"100%"}} src="./AType.png"></img>
         </div>
           
     </section>

@@ -173,7 +173,6 @@ export default function JobAll({ history }) {
        }
     }, [])
 
-    
     const goBack = () => {
         history.goBack()
     }
@@ -263,24 +262,24 @@ export default function JobAll({ history }) {
             <div className="search">
                 <select ref={regionRef}>
                     {state.jobSiteType === "jobkorea" ? 
-                    regioncode.map((code) => {
+                    regioncode.map((code, index) => {
                         if (code.code === JOBKOREA_CODE) { //config 값으로 대체 해야함
                             return (
-                                <option value={code.code} selected>{code.value}</option>
+                                <option key={index} value={code.code} selected>{code.value}</option>
                             )
                         }else {
                             return (
-                                <option value={code.code}>{code.value}</option>
+                                <option key={index} value={code.code}>{code.value}</option>
                             )
                         }
-                }) : worknetRegion.map((code) => {
+                }) : worknetRegion.map((code, index) => {
                         if (code.code === WORKNET_CODE) { //config 값으로 대체 해야함
                             return (
-                                <option value={code.code} selected>{code.value}</option>
+                                <option key={index} value={code.code} >{code.value}</option>
                             )
                         }else {
                             return (
-                                <option value={code.code}>{code.value}</option>
+                                <option key={index} value={code.code}>{code.value}</option>
                             )
                         }
                     })}
@@ -292,7 +291,7 @@ export default function JobAll({ history }) {
                             <option value={code.code}>{code.value}</option>
                         )) : state.jobSiteType === "worknet" ?
                              worknetCode.map((code, index) => (
-                            <option value={code.code}>{code.value}</option>
+                            <option key={index} value={code.code}>{code.value}</option>
                         )) : <div></div>
                     }
                 </select>

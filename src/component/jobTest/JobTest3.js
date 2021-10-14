@@ -1,4 +1,7 @@
 import React, {useRef, useState} from 'react'
+import {FaBars, FaArrowLeft} from 'react-icons/fa';
+import {AiOutlineHome} from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 export default function JobTest3( props ) {
     console.log(props)
@@ -8,26 +11,30 @@ export default function JobTest3( props ) {
         justifyContent: "flex-start",
         alignItems: "center",
         width: "90%",
-        height: "75vh",
-       
+        height: "78vh",
+        
     }
     const btnboxStyle = {
         display: "flex",
-        width: "75%",
-        height: "20vh",
+        width: "80%",
+        justifyContent:"center",
+        height: "24vh",
+        marginTop:"43vh",
+        position:"absolute",
         
     }
     const BtnSelectStyle={
         display:"flex", 
         flexDirection:"column", 
         flex:"1", 
-        border:"grey 1px solid", 
+        border:"none", 
         alignItems:"center", 
         justifyContent:"center",
-        backgroundColor:"white",
+        backgroundColor:"rgb(255,255,255,0.1)",
         cursor: "pointer",
         fontSize: "large",
         fontFamily: "gmaget",
+        
     }
     const btnABStyle ={
         border:"none", 
@@ -37,33 +44,33 @@ export default function JobTest3( props ) {
         width:"25%", 
         height:"5vh",
         fontSize:"30px",
-        fontWeight:"600"
+        fontWeight:"600",
     }
     const spanStyle = {
-        fontSize:"20px", 
+        fontSize:"3vh", 
         fontWeight:"600", 
-        marginTop:"8px"
+        marginTop:"10px"
     }
     return (<section style={style}>
             <div style={{ display: "flex",
-        flexDirection : "column",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "72vh",
-        backgroundImage:"url(./clipboard-3827867_1280.png)", 
-        backgroundSize: "100%", 
+                flexDirection : "column",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                width: "100%",
+                height: "67vh",
+                marginTop:"2vh",
+                // backgroundImage:"url(./JobTestback.png)", 
+                // backgroundSize: "100%",
         }}>
-            {/* <img style={{margin:"0", width:"80%"}} src="./clipboard-307332_1280.png"></img> */}
-            <span style={{position:"absolute", marginTop:"30vh", borderBottomColor: "yellow", borderBottomStyle:"solid", borderBottomWidth:"4px"}}>테스트로 알아보는 나에게 맞는 직업</span>
-            <h1 style={{fontSize:"40px", marginTop:"2vh", width:"92%", width:"75%"}}>마음 맞는 사람과 다정하게 긴 시간 동안 이야기하는 경우가 많다.</h1>
+           <img style={{width:"100%"}} src="./jobTestback.png"></img>
+            <h1 style={{position:"absolute", fontSize:"3vh", height:"16vh", marginTop:"20vh", width:"75%"}}>마음 맞는 사람과 다정하게 긴 시간 동안 이야기하는 경우가 많다.</h1>
             <div style={btnboxStyle}>
                 <button style={BtnSelectStyle} onClick={()=> props.btnClick(6)}> 
-                    <div style={btnABStyle}>A</div>
+                    {/* <div style={btnABStyle}>A</div> */}
                     <span style={spanStyle}>YES</span>
                 </button>
-                <button style={BtnSelectStyle} onClick={()=> props.btnClick(7)}>
-                    <div style={btnABStyle}>B</div>
+                <button style={BtnSelectStyle} onClick={()=> props.btnClick(7)} >
+                    {/* <div style={btnABStyle}>B</div> */}
                     <span style={spanStyle}>NO</span>
                 </button>
             </div>

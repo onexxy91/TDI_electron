@@ -5,7 +5,7 @@
     height: 100%;
     width:100%;
     background-repeat: no-repeat;
-    background-color: rgb(51, 49, 63);
+    background-color: rgb(73, 70, 90);
     background-size: 100%;
     justify-content: space-between;
     overflow: hidden;
@@ -119,8 +119,9 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    margin-top: 16vh;
-    margin-bottom: 1vh;
+    margin-top: 12vh;
+    margin-bottom: 5vh;
+    
 }
 .menuBtnContainer {
     display: flex;
@@ -128,7 +129,7 @@
     /* background-color: rgba(184, 164, 192, 0.553);  */
     width: 99%;
     height: 10vh;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     border-radius: 7px;
     margin-top: 0.2vh;
@@ -140,7 +141,7 @@
     /* background-color: rgba(184, 164, 192, 0.553);  */
     width: 99%;
     height: 10vh;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     border-radius: 7px;
     margin-top: 0.1vh;
@@ -158,7 +159,7 @@
     color: white;
     font-size: x-large;
     font-family: "gmaget";
-    /* margin-right: 1vh; */
+    margin-right: 0.1vh;
 }
 .menuBtnContainer1 button {
     height: 10vh;
@@ -172,7 +173,7 @@
     color: white;
     font-family: "gmaget";
     font-size: x-large;
-    /* margin-right: 1vh; */
+    margin-right: 0.1vh;
 }
 .menuBtnContainer button:active {
     /* box-shadow:200px 0 0 0 rgba(43, 143, 209, 0.5) inset; */

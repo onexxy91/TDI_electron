@@ -40,7 +40,7 @@ const style ={
     const placard = state.data.placard;
     const url = 'https://naveropenapi.apigw.ntruss.com/vision/v1/face'
 
-    const imgs = ['./KakaoTalk_1.png', './KakaoTalk_2.png']
+    const imgs = ['./KakaoTalk_1.png', './KakaoTalk_2.png', './backSample1.png']
     const imageSlide = () => {
         //console.log("실행?", count);
         if (count > (imgs.length -1)) {
@@ -67,7 +67,7 @@ useEffect(() => {
                {/* <Slide /> */}
         </div>
         <div className="centerSlide">
-            <Link style={{textDecoration: "none"}}to="/centerNews"><CenterNewsSlide /></Link>
+            <Link style={{textDecoration: "none",}}to="/centerNews"><CenterNewsSlide /></Link>
         </div>
         {/* <div className="menuBtnContainer">
             {univFile.menu_btn_arr.map((menuBtn, index)=> (

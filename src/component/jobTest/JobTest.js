@@ -25,8 +25,23 @@ import JobTest22 from './JobTest22';
 import JobTest23 from './JobTest23';
 import JobTest24 from './JobTest24';
 import JobTest25 from './JobTest25';
+import JobTest26 from './JobTest26';
+import JobTest27 from './JobTest27';
+import JobTest28 from './JobTest28';
+import JobTest29 from './JobTest29';
+import JobTest30 from './JobTest30';
+import JobTest31 from './JobTest31';
+import JobTest32 from './JobTest32';
+import JobTest33 from './JobTest33';
+import JobTest34 from './JobTest34';
+import JobTest35 from './JobTest35';
+import JobTest36 from './JobTest36';
+import JobTest37 from './JobTest37';
+import JobTest38 from './JobTest38';
 import JobAType from './JobAType';
-import JobEType from './JobEType';
+import JobBType from './JobBType';
+import JobCType from './JobCType';
+import JobDType from './JobDType';
 import {FaBars, FaArrowLeft} from 'react-icons/fa';
 import {AiOutlineHome} from 'react-icons/ai';
 import { Link } from 'react-router-dom'; 
@@ -43,11 +58,10 @@ export default function JobTest({history}) {
     const style = {
         display: "flex",
         flexDirection : "column",
-        justifyContent: "flex-start",
+        justifyContent: "center",
         alignItems: "center",
         width: "90%",
-        height: "76vh",
-        
+        height: "78vh",
     }
     const btnStyle = {
         backgroundColor: "rgb(255, 250, 250, 0.9)",
@@ -205,9 +219,89 @@ export default function JobTest({history}) {
                     <JobTest25 btnClick={btnClick} />
                 )
                 break;
+             case 26:
+                return (
+                    <JobTest26 btnClick={btnClick} />
+                )
+                break;
+             case 27:
+                return (
+                    <JobTest27 btnClick={btnClick} />
+                )
+                break;
+             case 28:
+                return (
+                    <JobTest28 btnClick={btnClick} />
+                )
+                break;
+             case 29:
+                return (
+                    <JobTest29 btnClick={btnClick} />
+                )
+                break;
+             case 30:
+                return (
+                    <JobTest30 btnClick={btnClick} />
+                )
+                break;
+             case 31:
+                return (
+                    <JobTest31 btnClick={btnClick} />
+                )
+                break;
+            case 32:
+                return (
+                    <JobTest32 btnClick={btnClick} />
+                )
+                break;
+            case 33:
+                return (
+                    <JobTest33 btnClick={btnClick} />
+                )
+                break;
+            case 34:
+                return (
+                    <JobTest34 btnClick={btnClick} />
+                )
+                break;
+            case 35:
+                return (
+                    <JobTest35 btnClick={btnClick} />
+                )
+                break;
+            case 36:
+                return (
+                    <JobTest36 btnClick={btnClick} />
+                )
+                break;
+            case 37:
+                return (
+                    <JobTest37 btnClick={btnClick} />
+                )
+                break;
+            case 38:
+                return (
+                    <JobTest38 btnClick={btnClick} />
+                )
+                break;
            case 100:
                return(
                    <JobAType btnClick={btnClick} />
+               ) 
+               break;
+            case 200:
+               return(
+                   <JobBType btnClick={btnClick} />
+               ) 
+               break;
+            case 300:
+               return(
+                   <JobCType btnClick={btnClick} />
+               ) 
+               break;
+            case 400:
+               return(
+                   <JobDType btnClick={btnClick} />
                ) 
                break;
        }
@@ -216,7 +310,7 @@ export default function JobTest({history}) {
     return (
         <div className="container" style={{backgroundColor:"rgb(200, 210, 216)"}}>
             <Navbar />
-            <div className="titleContainer" style={{backgroundColor:"rgb(200, 210, 216)", height:"12vh"}}>
+            <div className="titleContainer" style={{backgroundColor:"rgb(200, 210, 216)", height:"10vh"}}>
                 <button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}} onClick={goBack}><FaArrowLeft size="45" color="#ffff" /><br/>뒤로</button>
                 <div style={{display:"flex", width:"35vh", justifyContent:"space-evenly", alignItems:"center"}}><label style={{fontSize:"38px", fontWeight:"900", color:"#ffff", marginTop:"10px", textShadow: "-1px 0 black, 0 3px black, 3px 0 black, 0 -1px black"}}>직업테스트</label></div>
                 <Link to="/menuAll"><button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}}><FaBars size="45" color="#ffff"/><br/>메뉴</button></Link>

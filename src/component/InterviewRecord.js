@@ -5,7 +5,9 @@ import VideoRecorder from "react-video-recorder";
 import renderActions from './default/render-action';
 import axios from 'axios';
 import { getToday } from './utilities';
-import { FaGrinBeam } from 'react-icons/fa';
+import { AiOutlineHome } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+
 
 
 const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
@@ -38,7 +40,8 @@ export default function InterviewRecord({ location, history }) {
         dutyDetail: [],
         btnHide: false,
         startBtn: true,
-        endBtn: false
+        endBtn: false,
+        recStart: false,
     })
     const videoRef = useRef();
     const audioRef = useRef();
@@ -63,7 +66,7 @@ export default function InterviewRecord({ location, history }) {
         flexFlow: "column nowrap",
         alignItems: "center",
         width:"85%",
-        height: "86vh",
+        height: "89vh",
         overflow: "auto",
         fontFamily: "gmaget",
     }
@@ -168,7 +171,7 @@ export default function InterviewRecord({ location, history }) {
         }
         filePath = `${ADMIN_ID}_${location.state.user.user_id}_${getToday()}`;
         getDutyDetail();
-        console.log("video", videoRef.current);
+        console.log("video11111", videoRef.current);
         videoRef.current.turnOnCamera();
     }, [])
 
@@ -199,7 +202,8 @@ export default function InterviewRecord({ location, history }) {
         console.log(" 녹화 스타트 !!!!!! ");
         setState({
             ...state,
-            startBtn: false
+            startBtn: false,
+            recStart: true,
         })
        // aRef.current.href = "";
        // aRef.current.download = "";
@@ -235,6 +239,7 @@ export default function InterviewRecord({ location, history }) {
     console.log("dutydetail=", state.dutyDetail.length)
     console.log("counts=", state.counts)
     console.log("number=", number);
+
     return (
         <div style={containerStyle}>
             <Navbar />
@@ -272,6 +277,7 @@ export default function InterviewRecord({ location, history }) {
                         }
                     }}
                     onStopRecording={() => {
+                        console.log("onStop !");
                         number = number +1;
                         setState({
                                 ...state,
@@ -321,7 +327,7 @@ export default function InterviewRecord({ location, history }) {
                                 })
                             }
                             // }else {
-                            //     ipcRenderer.send('asynchronous-videoComplate', filePath, "N");//Y 빠르다..
+                            //     ipcRenderer.send('asynchronous-videoComplate', filePath, "N");//Y 빠르다.. 바로 안보내고 인터뷰 종료 버튼 눌렀을때 호출 
                             // }
                         } catch (error) {
                             ipcRenderer.send('asynchronous-videoComplate', filePath, "N");
@@ -347,7 +353,10 @@ export default function InterviewRecord({ location, history }) {
                 
             </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
+            <div className="footer">
+                <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
+            </div>
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FaArrowLeft, FaBars } from 'react-icons/fa'
+import { AiOutlineHome } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer';
@@ -24,7 +25,7 @@ export default function DisitalInterviewDutyList({ location, history}) {
         display: "flex",
         flexFlow: "column nowrap",
         width:"85%",
-        height: "76vh",
+        height: "79vh",
         overflow: "auto",
         fontFamily: "gmaget",
     }
@@ -93,7 +94,10 @@ export default function DisitalInterviewDutyList({ location, history}) {
                    }
                 </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
+            <div className="footer">
+                <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
+            </div>
         </div>
     )
 }

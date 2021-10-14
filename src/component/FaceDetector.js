@@ -11,6 +11,8 @@ import { drawMesh } from './utilities';
 import FaceDetectorModal from './modal/FaceDetectorModal';
 import GuideModal from './modal/GuideModal';
 import axios from 'axios';
+import { AiOutlineHome } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 let WORKNET_PATH;
 let JOBKOREA_PATH;
@@ -91,7 +93,7 @@ export default function FaceDetector({ history }) {
         justifyContent: "flex-start",
         alignItems: "center",
         width:"90%",
-        height: "66vh",
+        height: "69vh",
         position: "relative",
         // backgroundColor: "blue"
     }
@@ -346,7 +348,10 @@ export default function FaceDetector({ history }) {
             <button onClick={startBtnClick} style={btnStyle}>시작하기</button>
             <FaceDetectorModal closeNews={close} selectedNews={selectedNews} />
             <GuideModal closeNews={close} restart={restart} face={face} celebrity={celebrity} image={image} recruitData={recruitData}/>
-            <Footer />
+            {/* <Footer /> */}
+            <div className="footer">
+                <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
+            </div>
         </div>
     )
 }

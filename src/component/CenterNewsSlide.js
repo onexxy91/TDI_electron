@@ -34,14 +34,14 @@ export default function CenterNewsSlide() {
     
 const centerBtn = {
     width: "50vh",
-    height: "5vh",
+    height: "7vh",
     backgroundColor: "rgba(19, 19, 18, 0.363)",
     borderRadius: "30px",
     color: "white",
     outline: "none",
     cursor: "pointer",
     marginTop: "1vh",
-    fontSize: "20px",
+    fontSize: "2vh",
     fontFamily: "gmaget",
     display: "flex",
     alignItems: "center",
@@ -74,7 +74,9 @@ const centerBtn = {
             )
         : (<Slider style={{width:'50vh', height:'6vh'}} {...setting}>
         {state.newsData.map((notice, index) => (
-            <button style={centerBtn} key={index}><MdNotificationsNone size="35" color="#ffff"/> {notice.title}</button>
+            <div>
+                <button style={centerBtn} key={index}><MdNotificationsNone size="35" color="#ffff"/> {notice.title}</button>
+            </div>
         ))}
       </Slider>)
         }

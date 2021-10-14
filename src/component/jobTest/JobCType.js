@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react'
 
-export default function JobEType( props ) {
+export default function JobBType( props ) {
     console.log(props)
     const style = {
         display: "flex",
@@ -8,7 +8,7 @@ export default function JobEType( props ) {
         justifyContent: "flex-start",
         alignItems: "center",
         width: "90%",
-        height: "75vh",
+        height: "78vh",
        
     }
     return (<section style={style}>
@@ -17,11 +17,11 @@ export default function JobEType( props ) {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        height: "72vh",
-        backgroundImage:"url(./AType.png)", 
-        backgroundSize: "100%", 
+        height: "74vh",
+        // backgroundImage:"url(./CType.png)", 
+        // backgroundSize: "100%", 
         }}>
-           
+        <img style={{width:"100%"}} src="./CType.png" />
         </div>
           
     </section>

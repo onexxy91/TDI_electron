@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer';
 import axios from 'axios';
+import { useSelector } from 'react-redux'
 
-const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
+
 const INTERVIEW_CODE = process.env.REACT_APP_INTERVIEW_GROUP_CODE;
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
@@ -20,7 +21,11 @@ if(IS_DEV === "true") {
 
 export default function DisitalInterviewDutyList({ location, history}) {
     const [dutyList, setDutyList] = useState([]);
+    const initData = useSelector(state => state.initialReducer);
+    const ADMIN_ID = initData.data.config.ADMIN_ID;
+
     console.log("interviewDutyList-", location)
+    
     const divStyle = {
         display: "flex",
         flexFlow: "column nowrap",
@@ -75,13 +80,13 @@ export default function DisitalInterviewDutyList({ location, history}) {
             <Navbar />
             <div className="titleContainer" style={{height:"10vh"}}>
                 <button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}} onClick={goBack}><FaArrowLeft size="45" color="#ffff" /><br/>뒤로</button>
-                <h1 style={{fontWeight:"900", color:"rgb(235,240,240)", width:"75%" }}>직무선택 / {location.state.company.interview_title}</h1>
+                <h1 style={{fontWeight:"900", color:"rgb(235,240,240)", width:"60%" }}>직무선택 / {location.state.company.interview_title}</h1>
                 {/* <Link to="/menuAll"><button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}}><FaBars size="45" color="#ffff"/><br/>메뉴</button></Link> */}
             </div>
             <div style={divStyle}>
                 <div className="interviewList">
                    {dutyList.map((duty, index) => (
-                        <Link key={index} to ={{
+                        <Link style={{height:"25%"}} key={index} to ={{
                             pathname:"/interviewRecord",
                             state: {
                                 user: location.state.user,

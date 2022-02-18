@@ -67,7 +67,7 @@ export default function FaceDetector({ history }) {
             position: "absolute",
             textAlign: "center",
             width: "85%",
-            height: "60vh",
+            height: "65vh",
             webkitTransform:"rotateY(180deg)"
         }
     })    
@@ -92,10 +92,10 @@ export default function FaceDetector({ history }) {
         flexWrap: "nowrap",
         justifyContent: "flex-start",
         alignItems: "center",
-        width:"90%",
+        width:"30%",
         height: "69vh",
         position: "relative",
-        // backgroundColor: "blue"
+        // backgroundColor: "white"
     }
     const btnStyle = {
         width: "35vh",
@@ -117,7 +117,7 @@ export default function FaceDetector({ history }) {
       };
     const mentStyle = {
         position: "absolute",
-        width: "60%",
+        width: "75%",
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-end",

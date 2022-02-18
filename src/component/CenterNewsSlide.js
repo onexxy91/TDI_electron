@@ -4,8 +4,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { MdNotificationsNone } from 'react-icons/md';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
-const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
+
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
 let centerNoticeAPI;
@@ -16,11 +17,12 @@ if (IS_DEV === "true") {
     centerNoticeAPI = `${PROXY}/api/notice_list.api`;
 }
 export default function CenterNewsSlide() {
+    const initData = useSelector(state => state.initialReducer);
     const [state, setState] = useState({
         isLoading: true
        
     });
-
+    const ADMIN_ID = initData.data.config.ADMIN_ID;
     const setting = {
         dots: false,
         infinite: true,
@@ -33,7 +35,7 @@ export default function CenterNewsSlide() {
     }
     
 const centerBtn = {
-    width: "50vh",
+    width: "100vh",
     height: "7vh",
     backgroundColor: "rgba(19, 19, 18, 0.363)",
     borderRadius: "30px",
@@ -45,7 +47,8 @@ const centerBtn = {
     fontFamily: "gmaget",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
+
 }
     const getCenterNews = async () => {
         const centerNotice = await axios.get(`${centerNoticeAPI}?group_id=${ADMIN_ID}&admin_id=${ADMIN_ID}&page=1&path=DID}`);
@@ -65,14 +68,14 @@ const centerBtn = {
     }, [])
 
     return (<section>
-        {state.isLoading ? (<div style={{ height: "6vh"}}></div>) 
+        {state.isLoading ? (<div style={{ height: "6vh" }}></div>) 
         :state.newsData.length === 0 ? (
             <button style={centerBtn} ><MdNotificationsNone size="35" color="#ffff"/> 센터소식 +</button>
             )
         : state.newsData.length === 1 ? (
             <button style={centerBtn} ><MdNotificationsNone size="35" color="#ffff"/> {state.newsData[0].title}</button>
             )
-        : (<Slider style={{width:'50vh', height:'6vh'}} {...setting}>
+        : (<Slider style={{width:'100vh', height:'6vh' }} {...setting}>
         {state.newsData.map((notice, index) => (
             <div>
                 <button style={centerBtn} key={index}><MdNotificationsNone size="35" color="#ffff"/> {notice.title}</button>

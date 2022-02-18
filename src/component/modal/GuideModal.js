@@ -73,7 +73,7 @@ const GuideModal = (props) =>{
         fontSize: "18px"
     }
     const btnStyle={
-        flex:"1",
+        width:"48%",
         color:"#ffff",
         outline: "none",
         backgroundColor: "rgba(3, 12, 24, 0.382)",
@@ -87,7 +87,7 @@ const GuideModal = (props) =>{
         display: "flex",
         flexDirection: "column",
         width: "100%",
-        height: "30vh",
+        height: "34vh",
         overflow: "auto"
     }
     const listStyle = {
@@ -124,10 +124,10 @@ const GuideModal = (props) =>{
                     backgroundColor: "rgba(3, 3, 3, 0)"
                 },
                 content: {
-                    top: '45vh',
+                    top: '35vh',
                     bottom: '7.7vh',
-                    left: "0px",
-                    right:"0px",
+                    left: "17vh",
+                    right:"17vh",
                     backgroundColor: "rgba(3, 3, 3, 0.500)"
                 }}}>
                 <div className="guideModal" style={guideModalStyle}>
@@ -155,7 +155,7 @@ const GuideModal = (props) =>{
                             {props.celebrity.celebrity && <span style={{ color:"#ffff", fontSize:"22px", fontWeight:"600"}}>{props.celebrity.celebrity}</span>}
                             {props.celebrity.confidence && <span style={{color:"yellow", fontSize:"30px", fontWeight:"600"}}>{props.celebrity.confidence}%</span>}
                         </div>
-                        <div style={{display:"flex", width:"100%", height:"4vh", backgroundColor:"yellow"}}>
+                        <div style={{display:"flex", justifyContent:"space-around", width:"100%", height:"6vh"}}>
                             <button style={btnStyle} onClick={props.closeNews}>닫기</button>
                             <button style={btnStyle} onClick={props.restart}>다시하기</button>
                         </div>

@@ -25,7 +25,7 @@ export default function ForbiddenModal( props ) {
                 }
             }}>
             <div style={{display:"flex", flexFlow:"column wrap", height:"100%", width:"100%", justifyContent:"space-between", alignItems:"center"}}>
-                <span style={{fontFamily: "gmaget", fontSize: "2vh",}}>업데이트 예정 메뉴입니다.</span>
+                <span style={{fontFamily: "gmaget", fontSize: "2vh",}}>{props.message}</span>
                 <button onClick={props.close} style={{fontSize: "2vh", fontWeight: "700", outline: "none", cursor: "pointer",fontFamily: "gmaget", border:"none", width:"10vh", height:"4.2vh", backgroundColor:"#5bc0de", color:"#ffff" }}>CLOSE</button>
             </div>
        </ReactModal>

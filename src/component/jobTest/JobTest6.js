@@ -13,7 +13,7 @@ export default function JobTest6( props ) {
     }
     const btnboxStyle = {
         display: "flex",
-        width: "80%",
+        width: "25%",
         justifyContent:"center",
         height: "24vh",
         marginTop:"43vh",
@@ -59,8 +59,8 @@ export default function JobTest6( props ) {
                 // backgroundImage:"url(./JobTestback.png)", 
                 // backgroundSize: "100%",
         }}>
-           <img style={{width:"100%"}} src="./jobTestback.png"></img>
-            <h1 style={{position:"absolute", height:"16vh",fontSize:"3vh", marginTop:"20vh", width:"75%"}}>주위 사람들로부터 아이디어맨 이란 소리를 자주 듣는다.</h1>
+           <img style={{width:"30%"}} src="./jobTestback.png"></img>
+            <h1 style={{position:"absolute", height:"16vh",fontSize:"3vh", marginTop:"20vh", width:"20%"}}>주위 사람들로부터 아이디어맨 이란 소리를 자주 듣는다.</h1>
             <div style={btnboxStyle}>
                 <button style={BtnSelectStyle} onClick={()=> props.btnClick(5)}> 
                     {/* <div style={btnABStyle}>A</div> */}

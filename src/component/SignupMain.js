@@ -4,6 +4,7 @@ import { FaArrowLeft, FaBars } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import Footer from './Footer';
+import { AiOutlineHome } from 'react-icons/ai'
 import Navbar from './Navbar'
 import Keyboard from 'react-hangul-virtual-keyboard';
 import "react-hangul-virtual-keyboard/build/css/index.css";
@@ -12,7 +13,7 @@ import { isConstructorDeclaration } from 'typescript';
 
 let SIGNUP_API;
 let DETAIL_SIGN_API;
-const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
+
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
 let buttonArray = [];
@@ -34,6 +35,7 @@ export default function SignupMain({ history }) {
     const [inputs, setInputs] = useState({});
     const [inputName, setInputName] = useState("default");
     const [keyboardOpen, setKeyboardOpen] = useState(false);
+    const ADMIN_ID = state.data.config.ADMIN_ID;
 
     const ageCode = state.data.ageCode;
     const eduCode = state.data.eduCode;
@@ -60,7 +62,7 @@ export default function SignupMain({ history }) {
         display: "flex",
         flexDirection: "column",
         flexWrap: "nowrap",
-        height: "100%",
+        height: "100vh",
         width:"100%",
         backgroundSize: "cover",
         justifyContent: "space-between",
@@ -447,7 +449,10 @@ export default function SignupMain({ history }) {
                     ]}
                  />
             </div>
-            <Footer />
+            {/* <Footer /> */}
+            <div className="footer">
+                <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
+            </div>
         </div>
     )
 }

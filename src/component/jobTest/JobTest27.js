@@ -13,7 +13,7 @@ export default function JobTest27( props ) {
     }
     const btnboxStyle = {
         display: "flex",
-        width: "80%",
+        width: "25%",
         justifyContent:"center",
         height: "24vh",
         marginTop:"43vh",
@@ -60,8 +60,8 @@ export default function JobTest27( props ) {
                 // backgroundSize: "100%",
         }}>
             
-            <img style={{width:"100%"}} src="./jobTestback.png"></img>
-            <h1 style={{position:"absolute", fontSize:"3vh", marginTop:"20vh",height:"16vh", width:"75%"}}>오늘 꼭 해야 할일도 사정이 생기면 내일로 미룰수 있다.</h1>
+            <img style={{width:"30%"}} src="./jobTestback.png"></img>
+            <h1 style={{position:"absolute", fontSize:"3vh", marginTop:"20vh",height:"16vh", width:"20%"}}>오늘 꼭 해야 할일도 사정이 생기면 내일로 미룰수 있다.</h1>
             <div style={btnboxStyle}>
                 <button style={BtnSelectStyle} onClick={()=> props.btnClick(28)}> 
                     

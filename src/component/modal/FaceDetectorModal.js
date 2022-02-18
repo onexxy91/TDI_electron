@@ -23,7 +23,7 @@ const FaceDetectorModal = (props) =>{
                     {/* <p>이용안내</p> */}
                     {/* <p style={triangleup}></p> */}
                 </div>
-                /* <div className="App">
+                 <div className="App">
             <header className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
             </header>

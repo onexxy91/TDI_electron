@@ -10,8 +10,10 @@ const SmallModal = (props) => {
             ariaHideApp={false}
             style={{
                 content: {
-                    top: '120px',
-                    bottom: '80px'
+                    top: '5vh',
+                    bottom: '5vh',
+                    left:'30vh',
+                    right:'30vh'
                 }
             }}>
         {props.selectedRecruit && <div className="modalContainer">

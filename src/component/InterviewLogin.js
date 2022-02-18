@@ -1,13 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { FaArrowLeft, FaBars } from 'react-icons/fa'
-import { Link} from 'react-router-dom'
+import { FaArrowLeft, FaBars, FaUnlockAlt } from 'react-icons/fa'
+import { AiOutlineHome } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer';
 import axios from 'axios';
 import Keyboard from 'react-hangul-virtual-keyboard';
+import ForbiddenModal from './modal/ForbiddenModal';
 import "react-hangul-virtual-keyboard/build/css/index.css";
+import { useSelector } from 'react-redux'
 
-const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
+
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
 let LOGIN_API_URL;
@@ -19,19 +22,22 @@ if(IS_DEV === "true") {
 }
 
 export default function InterviewLogin({ history }) {
+    const initData = useSelector(state => state.initialReducer);
     const phoneRef = useRef(HTMLInputElement);
     const passRef = useRef(HTMLInputElement);
     const keyboard = useRef();
+    const [isOpen, setIsOpen] = useState(false);
     const [layout, setLayout] = useState("default");
     const [language, setLanguage] = useState("default");
     const [inputs, setInputs] = useState({});
     const [inputName, setInputName] = useState("default");
     const [keyboardOpen, setKeyboardOpen] = useState(false);
-
+    const ADMIN_ID = initData.data.config.ADMIN_ID;
+    
     const divStyle = {
         display: "flex",
         width: "100%",
-        height: "70vh",
+        height: "73vh",
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "flex-start",
@@ -61,11 +67,11 @@ export default function InterviewLogin({ history }) {
         flexDirection: "column",
         justifyContent: "space-around",
         alignItems: "center",
-        width: "70%",
-        height: "36vh",
+        width: "30%",
+        height: "60vh",
         backgroundColor: "rgb(255, 255, 255)",
         borderRadius:"5px",
-        marginTop:"4vh"
+        // marginTop:"4vh"
     }
     const btnStyle ={
         width:"18vh",
@@ -102,7 +108,7 @@ export default function InterviewLogin({ history }) {
         const result = await axios.get(LOGIN_API_URL + `?group_id=${ADMIN_ID}&user_id=${id.value}&user_password=${pass.value}&encFlag=N`);
         console.log(result);
         if(result.data.result_code === "200" && result.data.result_msg === "success") {
-            console.log("성공")
+            //console.log("성공")
             history.push({
                 pathname: "/interviewCompany",
                 state: {
@@ -110,9 +116,13 @@ export default function InterviewLogin({ history }) {
                 }
             })
         }else{
-            alert("로그인 실패!");
+            //alert("로그인 실패!");
+            setIsOpen(true);
         }
 
+    }
+    const modalClose = ()=> {
+        setIsOpen(false);
     }
 
     const onChangeAll = inputs => {
@@ -171,19 +181,22 @@ export default function InterviewLogin({ history }) {
             <Navbar />
             <div className="titleContainer" style={{height:"16vh"}}>
                 <button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}} onClick={goBack}><FaArrowLeft size="45" color="#ffff" /><br/>뒤로</button>
-                <h1 style={{fontWeight:"900", color:"rgb(235,240,240)"}}>로그인</h1>
+                <h1 style={{fontWeight:"900", color:"rgb(235,240,240)"}}>디지털인터뷰-로그인</h1>
                 <Link to="/menuAll"><button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}}><FaBars size="45" color="#ffff"/><br/>메뉴</button></Link>
             </div>
             <div style={divStyle}>
                 <div style={loginStyle}>
                     {/* <label>연락처</label> */}
+                    <i><FaUnlockAlt size="40" color="grey"></FaUnlockAlt></i>
                     <div style={{display:"flex", width:"100%", justifyContent:"center", alignItems:"center", }}>
                         {/* <label><FaPhoneAlt size="35" color="grey"></FaPhoneAlt></label> */}
-                        <input id="id" value ={getInputValue("id")} onChange={onChangeInput} onFocus={inputFocus} ref={phoneRef} type="number"  style={inputStyle} placeholder="  &#xf098;  연락처를'_' 없이 입력하세요."></input>
+                        {/* value ={getInputValue("id")} onChange={onChangeInput} */}
+                        <input id="id" onFocus={inputFocus} ref={phoneRef} type="number"  style={inputStyle} placeholder="  &#xf098;  연락처를'_' 없이 입력하세요."></input>
                     </div>
                     <div style={{display:"flex", width:"100%", justifyContent:"center", alignItems:"center", }}>
                         {/* <i><FaUnlockAlt size="50" color="grey"></FaUnlockAlt></i> */}
-                        <input id="pass" ref={passRef} type="password" onChange={onChangeInput} value={getInputValue("pass")}style={inputStyle} onFocus={passInputFocus} placeholder="  &#61475;  비밀번호"></input>
+                        {/* onChange={onChangeInput} value={getInputValue("pass")} */}
+                        <input id="pass" ref={passRef} type="password" style={inputStyle} onFocus={passInputFocus} placeholder="  &#61475;  비밀번호"></input>
                     </div>
                     <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", width:"95%"}}>
                         <Link to="/signup"><button style={btnStyle}>회원가입</button></Link>
@@ -191,7 +204,7 @@ export default function InterviewLogin({ history }) {
                     </div>
                 </div>
             </div>
-            <div className={`keyboardContainer ${!keyboardOpen ? "hidden" : ""}`}>
+            {/* <div className={`keyboardContainer ${!keyboardOpen ? "hidden" : ""}`}>
                 <Keyboard
                     keyboardRef={r => (keyboard.current = r)}
                     layoutName={layout}
@@ -206,8 +219,16 @@ export default function InterviewLogin({ history }) {
                           }
                     ]}
                  />
+            </div> */}
+            {/* <Footer /> */}
+            <div className="footer">
+                <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>
-            <Footer />
+            <ForbiddenModal
+                isOpen = {isOpen}
+                close = {modalClose}
+                message= "연락처 또는 비밀번호가 맞지 않습니다. 확인 후 재시도 해주세요"
+                />
         </div>
     )
 }

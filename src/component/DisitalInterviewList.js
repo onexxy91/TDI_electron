@@ -7,10 +7,11 @@ import Footer from './Footer';
 
 import axios from 'axios';
 import InterviewGuideModal from './modal/InterviewGuideModal';
+import { useSelector } from 'react-redux'
 
 
 let INTERVIEW_LIST_API;
-const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
+
 const INTERVIEW_CODE = process.env.REACT_APP_INTERVIEW_GROUP_CODE;
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
@@ -22,11 +23,13 @@ if(IS_DEV === "true") {
 }
 
 export default function DisitalInterviewReal({ location, history}) {
+    const initData = useSelector(state => state.initialReducer);
     const [isOpen, setIsOpen] = useState(true);
     const disitalBtnRef = useRef(HTMLButtonElement);
     const realtimeBtnRef = useRef(HTMLButtonElement);
     let mentRef = useRef(HTMLSpanElement);
     const [interviewList, setInterviewList] = useState([]);
+    const ADMIN_ID = initData.data.config.ADMIN_ID;
 
     console.log("interviewList-", location);
     const divStyle = {
@@ -41,7 +44,7 @@ export default function DisitalInterviewReal({ location, history}) {
         display: "flex",
         flexFlow: "row nowrap",
         width: "100%",
-        justifyContent: "flex-start",
+        justifyContent: "center",
         alignItems: "flex-end",
         height:"6.3vh",
     }
@@ -133,9 +136,9 @@ export default function DisitalInterviewReal({ location, history}) {
         <div className="container" style={{backgroundColor: "#21D4FD",
         backgroundImage: "linear-gradient(19deg, #21D4FD 0%, #6271b9 100%)"}}>
             <Navbar />
-            <div className="titleContainer" style={{height:"10vh"}}>
+            <div className="titleContainer" style={{height:"10vh", width:"95%", display:"flex", justifyContent:"space-between" }}>
                 <button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}} onClick={goBack}><FaArrowLeft size="45" color="#ffff" /><br/>뒤로</button>
-                <h1 style={{fontWeight:"900", color:"rgb(235,240,240)", width:"70%"}}>실전면접({location.state.user.user_name}님)</h1>
+                <h1 style={{fontWeight:"900", color:"rgb(235,240,240)"}}>실전면접({location.state.user.user_name}님)</h1>
                 {/* <Link to="/menuAll"><button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}}><FaBars size="45" color="#ffff"/><br/>메뉴</button></Link> */}
             </div>
             <div style={divStyle}>
@@ -146,7 +149,7 @@ export default function DisitalInterviewReal({ location, history}) {
                 <div className="interviewList">
                     {interviewList.length !== 0 ?
                     interviewList.map((list, index) => (
-                        <Link key={index} to ={{
+                        <Link style={{height:"25%"}} key={index} to ={{
                             pathname:"/interviewDutyList",
                             state: {
                                 user: location.state.user,
@@ -163,7 +166,7 @@ export default function DisitalInterviewReal({ location, history}) {
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>
-            <InterviewGuideModal isOpen={isOpen} closeNews={closeNews}/>
+            {/* <InterviewGuideModal isOpen={isOpen} closeNews={closeNews}/> */}
         </div>
     )
 }

@@ -9,8 +9,8 @@ import "./centerNews.css"
 import axios from 'axios'
 import Footer from './Footer'
 import CenterModal from './modal/CenterModal'
+import { useSelector } from 'react-redux'
 
-const admin_id = process.env.REACT_APP_ADMIN_ID;
 let center_news_api;
 
 const IS_DEV = process.env.REACT_APP_ISDEV;
@@ -22,13 +22,16 @@ if(IS_DEV === "true") {
     center_news_api = `${PROXY}/api/notice_list.api`;
 }
 export default function CenterNews({ history })  {
-    
+    const initData = useSelector(state => state.initialReducer);
     const [state, setState] = useState({
         newsData: [],
         isLoading: true,
         cur_page: 1,
         selectedNews: undefined
     })
+    console.log(initData);
+    
+    const admin_id = initData.data.config.ADMIN_ID;
     const inputRef = useRef();
 
     const goBack = () => {
@@ -83,8 +86,8 @@ export default function CenterNews({ history })  {
             <div className="menuBar">
                 <button onClick={goBack}><FaArrowLeft size="32" color="#ffff" /></button>
                 <p>센터소식</p>
-                <button><RiScissorsCutFill size="32" color="#ffff" /><br/>스크랩</button>
-                <Link to="/menuAll"><button className="allSeviceBtn"><FaBars size="32" color="#ffff"/><br/>전체보기</button></Link>
+                {/* <button><RiScissorsCutFill size="32" color="#ffff" /><br/>스크랩</button> */}
+                <Link to="/menuAll"><button className="allSeviceBtn"><FaBars size="32" color="#ffff"/><br/>메뉴보기</button></Link>
             </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
             <div className="newSearch">
                 <input className="searchInput" ref={inputRef} type="text" placeholder="검색어 입력" />

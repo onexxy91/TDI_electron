@@ -20,7 +20,7 @@ export default function Navbar({ history }) {
     console.log("Nav", initData);
     const weather = initData.data.weather;
     const univFile = initData.data;    
-   
+    const newWeather = initData.data.newWeather;
 
     const dustIcons = () => {
         if (weather.dustStr === "좋음") {
@@ -48,24 +48,47 @@ export default function Navbar({ history }) {
         }
     }
 
-
-
-    return (
-        <div className="logoContainer">
-        <Link to="/"> <button className="logoBtn"><img src={univFile.univFile[0].main_logo_file} alt="logo"></img></button></Link>
-            <div className="weatherContainer">
-                <div className="left">
-                    <p id="today">{getDateTime()}</p>
-                    <p id="temp">{ weather.cur_temp}ºC</p>
+    if (weather != undefined) {
+        return (
+            <div className="logoContainer">
+            <Link to="/"> <button className="logoBtn"><img src={univFile.univFile[0].main_logo_file} alt="logo"></img></button></Link>
+                <div className="weatherContainer">
+                    <div className="left">
+                        <p id="today">{getDateTime()}</p>
+                        <p id="temp">{ weather.cur_temp}ºC</p>
+                    </div>
+                    {weatherIcons()}
+                    <div className="right">
+                        <p id="today">미세먼지</p>
+                        <p id="temp">{weather.dustStr}</p>
+                    </div>
+                    {dustIcons()}
                 </div>
-                {weatherIcons()}
-                <div className="right">
-                    <p id="today">미세먼지</p>
-                    <p id="temp">{weather.dustStr}</p>
-                </div>
-                {dustIcons()}
+                <Link to="/setting"> <button className="settingBtn"><GoGear size="32" color="#ffff"/><br/>설정</button></Link>
             </div>
-            <Link to="/setting"> <button className="settingBtn"><GoGear size="32" color="#ffff"/><br/>설정</button></Link>
-        </div>
-    )
+        )
+    }else {
+        return (
+            <div className="logoContainer">
+            <Link to="/"> <button className="logoBtn"><img src={univFile.univFile[0].main_logo_file} alt="logo"></img></button></Link>
+                <div className="weatherContainer">
+                    <div className="left">
+                        <p id="today">{getDateTime()}</p>
+                        <p id="temp">{Math.round(newWeather.main.temp)}℃</p>
+                    </div>
+                    {/* {weatherIcons()} */}
+                     <WiDaySunny size="42" color="#ffff"></WiDaySunny>
+                    <div className="right">
+                        {/* <p id="today">날씨</p> */}
+                        <p id="temp">{newWeather.weather[0].description}</p>
+                    </div>
+                    {/* {dustIcons()}  */}
+                    {/* <FaRegMeh size="34" color="#ffff"></FaRegMeh> */}
+                </div>
+                <Link to="/setting"> <button className="settingBtn"><GoGear size="32" color="#ffff"/><br/>설정</button></Link>
+            </div>
+        )
+    }
+
+    
 }

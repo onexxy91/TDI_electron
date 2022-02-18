@@ -38,15 +38,15 @@ const style ={
     let count = 0;
     const univFile = state.data.univFile[0];
     const placard = state.data.placard;
-    const url = 'https://naveropenapi.apigw.ntruss.com/vision/v1/face'
+    //const url = 'https://naveropenapi.apigw.ntruss.com/vision/v1/face'
 
-    const imgs = ['./KakaoTalk_1.png', './KakaoTalk_2.png', './backSample1.png']
+    const imgs = ['./interview.png']
     const imageSlide = () => {
         //console.log("실행?", count);
         if (count > (imgs.length -1)) {
             count = 0;
         }
-       
+
         divRef.current.style.cssText = `background-image: url(${imgs[count]});`
         count = count +1
        
@@ -61,7 +61,7 @@ useEffect(() => {
 
 },[])
 
-    return <div ref={divRef} className="container" style={{backgroundImage: 'url(./KakaoTalk_1.png)' }}>
+    return <div ref={divRef} className="container" style={{backgroundImage: 'url(./interview.png)' }}>
        <Navbar />
         <div className="placardContainer">
                {/* <Slide /> */}
@@ -76,14 +76,14 @@ useEffect(() => {
             ))}
         </div> */}
          <div className="menuBtnContainer">    
-            <Link to={btnLink[0]}><button><MdAssignmentInd size="40" color="#ffff"></MdAssignmentInd><br/>채용정보</button></Link>
-            <Link to={btnLink[1]}><button><BiTimer size="42" color="#ffff"></BiTimer><br/>시간제일자리</button></Link>
-            <Link to={btnLink[2]}><button><FaRegPaperPlane size="30" color="#ffff"></FaRegPaperPlane><br/>센터소식</button></Link>
+            <Link to={btnLink[0]}><button><MdAssignmentInd size="50" color="#ffff"></MdAssignmentInd><br/>채용정보</button></Link>
+            <Link to={btnLink[1]}><button><BiTimer size="50" color="#ffff"></BiTimer><br/>시간제일자리</button></Link>
+            <Link to={btnLink[2]}><button><FaRegPaperPlane size="40" color="#ffff"></FaRegPaperPlane><br/>센터소식</button></Link>
         </div>
         <div className="menuBtnContainer1">    
-            <Link to={btnLink[3]}><button><RiLightbulbFlashLine size="40" color="#ffff"/><br/>FUN! FUN!</button></Link>
-            <Link to={btnLink[4]}><button><RiLightbulbFlashLine size="40" color="#ffff"/><br/>customBtn1</button></Link>
-            <Link to={btnLink[5]}><button><RiLightbulbFlashLine size="40" color="#ffff"/><br/>customBtn2</button></Link>
+            <Link to={btnLink[3]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>FUN! FUN!</button></Link>
+            <Link to={btnLink[4]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>customBtn1</button></Link>
+            <Link to={btnLink[5]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>customBtn2</button></Link>
         </div>
         <div className="contentBtnContainer">
             <div className="sub1">
@@ -100,7 +100,7 @@ useEffect(() => {
             {/* <Link to="/"><button className="centerBtn"><CenterNewsSlide /></button></Link>  */}
        {/* <Footer /> */}
        <div style={style}>
-           <Link style={{display:"flex", alignItems:"center"}}><span style={{color:"white"}}>이용안내</span><MdHelpOutline size="32" color="#ffff"/></Link>
+           <Link style={{display:"flex", alignItems:"center", textDecoration:"none"}}><span style={{color:"white"}}>이용안내</span><MdHelpOutline size="32" color="#ffff"/></Link>
        </div>
     </div>
 }

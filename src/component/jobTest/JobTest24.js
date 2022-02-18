@@ -13,7 +13,7 @@ export default function JobTest24( props ) {
     }
     const btnboxStyle = {
         display: "flex",
-        width: "80%",
+        width: "25%",
         justifyContent:"center",
         height: "24vh",
         marginTop:"43vh",
@@ -59,8 +59,8 @@ export default function JobTest24( props ) {
                 // backgroundImage:"url(./JobTestback.png)", 
                 // backgroundSize: "100%",
         }}>
-            <img style={{width:"100%"}} src="./jobTestback.png"></img>
-            <h1 style={{position:"absolute", fontSize:"3vh", height:"16vh", marginTop:"20vh", width:"75%"}}>삶의 본질에 의문을 갖고 그것에 대해 고민해본 적이 있다.</h1>
+            <img style={{width:"30%"}} src="./jobTestback.png"></img>
+            <h1 style={{position:"absolute", fontSize:"3vh", height:"16vh", marginTop:"20vh", width:"20%"}}>삶의 본질에 의문을 갖고 그것에 대해 고민해본 적이 있다.</h1>
             <div style={btnboxStyle}>
                 <button style={BtnSelectStyle} onClick={()=> props.btnClick(27)}> 
                     

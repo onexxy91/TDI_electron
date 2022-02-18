@@ -72,7 +72,7 @@ export default function JobTest({history}) {
         border: "none",
         // boxShadow:  "5px 5px 5px gray",
         height: "7.5vh",
-        width: "90%",
+        width: "30%",
         fontFamily: "gmaget",
     }
     const btnClick =  (value) => {
@@ -89,7 +89,7 @@ export default function JobTest({history}) {
            case 0:
                return (
                 <section style={style}>
-                    <img style={{margin:"0", width:"90%"}} src="./jobtestmain.png"></img>
+                    <img style={{margin:"0", width:"30%"}} src="./jobtestmain.png"></img>
                     <button onClick={() => btnClick(1)} style={btnStyle}>START ></button>
                 </section>
                )

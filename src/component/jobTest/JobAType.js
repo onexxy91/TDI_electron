@@ -21,7 +21,7 @@ export default function JobAType( props ) {
         // backgroundImage:"url(./AType.png)", 
         // backgroundSize: "100%", 
         }}>
-        <img style={{width:"100%"}} src="./AType.png"></img>
+        <img style={{width:"30%"}} src="./AType.png"></img>
         </div>
           
     </section>

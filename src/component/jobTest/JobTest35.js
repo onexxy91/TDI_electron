@@ -13,7 +13,7 @@ export default function JobTest35( props ) {
     }
     const btnboxStyle = {
         display: "flex",
-        width: "80%",
+        width: "25%",
         justifyContent:"center",
         height: "24vh",
         marginTop:"43vh",
@@ -59,8 +59,8 @@ export default function JobTest35( props ) {
                 // backgroundImage:"url(./JobTestback.png)", 
                 // backgroundSize: "100%",
         }}>
-            <img style={{width:"100%"}} src="./jobTestback.png"></img>
-            <h1 style={{position:"absolute", fontSize:"3vh", marginTop:"20vh",height:"16vh", width:"75%"}}>어려운 문제에 부딪히면 오히려 더욱 투지가 생긴다.</h1>
+            <img style={{width:"30%"}} src="./jobTestback.png"></img>
+            <h1 style={{position:"absolute", fontSize:"3vh", marginTop:"20vh",height:"16vh", width:"20%"}}>어려운 문제에 부딪히면 오히려 더욱 투지가 생긴다.</h1>
             <div style={btnboxStyle}>
                 <button style={BtnSelectStyle} onClick={()=> props.btnClick(31)}> 
                     

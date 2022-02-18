@@ -7,10 +7,11 @@ import axios from 'axios';
 import { getToday } from './utilities';
 import { AiOutlineHome } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 
-const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
+
 const INTERVIEW_CODE = process.env.REACT_APP_INTERVIEW_GROUP_CODE;
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
@@ -32,8 +33,9 @@ const MIME_TYPES = [
     'video/mp4'
   ]
 export default function InterviewRecord({ location, history }) {
-    console.log("InterviewRecord", location);
-    
+    //console.log("InterviewRecord", location);
+    const initData = useSelector(state => state.initialReducer);
+    const ADMIN_ID = initData.data.config.ADMIN_ID;
     const ipcRenderer = electron.ipcRenderer;
     const [state, setState] = useState({
         conunts: 0,
@@ -71,7 +73,7 @@ export default function InterviewRecord({ location, history }) {
         fontFamily: "gmaget",
     }
     const videoDivStyle = {
-        width: "90%",
+        width: "50%",
         height: "62vh",
      
     }

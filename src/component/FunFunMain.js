@@ -3,7 +3,6 @@ import Navbar from "./Navbar"
 import {FaArrowLeft, FaRegWindowMinimize, FaBars} from 'react-icons/fa'
 import {AiOutlineHome} from 'react-icons/ai'
 import { Link } from 'react-router-dom';
-import Footer from './Footer';
 import ForbiddenModal from './modal/ForbiddenModal';
 
 export default function FunFunMain({ history }) {
@@ -16,7 +15,7 @@ export default function FunFunMain({ history }) {
         flexFlow: "row wrap",
         justifyContent: "space-between",
         alignItems: "flex-start",
-        width: "85%",
+        width: "40%",
         height: "65vh",
         // backgroundColor:"black"
     }
@@ -77,6 +76,7 @@ export default function FunFunMain({ history }) {
             <ForbiddenModal
                 isOpen = {isOpen}
                 close = {modalClose}
+                message= "업데이트 또는 지원불가 메뉴입니다."
                 />
         </div>
     )

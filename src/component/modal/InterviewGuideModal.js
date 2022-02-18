@@ -23,7 +23,9 @@ export default function InterviewGuideModal(props) {
         ariaHideApp={false}
         style={{ 
             overlay: {
-                 backgroundColor: 'rgba(255, 255, 255, 0)'
+                 backgroundColor: 'rgba(255, 255, 255, 0)',
+                 left:'100px',
+                 
             },
             content: {
                 top: '0px',
@@ -33,9 +35,8 @@ export default function InterviewGuideModal(props) {
                 backgroundColor: 'rgba(255, 255, 255, 0)'
             }}}> 
             <div className="modalContainer" 
-            style={{backgroundImage: 'url(./disitalInterviewPopup.png)',
-                     backgroundSize: "cover"}}>
-            <div style={{display:"flex", width:"100%", justifyContent:"center", height:"83%", alignItems:"flex-end"}}>
+            style={{backgroundImage: 'url(./disitalInterviewPopup.png)', backgroundSize:"100%", width:"30%" }}>
+            <div style={{display:"flex", width:"100%", justifyContent:"center", height:"82%", alignItems:"flex-end"}}>
                 <button style={btnSytle} onClick={props.closeNews}>확인</button>
             </div>
             </div>

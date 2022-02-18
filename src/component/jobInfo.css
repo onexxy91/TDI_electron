@@ -55,7 +55,7 @@
     flex-flow: row wrap;
     justify-content: space-evenly;
     /* background-color: hotpink; */
-    width: 90%;
+    width: 50%;
     height: 50vh;
 }
 .infobtnContainer button {
@@ -107,7 +107,7 @@
 .kongchaeContainer{
     display: flex;
     height: 13.5vh; 
-    width: 90%;
+    width: 50%;
     /* background-color: khaki; */
     justify-content: center;
     align-items: center;

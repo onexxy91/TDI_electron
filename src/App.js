@@ -24,12 +24,11 @@ import './App.css';
 import InterviewRecord from './component/InterviewRecord';
 import JobTest from './component/jobTest/JobTest';
 
-const electron = window.require('electron');
 
 function App() {
   
   //console.log("window", window);
-  console.log('electron', electron);
+  //console.log('electron', electron);
   //const ipcRenderer = electron.ipcRenderer;
   //console.log('ipcRenderre', ipcRenderer);
   //const dialog = electron.remote.dialog;

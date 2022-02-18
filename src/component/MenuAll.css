@@ -41,7 +41,7 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 90%;
+    width: 60%;
     /* background-color: orchid; */
     margin-top: 5vh;
     
@@ -105,7 +105,7 @@ li {
 .secContainer {
     margin-top: 3vh;
     display: flex;
-    width: 90%;
+    width: 60%;
     /* background-color: honeydew; */
     justify-content: space-around;
     height: 8vh;
@@ -143,7 +143,7 @@ li {
 }
 .thrContainer {
     display: flex;
-    width: 89%;
+    width: 60%;
     background-color: teal;
     justify-content: space-around;
     
@@ -179,7 +179,7 @@ li {
 }
 .fourContainer {
     display: flex;
-    width: 90%;
+    width: 60%;
     /* background-color: violet; */
     margin-top: 20px;
     justify-content: space-around;

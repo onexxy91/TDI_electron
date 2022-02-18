@@ -34,10 +34,11 @@ export default function EveryDayQuiz({history}) {
         display:"flex",
         flexFlow: "column nowrap",
         alignItems:"center",
-        width:"88%",
+        width:"50%",
         height:"68vh",
         backgroundColor:"#ffff",
         overflow: "auto",
+        borderRadius:"5px"
     }
     const btndiv = {
         display:"flex",
@@ -49,14 +50,15 @@ export default function EveryDayQuiz({history}) {
        
     }
     const btnStyle = {
-        width:"100%",
+        width:"56.5%",
         border:"none",
         cursor:"pointer",
         fontSize:"22px",
         fontWeight:"600",
         fontFamily: "gmaget",
         color:"#ffff",
-        backgroundColor:"black"
+        backgroundColor:"black",
+        borderRadius:"3px"
     }
     const btnClick = async () => {
         let result;
@@ -122,24 +124,28 @@ export default function EveryDayQuiz({history}) {
                 <Link to="/menuAll"><button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}}><FaBars size="45" color="#ffff"/><br/>메뉴</button></Link>
             </div>
             <div style={contentDiv}>
-                <img style={{width:"100%"}} src="./everydayquiz.png"></img>
+                <img style={{width:"70%"}} src="./everydayquiz.png"></img>
                 <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", width:"80%", marginTop:"2vh", marginBottom:"5vh"}}>
                     <span style={{fontSize:"2vh"}}>1.{state.quiz.qz_ttl}</span>
                     <span style={{fontSize:"2vh", marginTop:"2vh"}}>{state.quiz.qz_txt}</span>
                 </div>
                 <div style={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"flex-start", width:"80%", marginBottom:"1vh"}}>
+                    A
                     <input ref={aRef} type="radio" id="a" name="drone" value="A" />
                     <label style={{fontSize:"2vh"}} htmlFor="a">{state.quiz.qz_ex_a}</label>
                 </div>
                 <div style={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"flex-start", width:"80%", marginBottom:"1vh"}}>
+                    B
                     <input  ref={bRef} type="radio" id="b" name="drone" value="B" />
                     <label style={{fontSize:"2vh"}} htmlFor="b">{state.quiz.qz_ex_b}</label>
                 </div>
                 <div style={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"flex-start", width:"80%", marginBottom:"1vh"}}>
+                    C
                     <input ref={cRef} type="radio" id="c" name="drone" value="C" />
                     <label style={{fontSize:"2vh"}} htmlFor="c">{state.quiz.qz_ex_c}</label>
                 </div>
                 <div style={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"flex-start", width:"80%", marginBottom:"1vh"}}>
+                    D
                     <input ref={dRef} type="radio" id="d" name="drone" value="D" />
                     <label style={{fontSize:"2vh"}} htmlFor="d">{state.quiz.qz_ex_d}</label>
                 </div>

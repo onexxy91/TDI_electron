@@ -4,12 +4,15 @@ import { Link, Router } from 'react-router-dom'
 import Navbar from './Navbar'
 import Keyboard from 'react-hangul-virtual-keyboard';
 import "react-hangul-virtual-keyboard/build/css/index.css";
+import ForbiddenModal from './modal/ForbiddenModal'
+import { useSelector } from 'react-redux';
 
 
-const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
+
 //const electron = window.require('electron');
 
 export default function SettingLogin({ history, location }) {
+    const initData = useSelector(state => state.initialReducer);
     const inputRef = useRef();
     const keyboard = useRef();
     const [layout, setLayout] = useState("default");
@@ -17,6 +20,8 @@ export default function SettingLogin({ history, location }) {
     const [input, setInput] = useState("");
     const [inputName, setInputName] = useState("default");
     const [keyboardOpen, setKeyboardOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const ADMIN_ID = initData.data.config.ADMIN_ID;
     
     const goBack = () => {
         history.goBack()
@@ -55,8 +60,8 @@ export default function SettingLogin({ history, location }) {
         flexDirection: "column",
         justifyContent: "space-around",
         alignItems: "center",
-        width: "70%",
-        height: "35vh",
+        width: "25%",
+        height: "60vh",
         backgroundColor: "rgb(255, 255, 255)",
         borderRadius:"5px"
 
@@ -74,15 +79,19 @@ export default function SettingLogin({ history, location }) {
     const passwordConf = () => {
         const passValue = inputRef.current.value;
         if (passValue === ADMIN_ID) {
-            console.log('passWord ok');
+            //console.log('passWord ok');
             history.push("/settingMenu");
         }else {
+            setIsOpen(true);
             //electron.remote.dialog.showMessageBox(null, options);
-            alert('관리자번호가 틀립니다.');
-            console.log('passWord no');
+            //alert('관리자번호가 틀립니다.');
+            //console.log('passWord no');
         }
         inputRef.current.value = "";
         inputRef.current.focus();
+    }
+    const modalClose = () => {
+        setIsOpen(false);
     }
     useEffect(() => {
         inputRef.current.focus();
@@ -160,11 +169,12 @@ export default function SettingLogin({ history, location }) {
             <div style={divStyle}>
                 <div style={boxStyle}>
                 <i><FaUnlockAlt size="40" color="grey"></FaUnlockAlt></i>
-                    <input id="pass" ref={inputRef} onChange={onChangeInput} onFocus={passInputFocus} value={input} style={inputStyle} type="password"></input>
+                    {/* onChange={onChangeInput} value={input}*/}
+                    <input id="pass" ref={inputRef}  onFocus={passInputFocus}  style={inputStyle} type="password"></input>
                     <button style={btnStyle} onClick={passwordConf}>확인</button>
                 </div>
             </div>
-            <div className={`keyboardContainer ${!keyboardOpen ? "hidden" : ""}`}>
+            {/* <div className={`keyboardContainer ${!keyboardOpen ? "hidden" : ""}`}>
                 <Keyboard
                     keyboardRef={r => (keyboard.current = r)}
                     layoutName={layout}
@@ -179,7 +189,12 @@ export default function SettingLogin({ history, location }) {
                           }
                     ]}
                  />
-            </div>
+            </div> */}
+            <ForbiddenModal
+                isOpen = {isOpen}
+                close = {modalClose}
+                message= "관리자 번호가 맞지 않습니다. 확인 후 재시도 해주세요"
+                />
         </div>
     )
 }

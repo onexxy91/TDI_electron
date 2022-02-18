@@ -68,7 +68,7 @@
   "build": {
     "productName": "HelloElectron",
     "appId": "com.innospeech.client",
-    "asar": true,
+    "asar": false,
     "protocols": {
       "name": "helloElectron",
       "schemes": [

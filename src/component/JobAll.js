@@ -256,8 +256,8 @@ export default function JobAll({ history }) {
             <div className="menuBar">
             <button onClick={goBack}><FaArrowLeft size="32" color="#ffff" /></button>
                  {getTitleType()}
-                <button><RiScissorsCutFill size="32" color="#ffff" /><br/>스크랩</button>
-                <Link to="/menuAll"><button className="allSeviceBtn"><FaBars size="32" color="#ffff"/><br/>전체보기</button></Link>
+                {/* <button><RiScissorsCutFill size="32" color="#ffff" /><br/>스크랩</button> */}
+                <Link to="/menuAll"><button className="allSeviceBtn"><FaBars size="32" color="#ffff"/><br/>메뉴보기</button></Link>
             </div>
             <div className="search">
                 <select ref={regionRef}>

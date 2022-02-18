@@ -13,7 +13,7 @@ export default function JobTest33( props ) {
     }
     const btnboxStyle = {
         display: "flex",
-        width: "80%",
+        width: "25%",
         justifyContent:"center",
         height: "24vh",
         marginTop:"43vh",
@@ -59,8 +59,8 @@ export default function JobTest33( props ) {
                 // backgroundImage:"url(./JobTestback.png)", 
                 // backgroundSize: "100%",
         }}>
-            <img style={{width:"100%"}} src="./jobTestback.png"></img>
-            <h1 style={{position:"absolute", fontSize:"3vh", marginTop:"20vh",height:"16vh", width:"75%"}}>타인과 이야기를 할 때 제스처(손짓,몸짓)가 큰 편이다.</h1>
+            <img style={{width:"30%"}} src="./jobTestback.png"></img>
+            <h1 style={{position:"absolute", fontSize:"3vh", marginTop:"20vh",height:"16vh", width:"20%"}}>타인과 이야기를 할 때 제스처(손짓,몸짓)가 큰 편이다.</h1>
             <div style={btnboxStyle}>
                 <button style={BtnSelectStyle} onClick={()=> props.btnClick(400)}> 
                     <span style={spanStyle}>YES</span>

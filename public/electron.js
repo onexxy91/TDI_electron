@@ -3,7 +3,7 @@ const { app, BrowserWindow, screen, ipcMain, dialog, net } = require("electron")
 const isDev = require("electron-is-dev");
 const fs = require('fs');
 const request = require('request');
-
+const config = require(path.normalize('../config.json'));
 const N_API_URL = 'https://naveropenapi.apigw.ntruss.com/vision/v1/';
 const UPLOAD_URL = 'http://cms.innospeech.com/api/uploadUniversalInterview.api';
 
@@ -12,6 +12,7 @@ function createWindow() {
   const {width, height} = screen.getPrimaryDisplay().workAreaSize;
   console.log(width);
   console.log(isDev);
+  // console.log(config.host);
   // Create the browser window.
   // const win = new BrowserWindow({
   //   width: 800,
@@ -25,7 +26,7 @@ function createWindow() {
   try {
     if (width === 1920) { 
       mainWindow = new BrowserWindow({
-      maxWidth: 630,
+      minWidth: 1920,
       height: 1350,
       webPreferences: {
         nodeIntegration: true,
@@ -198,7 +199,7 @@ ipcMain.on('asynchronous-videoComplate', (event, interviewID, interviewDutyID, d
 
 ipcMain.on('synchronous-message', (event, arg) => {
   console.log(arg) // prints "ping"
-  event.returnValue = 'pong'
+  event.sender.send('asynchronous-message', config);
 })
 
 if (require("electron-squirrel-startup")) {

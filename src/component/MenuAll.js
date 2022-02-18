@@ -39,9 +39,9 @@ export default function MenuAll({ history }) {
                         <Link to="/faceDetector"><li><button>안면인식 맞춤정보</button></li></Link>
                         <li><button>나만의 사원증 만들기</button></li>
                         <li><button>크로마키 촬영</button></li>
-                        <li><button>오늘의 퀴즈</button></li>
-                        <li><button>직업테스트</button></li>
-                        <li><button>오늘의 영어 한마디</button></li>
+                        <Link to="/everyQuiz"><li><button>오늘의 퀴즈</button></li></Link>
+                        <Link to="/jobTest"><li><button>직업테스트</button></li></Link>
+                        <Link to="/todayEng"><li><button>오늘의 영어 한마디</button></li></Link>
                     </ul>
                 </div>
             </div>

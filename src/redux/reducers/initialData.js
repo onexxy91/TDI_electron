@@ -12,7 +12,7 @@ const initialReducer = (state = initalState, action) => {
             ...state,
             data: {...action.payload},
             isLoading: false,
-            admin_id: process.env.REACT_APP_ADMIN_ID
+            //admin_id: process.env.REACT_APP_ADMIN_ID
         };
         default:
         return state;

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import {FaArrowLeft, FaRegWindowMinimize, FaBars} from 'react-icons/fa'
 import {AiOutlineHome} from 'react-icons/ai'
-
 import Footer from './Footer'
 
 export default function DisitalInterview({ history }) {

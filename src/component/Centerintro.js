@@ -1,10 +1,8 @@
 import React from 'react'
 import Navbar from './Navbar'
 import { FaArrowLeft, FaBars } from 'react-icons/fa'
-import { RiScissorsCutFill } from 'react-icons/ri'
 import { AiOutlineHome } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import Footer from './Footer'
 import './centerintro.css'
 import { useSelector } from 'react-redux'
 
@@ -36,7 +34,7 @@ const ADMIN_NAME = data.data.config.ADMIN_NAME;
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>
-            {/* <Footer/> */}
+            
         </div>
     )
 }

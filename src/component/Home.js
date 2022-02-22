@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from "react"
 import "./home.css"
-import Slide from "./Slide"
+// import Slide from "./Slide"
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
 //import background_imag from "../univ_background_2.png";
-import Footer from "./Footer";
 import { BiTimer } from 'react-icons/bi';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { MdAssignmentInd, MdHelpOutline } from 'react-icons/md';
@@ -21,19 +20,19 @@ const btnLink = new Array('/jobInfo'
     , '/custom2'); 
 
 export default function Home() {
+    const state = useSelector(state => state.initialReducer);
+    console.log("home", state.data.placard);
+    const divRef = useRef(HTMLDivElement);
+    const custom_API_FIR = state.data.config.CUSTOM_API_FIR;
+    const custom_API_SEC = state.data.config.CUSTOM_API_SEC;
 
-const state = useSelector(state => state.initialReducer);
-console.log("home", state.data.placard);
-const divRef = useRef(HTMLDivElement);
-
-const style ={
-    display: "flex",
-    height: "5vh",
-    width: "95%",
-    justifyContent: "flex-end",
-    alignItems:"center",
-    
-}
+    const style ={
+        display: "flex",
+        height: "5vh",
+        width: "95%",
+        justifyContent: "flex-end",
+        alignItems:"center",
+    }
 
     let count = 0;
     const univFile = state.data.univFile[0];
@@ -78,12 +77,18 @@ useEffect(() => {
          <div className="menuBtnContainer">    
             <Link to={btnLink[0]}><button><MdAssignmentInd size="50" color="#ffff"></MdAssignmentInd><br/>채용정보</button></Link>
             <Link to={btnLink[1]}><button><BiTimer size="50" color="#ffff"></BiTimer><br/>시간제일자리</button></Link>
-            <Link to={btnLink[2]}><button><FaRegPaperPlane size="40" color="#ffff"></FaRegPaperPlane><br/>센터소식</button></Link>
+            <Link to={btnLink[2]}><button><FaRegPaperPlane size="40" color="#ffff"></FaRegPaperPlane><br/>공지사항</button></Link>
         </div>
         <div className="menuBtnContainer1">    
             <Link to={btnLink[3]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>FUN! FUN!</button></Link>
-            <Link to={btnLink[4]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>customBtn1</button></Link>
-            <Link to={btnLink[5]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>customBtn2</button></Link>
+            {custom_API_FIR !== "" ?
+                <Link to={btnLink[4]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>customBtn1</button></Link>
+                :<button style={{ display: "none"}}></button>
+            }
+            {custom_API_SEC !== "" ?
+                <Link to={btnLink[5]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>customBtn2</button></Link>
+                :<button style={{ display: "none"}}></button>
+            }
         </div>
         <div className="contentBtnContainer">
             <div className="sub1">
@@ -93,14 +98,14 @@ useEffect(() => {
                 <Link to="/faceDetector"><button><img src="./faceDetecImage.png"></img></button></Link>
             </div>
             <div className="sub2">
-                <span style={{color:"white", fontSize: "large"}}>일자리 센터소개</span>
+                <span style={{color:"white", fontSize: "large"}}>{state.data.config.ADMIN_NAME} 소개</span>
                 <Link to="/centerintro"><button><img src={univFile.center_menu_img}></img></button></Link>
             </div>
         </div>
             {/* <Link to="/"><button className="centerBtn"><CenterNewsSlide /></button></Link>  */}
-       {/* <Footer /> */}
+       
        <div style={style}>
-           <Link style={{display:"flex", alignItems:"center", textDecoration:"none"}}><span style={{color:"white"}}>이용안내</span><MdHelpOutline size="32" color="#ffff"/></Link>
+           <Link to="/" style={{display:"flex", alignItems:"center", textDecoration:"none"}}><span style={{color:"white"}}>이용안내</span><MdHelpOutline size="32" color="#ffff"/></Link>
        </div>
     </div>
 }

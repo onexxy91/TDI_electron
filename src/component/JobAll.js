@@ -4,8 +4,7 @@ import './jobAll.css'
 import { FaArrowLeft, FaBars, FaChevronDown } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {RiScissorsCutFill} from 'react-icons/ri';
-import Footer from './Footer';
+// import {RiScissorsCutFill} from 'react-icons/ri';
 import axios from 'axios';
 import { BsSearch } from 'react-icons/bs';
 import { FcSearch } from 'react-icons/fc';
@@ -19,8 +18,6 @@ let JOBKOREA_PATH;
 let WORKNET_PATH;
 let WORKNET_SMALL_PATH;
 let OPEN_JOB_API;
-const WORKNET_CODE = process.env.REACT_APP_WORKNET_CODE;
-const JOBKOREA_CODE = process.env.REACT_APP_JOBKOREA_CODE;
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
 
@@ -40,17 +37,18 @@ if(IS_DEV === "true") {
 let time = 0;
 let timeoutIntval = null;
 export default function JobAll({ history }) {
-   
-
     const jobTypePath = history.location.pathname;
     const regionRef = useRef();
     const codeRef = useRef();
     const inputRef = useRef();
     const initData = useSelector(state => state.initialReducer);
+    const WORKNET_CODE = initData.data.config.WORKNET_CODE;
+    const JOBKOREA_CODE = initData.data.config.JOBKOREA_CODE;
     const jobKoCode = initData.data.jobCode;
     const regioncode = initData.data.region;
     const worknetRegion = initData.data.worknetRegion;
     const worknetCode = initData.data.worknetCode;
+
 
    
     const [state, setState] = useState({
@@ -88,7 +86,6 @@ export default function JobAll({ history }) {
         let recruitData = "";
         let pref_code = "";
         let http_url = "";
-       
 
         switch (jobTypePath) {
             case '/jobAll' : 
@@ -100,8 +97,12 @@ export default function JobAll({ history }) {
                 recruitData = await axios.get(`${JOBKOREA_PATH}cur_page=${state.cur_page + 1}&page_size=10&area_code=${JOBKOREA_CODE}&jtype=6,7,2`);
                 jobSiteType = "jobkorea";
                 pref_code = "6,7,2";
-                
                 break;       
+            case '/hsJobInfo' :
+                recruitData = await axios.get(`${JOBKOREA_PATH}cur_page=${state.cur_page + 1}&page_size=10&area_code=${JOBKOREA_CODE}&edu_code=3`);
+                jobSiteType = 'jobkorea';
+                pref_code = "3";
+                break;
             case '/youthJobInfo' :
                 recruitData = await axios.get(`${WORKNET_PATH}&cur_page=${state.cur_page + 1}&page_size=10&pref_code=13&area_code=${WORKNET_CODE}`);
                 jobSiteType = "worknet";
@@ -127,11 +128,11 @@ export default function JobAll({ history }) {
                 jobSiteType = "worknetsmall";
                 break;
             case '/openJobInfo' : 
-                recruitData = await axios.get(`${OPEN_JOB_API}?ctgr_code=12&page=1&path=DID`);
+                recruitData = await axios.get(`${OPEN_JOB_API}?ctgr_code=12&page=${state.cur_page + 1}&path=DID`);
                 jobSiteType = "jobkoreaOpen";
                 break;
         }
-       // console.log("recruit", recruitData.data.result);
+        //console.log("recruit", recruitData.data.result);
         setState({
             ...state,
             loading: false,
@@ -182,6 +183,8 @@ export default function JobAll({ history }) {
                 return (<p>전체기업</p>) 
             case "/realJobInfo" :
                 return (<p>시간제 일자리</p>)
+            case "/hsJobInfo" :
+                return (<p>고졸 채용</p>)
             case "/youthJobInfo" :
                 return (<p>청년 우대기업</p>)
             case "/middleJobInfo" :
@@ -231,7 +234,11 @@ export default function JobAll({ history }) {
         let recruitData = "";
         // console.log("code", code);
         if (state.jobSiteType === "jobkorea") {
-            recruitData = await axios.get(`${JOBKOREA_PATH}cur_page=${state.cur_page}&page_size=10&area_code=${regione}&job_code=${code}&keyword=${input}&jtype=${state.pref_code}`);
+            if (jobTypePath !== "/hsJobInfo") {
+                recruitData = await axios.get(`${JOBKOREA_PATH}cur_page=${state.cur_page}&page_size=10&area_code=${regione}&job_code=${code}&keyword=${input}&jtype=${state.pref_code}`);
+            }else {
+                recruitData = await axios.get(`${JOBKOREA_PATH}cur_page=${state.cur_page}&page_size=10&area_code=${regione}&job_code=${code}&keyword=${input}&edu_code=${state.pref_code}`);
+            }
             console.log(recruitData);
         } else if (state.jobSiteType === "worknet") {
             recruitData = await axios.get(`${WORKNET_PATH}&cur_page=${state.cur_page}&page_size=10&pref_code=${state.pref_code}&area_code=${regione}&job_code=${code}&keyword=${input}`);
@@ -321,7 +328,6 @@ export default function JobAll({ history }) {
             <button onClick={getjobkoreaRecruit}><FaChevronDown size="34" color="rgb(54, 51, 47, 0.8)"/></button>
             </div>) 
             }
-            {/* <Footer /> */}
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>
@@ -329,7 +335,7 @@ export default function JobAll({ history }) {
             (<WorknetModal 
                 closeRecruit= {closeRecruit}
                 selectedRecruit={state.selectedRecruit}/>) 
-                : state.jobSiteType === "jobkorea" ?
+                : state.jobSiteType === "jobkorea" || state.jobSiteType === "jobkoreaOpen" ?
                 (<RecruitModal closeRecruit ={closeRecruit}
                     selectedRecruit={state.selectedRecruit} />)
                 : (<SmallModal closeRecruit={closeRecruit}

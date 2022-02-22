@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useState} from 'react'
 import Navbar from "../Navbar"
 import JobTest1 from './JobTest1';
 import JobTest2 from './JobTest2';
@@ -47,7 +47,7 @@ import {AiOutlineHome} from 'react-icons/ai';
 import { Link } from 'react-router-dom'; 
 
 export default function JobTest({history}) {
-    const buttonRef = useRef(HTMLButtonElement);
+    
     const [state, setState] = useState({
         isloading: true,
         count: 0
@@ -93,217 +93,217 @@ export default function JobTest({history}) {
                     <button onClick={() => btnClick(1)} style={btnStyle}>START ></button>
                 </section>
                )
-               break;
+               
             case 1: 
                 return (
                     <JobTest1 btnClick={btnClick} />
                 )
-                break;
+                
             case 2:
                 return (
                     <JobTest2 btnClick={btnClick} />
                 )
-                break;
+              
             case 3:
                 return (
                     <JobTest3 btnClick={btnClick} />
                 )
-                break;
+               
             case 4: 
                 return (
                     <JobTest4 btnClick={btnClick} />
                 )
-                break;
+               
             case 5: 
                 return (
                     <JobTest5 btnClick={btnClick} />
                 )
-                break;   
+                   
             case 6:
                 return (
                     <JobTest6 btnClick={btnClick} />
                 )
-                break;
+                
             case 7:
                 return (
                     <JobTest7 btnClick={btnClick} />
                 )
-                break;
+                
             case 8:
                 return (
                     <JobTest8 btnClick={btnClick} />
                 )
-                break;
+                
             case 9:
                 return (
                     <JobTest9 btnClick={btnClick} />
                 )
-                break; 
+                 
             case 10:
                 return (
                     <JobTest10 btnClick={btnClick} />
                 )
-                break;
+                
             case 11:
                 return (
                     <JobTest11 btnClick={btnClick} />
                 )
-                break;
+                
             case 12:
                 return (
                     <JobTest12 btnClick={btnClick} />
                 )
-                break;
+                
             case 13:
                 return (
                     <JobTest13 btnClick={btnClick} />
                 )
-                break;
+                
             case 14:
                 return (
                     <JobTest14 btnClick={btnClick} />
                 )
-                break;
+                
             case 15:
                 return (
                     <JobTest15 btnClick={btnClick} />
                 )
-                break;
+                
             case 16:
                 return (
                     <JobTest16 btnClick={btnClick} />
                 )
-                break;
+                
             case 17:
                 return (
                     <JobTest17 btnClick={btnClick} />
                 )
-                break;
+                
             case 18:
                 return (
                     <JobTest18 btnClick={btnClick} />
                 )
-                break;
+                
             case 19:
                 return (
                     <JobTest19 btnClick={btnClick} />
                 )
-                break;
+                
             case 20:
                 return (
                     <JobTest20 btnClick={btnClick} />
                 )
-                break;
+                
              case 21:
                 return (
                     <JobTest21 btnClick={btnClick} />
                 )
-                break;
+                
              case 22:
                 return (
                     <JobTest22 btnClick={btnClick} />
                 )
-                break;
+                
              case 23:
                 return (
                     <JobTest23 btnClick={btnClick} />
                 )
-                break;
+                
              case 24:
                 return (
                     <JobTest24 btnClick={btnClick} />
                 )
-                break;
+                
              case 25:
                 return (
                     <JobTest25 btnClick={btnClick} />
                 )
-                break;
+                
              case 26:
                 return (
                     <JobTest26 btnClick={btnClick} />
                 )
-                break;
+                
              case 27:
                 return (
                     <JobTest27 btnClick={btnClick} />
                 )
-                break;
+                
              case 28:
                 return (
                     <JobTest28 btnClick={btnClick} />
                 )
-                break;
+                
              case 29:
                 return (
                     <JobTest29 btnClick={btnClick} />
                 )
-                break;
+                
              case 30:
                 return (
                     <JobTest30 btnClick={btnClick} />
                 )
-                break;
+                
              case 31:
                 return (
                     <JobTest31 btnClick={btnClick} />
                 )
-                break;
+                
             case 32:
                 return (
                     <JobTest32 btnClick={btnClick} />
                 )
-                break;
+                
             case 33:
                 return (
                     <JobTest33 btnClick={btnClick} />
                 )
-                break;
+                
             case 34:
                 return (
                     <JobTest34 btnClick={btnClick} />
                 )
-                break;
+                
             case 35:
                 return (
                     <JobTest35 btnClick={btnClick} />
                 )
-                break;
+                
             case 36:
                 return (
                     <JobTest36 btnClick={btnClick} />
                 )
-                break;
+                
             case 37:
                 return (
                     <JobTest37 btnClick={btnClick} />
                 )
-                break;
+                
             case 38:
                 return (
                     <JobTest38 btnClick={btnClick} />
                 )
-                break;
+                
            case 100:
                return(
                    <JobAType btnClick={btnClick} />
                ) 
-               break;
+               
             case 200:
                return(
                    <JobBType btnClick={btnClick} />
                ) 
-               break;
+               
             case 300:
                return(
                    <JobCType btnClick={btnClick} />
                ) 
-               break;
+               
             case 400:
                return(
                    <JobDType btnClick={btnClick} />
                ) 
-               break;
+               
        }
     }
     

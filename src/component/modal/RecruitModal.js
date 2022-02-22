@@ -3,7 +3,6 @@ import ReactModal from 'react-modal';
 import './recruitModal.css';
 
 const RecruitModal = (props) => {
-    //console.log(props.selectedRecruit)
     return (
         <ReactModal isOpen={props.selectedRecruit} 
             contentLabel="modal Example" 
@@ -75,9 +74,9 @@ const RecruitModal = (props) => {
                     </div>  
                 </div>
                 <div className="btnGroup">
-                    <button onClick={props.closeRecruit} >스크랩</button>
+                    {/* <button onClick={props.closeRecruit} >스크랩</button> */}
                     <button onClick={props.closeRecruit} >닫기</button>
-                    <button onClick={props.closeRecruit} >프린트하기</button>
+                    {/* <button onClick={props.closeRecruit} >프린트하기</button> */}
                 </div>
             </div>}
             

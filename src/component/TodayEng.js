@@ -97,10 +97,10 @@ export default function TodayEng({ history }) {
             <Navbar />
                 <div className="titleContainer" style={{backgroundColor:"rgb(35, 210, 216)", height:"18vh"}}>
                     <button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}} onClick={goBack}><FaArrowLeft size="45" color="#ffff" /><br/>뒤로</button>
-                    <div style={{display:"flex", width:"35vh", justifyContent:"center", alignItems:"center"}}>
+                    <div style={{display:"flex", width:"40vh", justifyContent:"center", alignItems:"center"}}>
                         <label style={{fontSize:"42px", fontWeight:"900", color:"#ffff", marginTop:"10px", marginRight:"5px", textShadow: "-1px 0 black, 0 3px black, 3px 0 black, 0 -1px black"}}>오늘의</label>
                         <label style={{fontSize:"42px", fontWeight:"900", color:"rgb(230, 230, 70)", marginTop:"10px", marginLeft:"10px", textShadow: "-1px 0 black, 0 3px black, 3px 0 black, 0 -1px black"}}> 영어한마디</label>
-                        </div>
+                    </div>
                     <Link to="/menuAll"><button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}}><FaBars size="45" color="#ffff"/><br/>메뉴</button></Link>
                 </div>
                 <div style={divStyle}>

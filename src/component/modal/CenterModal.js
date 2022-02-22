@@ -9,10 +9,10 @@ const CenterModal = (props) =>{
             ariaHideApp={false}
             style={{
                 content: {
-                    top: '5vh',
-                    bottom: '4vh',
-                    left:'30vh',
-                    right:'30vh'
+                    top: '3vh',
+                    bottom: '3vh',
+                    left:'35vh',
+                    right:'35vh'
                 }}}> 
                 {props.selectedNews && <div className="modalContainer">
                 <div className="top">

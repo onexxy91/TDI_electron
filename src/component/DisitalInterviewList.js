@@ -1,18 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { FaArrowLeft, FaBars } from 'react-icons/fa'
+import { FaArrowLeft } from 'react-icons/fa'
 import { AiOutlineHome } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
-import Footer from './Footer';
-
 import axios from 'axios';
-import InterviewGuideModal from './modal/InterviewGuideModal';
+// import InterviewGuideModal from './modal/InterviewGuideModal';
 import { useSelector } from 'react-redux'
 
 
 let INTERVIEW_LIST_API;
 
-const INTERVIEW_CODE = process.env.REACT_APP_INTERVIEW_GROUP_CODE;
+
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
 
@@ -24,6 +22,7 @@ if(IS_DEV === "true") {
 
 export default function DisitalInterviewReal({ location, history}) {
     const initData = useSelector(state => state.initialReducer);
+    const INTERVIEW_CODE = initData.data.config.INTERVIEW_GROUP_CODE;
     const [isOpen, setIsOpen] = useState(true);
     const disitalBtnRef = useRef(HTMLButtonElement);
     const realtimeBtnRef = useRef(HTMLButtonElement);
@@ -111,17 +110,38 @@ export default function DisitalInterviewReal({ location, history}) {
         setIsOpen(false);
     }
     const disitalInterviewBtn = async () => {
-        const result = await axios.get(INTERVIEW_LIST_API + `?admin_group_id=${ADMIN_ID}&interview_type=R&interview_group_id=${INTERVIEW_CODE}&realtime_use=N`)
-        setInterviewList(result.data.result);
-        
-        console.log(mentRef.current);
+        if (location.state.type == "R") {
+            const result = await axios.get(INTERVIEW_LIST_API + `?admin_group_id=${ADMIN_ID}&interview_type=R&interview_group_id=${INTERVIEW_CODE}&realtime_use=N`)
+            setInterviewList(result.data.result);
+            if (result.data.result.length  < 1) {
+                mentRef.current.textContent = "등록된 기업이 없습니다."
+            }
+            //console.log("result", result)
+        }else {
+            const result = await axios.get(INTERVIEW_LIST_API + `?admin_group_id=${ADMIN_ID}&interview_type=P&interview_group_id=${INTERVIEW_CODE}&realtime_use=N`)
+            setInterviewList(result.data.result);
+            if (result.data.result.length  < 1) {
+                mentRef.current.textContent = "등록된 기업이 없습니다."
+            }
+        }
+        //console.log(mentRef.current);
     }
     const realtimeInterviewBtn = async () => {
-        const result = await axios.get(INTERVIEW_LIST_API + `?admin_group_id=${ADMIN_ID}&interview_type=R&interview_group_id=${INTERVIEW_CODE}&realtime_use=Y`)
-        
-        setInterviewList(result.data.result);
-        mentRef.current.textContent = "등록된 기업이 없습니다."
-        console.log(mentRef);
+        if (location.state.type == "R") {
+            const result = await axios.get(INTERVIEW_LIST_API + `?admin_group_id=${ADMIN_ID}&interview_type=R&interview_group_id=${INTERVIEW_CODE}&realtime_use=Y`)
+            setInterviewList(result.data.result);
+            if (result.data.result.length  < 1) {
+                mentRef.current.textContent = "등록된 기업이 없습니다."
+            }
+        }else {
+            const result = await axios.get(INTERVIEW_LIST_API + `?admin_group_id=${ADMIN_ID}&interview_type=P&interview_group_id=${INTERVIEW_CODE}&realtime_use=Y`)
+            setInterviewList(result.data.result);
+            if (result.data.result.length  < 1) {
+                mentRef.current.textContent = "등록된 기업이 없습니다."
+            }
+        }
+        //mentRef.current.textContent = "등록된 기업이 없습니다."
+        //console.log(mentRef);
     }
 
     // console.log(interviewList)
@@ -138,7 +158,10 @@ export default function DisitalInterviewReal({ location, history}) {
             <Navbar />
             <div className="titleContainer" style={{height:"10vh", width:"95%", display:"flex", justifyContent:"space-between" }}>
                 <button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}} onClick={goBack}><FaArrowLeft size="45" color="#ffff" /><br/>뒤로</button>
-                <h1 style={{fontWeight:"900", color:"rgb(235,240,240)"}}>실전면접({location.state.user.user_name}님)</h1>
+                {location.state.type == "R" ?
+                    <h1 style={{fontWeight:"900", color:"rgb(235,240,240)"}}>실전면접({location.state.user.user_name}님)</h1>
+                    :<h1 style={{fontWeight:"900", color:"rgb(235,240,240)"}}>모의면접({location.state.user.user_name}님)</h1>
+                }
                 {/* <Link to="/menuAll"><button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}}><FaBars size="45" color="#ffff"/><br/>메뉴</button></Link> */}
             </div>
             <div style={divStyle}>
@@ -153,16 +176,17 @@ export default function DisitalInterviewReal({ location, history}) {
                             pathname:"/interviewDutyList",
                             state: {
                                 user: location.state.user,
-                                company: list
+                                company: list,
+                                type: location.state.type
                             }
                          }}>
                             <button  style={listBtnStyle}>{list.interview_title}</button></Link>
-                    )) : interviewList.length === 0 ? (<div> <span ref={mentRef}>인터뷰를 선택해주세요.</span></div>)
+                    )) : interviewList.length == 0 ? (<div> <span ref={mentRef}>인터뷰를 선택해주세요.</span></div>)
                     : (<div></div>)
                     }   
                 </div>
             </div>
-            {/* <Footer /> */}
+            
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>

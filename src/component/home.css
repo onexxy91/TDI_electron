@@ -162,23 +162,30 @@
     font-size: x-large;
     font-family: "gmaget";
     margin-right: 0.1vh;
+    
 }
+.menuBtnContainer button:hover{ 
+    box-shadow:200px 0 0 0 rgba(0,0,0,0.5) inset;
+}
+
 .menuBtnContainer1 button {
     height: 15vh;
     width: 20vh;
     border: none;
     border-radius: 5px; 
-    background-color: rgba(63, 128, 182, 0.932); 
+    background-color: rgba(15, 101, 172, 0.644); 
     /* margin-top: 5px; */
     outline: none;
     cursor: pointer;
     color: white;
     font-family: "gmaget";
     font-size: x-large;
+    /* margin-right: 0.1vh; */
     margin-right: 0.1vh;
 }
-.menuBtnContainer button:active {
-    /* box-shadow:200px 0 0 0 rgba(43, 143, 209, 0.5) inset; */
+
+.menuBtnContainer1 button:hover{ 
+    box-shadow:200px 0 0 0 rgba(0,0,0,0.5) inset;
 }
 
 .menuBtnContainer button img {
@@ -216,7 +223,7 @@ a{
 .sub1 button {
     width: 100%;
     height: 90%;
-    border-radius: 10px;
+    border-radius: 20px;
     color: white;
     background-color: rgba(13, 241, 135, 0);
     margin-top: 5px;
@@ -224,9 +231,14 @@ a{
     outline: none;
     cursor: pointer;
 }
+.sub1 button:hover{ 
+    box-shadow:500px 0 0 0 rgba(49, 48, 48, 0.5) inset;
+}
+
 .sub1 button:active {
     /* box-shadow:25vh 0 0 0 rgba(43, 143, 209, 0.5) inset; */
 }
+
 
 .sub1 button img {
     width: 100%;
@@ -250,11 +262,14 @@ a{
     color: white;
     background-color: rgba(200, 219, 30, 0);
     outline: none;
-    border-radius: 10px;
+    border-radius: 20px;
     cursor: pointer;
 }
 .sub2 button:active {
     /* box-shadow:25vh 0 0 0 rgba(43, 143, 209, 0.5) inset; */
+}
+.sub2 button:hover{ 
+    box-shadow:460px 0 0 0 rgba(46, 45, 45, 0.5) inset;
 }
 .sub2 button img {
     width: 100%;

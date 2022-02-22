@@ -1,4 +1,4 @@
-import  { HashRouter, Route, Switch, useLocation } from 'react-router-dom'
+import  {  Route, Switch } from 'react-router-dom'
 import React from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './routes/Transition.css'
@@ -95,7 +95,8 @@ function App() {
                            '/womenJobInfo',
                            '/disJobInfo',
                            '/smallJobInfo',
-                           '/openJobInfo'
+                           '/openJobInfo',
+                           '/hsJobInfo'
                            ]} exact component={JobAll} />
               <Route path="/centerNews" exact component={CenterNews} />
               <Route path="/setting" component={SettingLogin} />

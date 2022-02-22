@@ -3,20 +3,21 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FaArrowLeft, FaBars } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import Footer from './Footer';
+
 import { AiOutlineHome } from 'react-icons/ai'
 import Navbar from './Navbar'
-import Keyboard from 'react-hangul-virtual-keyboard';
-import "react-hangul-virtual-keyboard/build/css/index.css";
-import Hangul from "hangul-js";
-import { isConstructorDeclaration } from 'typescript';
+//import Keyboard from 'react-hangul-virtual-keyboard';
+//import "react-hangul-virtual-keyboard/build/css/index.css";
+//import Hangul from "hangul-js";
+//import { isConstructorDeclaration } from 'typescript';
+import ForbiddenModal from './modal/ForbiddenModal';
 
 let SIGNUP_API;
 let DETAIL_SIGN_API;
 
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
-let buttonArray = [];
+//let buttonArray = [];
 let inputText = "";
 
 if(IS_DEV === "true") {
@@ -29,13 +30,14 @@ if(IS_DEV === "true") {
 
 export default function SignupMain({ history }) {
     const state = useSelector(state => state.initialReducer);
-    const keyboard = useRef();
-    const [layout, setLayout] = useState("default");
-    const [language, setLanguage] = useState("default");
-    const [inputs, setInputs] = useState({});
-    const [inputName, setInputName] = useState("default");
-    const [keyboardOpen, setKeyboardOpen] = useState(false);
+    // const keyboard = useRef();
+    // const [layout, setLayout] = useState("default");
+    // const [language, setLanguage] = useState("default");
+    // const [inputs, setInputs] = useState({});
+    // const [inputName, setInputName] = useState("default");
+    // const [keyboardOpen, setKeyboardOpen] = useState(false);
     const ADMIN_ID = state.data.config.ADMIN_ID;
+    const [isOpen, setIsOpen] = useState(false);
 
     const ageCode = state.data.ageCode;
     const eduCode = state.data.eduCode;
@@ -98,7 +100,8 @@ export default function SignupMain({ history }) {
         fontFamily: "FontAwesome",
         marginLeft:"5px",
         marginTop: "5px",
-        fontFamily: "gmaget"
+        fontFamily: "gmaget",
+        imeMode: "active",
         
     }
     const textStyle = {
@@ -194,7 +197,8 @@ export default function SignupMain({ history }) {
         
         
         if (password.value !== passwordConf.value) {
-            alert("비밀번호와 비밀번호 확인이 일치하지않습니다.");
+            //alert("비밀번호와 비밀번호 확인이 일치하지않습니다.");
+            setIsOpen(true);
             passwordConf.focus();
             return;
         }
@@ -208,117 +212,120 @@ export default function SignupMain({ history }) {
             alert(result.data.result_msg);
         }
     }
-    const onChangeAll = inputs => {
-        console.log("All", inputs);
-        
-        setInputs({ ...inputs });
-        console.log("Inputs changed", inputs);
-    };
-
-    const handleShift = () => {
-        const newLayoutName = layout === "default" ? "shift" : "default";
-        setLayout(newLayoutName);
-      };
-    const handleEnter = () => {
-        setKeyboardOpen(false);
+    const modalClose = () => {
+        setIsOpen(false);
     }
-    const  handleLanguageButton = () => {
-        console.log("here");
+    // const onChangeAll = inputs => {
+    //     console.log("All", inputs);
         
-        const languageToggle = language === "default" ? "english" : "default";
+    //     setInputs({ ...inputs });
+    //     console.log("Inputs changed", inputs);
+    // };
+
+    // const handleShift = () => {
+    //     const newLayoutName = layout === "default" ? "shift" : "default";
+    //     setLayout(newLayoutName);
+    //   };
+    // const handleEnter = () => {
+    //     setKeyboardOpen(false);
+    // }
+    // const  handleLanguageButton = () => {
+    //     console.log("here");
+        
+    //     const languageToggle = language === "default" ? "english" : "default";
     
-        setLanguage(languageToggle);
-      }
-    const onKeyPress = button => {
-        console.log("Button pressed", button);
+    //     setLanguage(languageToggle);
+    //   }
+    // const onKeyPress = button => {
+    //     console.log("Button pressed", button);
         
-        /**
-         * If you want to handle the shift and caps lock buttons
-         */
-        //console.log(keyboard.current);
-         if(keyboard.current.options.inputName === "name") {
-            if (
-                ![
-                  "{shift}",
-                  "{language}",
-                  "{enter}",
-                  "{bksp}",
-                  "{space}",
-                  "{tab}"
-                ].includes(button)
-              ) {
-                buttonArray.push(button);
-              }
-              if (button === "{bksp}") {
-                buttonArray.pop();
-              }
-              if (button === "{space}") {
-                buttonArray.push(" ");
-              }
-              if (button === "{tab}") {
-                buttonArray.push("  ");
-              }
+    //     /**
+    //      * If you want to handle the shift and caps lock buttons
+    //      */
+    //     //console.log(keyboard.current);
+    //      if(keyboard.current.options.inputName === "name") {
+    //         if (
+    //             ![
+    //               "{shift}",
+    //               "{language}",
+    //               "{enter}",
+    //               "{bksp}",
+    //               "{space}",
+    //               "{tab}"
+    //             ].includes(button)
+    //           ) {
+    //             buttonArray.push(button);
+    //           }
+    //           if (button === "{bksp}") {
+    //             buttonArray.pop();
+    //           }
+    //           if (button === "{space}") {
+    //             buttonArray.push(" ");
+    //           }
+    //           if (button === "{tab}") {
+    //             buttonArray.push("  ");
+    //           }
               
-              inputText = Hangul.assemble(buttonArray);
+    //           inputText = Hangul.assemble(buttonArray);
 
-              setInputs({
-                ...inputs,
-                [inputName]: inputText
-              });
+    //           setInputs({
+    //             ...inputs,
+    //             [inputName]: inputText
+    //           });
 
-              //console.log("buttonArray", buttonArray)
-              //console.log("inputText", inputText)
-              //console.log(keyboard.current);
-              //console.log("ddd", keyboard.current.input.name);
-         }
-       //return inputText = Hangul.assemble(buttonArray);
+    //           //console.log("buttonArray", buttonArray)
+    //           //console.log("inputText", inputText)
+    //           //console.log(keyboard.current);
+    //           //console.log("ddd", keyboard.current.input.name);
+    //      }
+    //    //return inputText = Hangul.assemble(buttonArray);
         
-        if (button === "{shift}" || button === "{lock}") handleShift();
-        if (button === "{language}") handleLanguageButton();
-        if (button === "{enter}") handleEnter();
-      };
-      const onChangeInput = event => {        
-        const inputVal = event.target.value;
+    //     if (button === "{shift}" || button === "{lock}") handleShift();
+    //     if (button === "{language}") handleLanguageButton();
+    //     if (button === "{enter}") handleEnter();
+    //   };
+    //   const onChangeInput = event => {        
+    //     const inputVal = event.target.value;
 
-        setInputs({
-          ...inputs,
-          [inputName]: inputVal
-        });
+    //     setInputs({
+    //       ...inputs,
+    //       [inputName]: inputVal
+    //     });
     
-        keyboard.current.setInput(inputVal);
-      };
-      const inputFocus = () => {
-        setInputName("name");
-        setKeyboardOpen(true);
-      }
-      const passInputFocus = () => {
-        setInputName("pass");
-        setKeyboardOpen(true);
-      }
-      const passComInputFocus = () => {
-        setInputName("passCom");
-        setKeyboardOpen(true);
-      }
-      const emailFocus = () => {
-        setInputName("email");
-        setLanguage("english");
-        setKeyboardOpen(true);
-      }
-      const phoneFocus = () => {
-        setInputName("phone");
-        setKeyboardOpen(true);
-      }
-      const getInputValue = inputName => {
-          //console.log("getInputValue", inputs[inputName])
-        return inputs[inputName] || "";
-      };
+    //     keyboard.current.setInput(inputVal);
+    //   };
+    //   const inputFocus = () => {
+    //     setInputName("name");
+    //     setKeyboardOpen(true);
+    //   }
+    //   const passInputFocus = () => {
+    //     setInputName("pass");
+    //     setKeyboardOpen(true);
+    //   }
+    //   const passComInputFocus = () => {
+    //     setInputName("passCom");
+    //     setKeyboardOpen(true);
+    //   }
+    //   const emailFocus = () => {
+    //     setInputName("email");
+    //     setLanguage("english");
+    //     setKeyboardOpen(true);
+    //   }
+    //   const phoneFocus = () => {
+    //     setInputName("phone");
+    //     setKeyboardOpen(true);
+    //   }
+    //   const getInputValue = inputName => {
+    //       //console.log("getInputValue", inputs[inputName])
+    //     return inputs[inputName] || "";
+    //   };
       useEffect(() => {
-          console.log("띵")
+          //console.log("띵")
           if (inputText !== "") {
-            console.log("똥")
+            //console.log("똥")
                 inputText = "";
                 nameInput.current.value = "";
-                buttonArray = [];
+                //buttonArray = [];
           }
 
       }, [])
@@ -337,34 +344,40 @@ export default function SignupMain({ history }) {
             <h1 style={{color:"white"}}>회원정보 입력</h1>
                 <div style={formStyle}> 
                     <div style={{display:"flex", width:"100%", justifyContent:"space-around", alignItems:"center"}}>
-                        <label style={textStyle}>성명</label><input id="name" value ={inputText} onChange={onChangeInput} onFocus={inputFocus} ref={nameInput} type="text" style={inputStyle} placeholder=" 이름을 입력하세요."></input>
+                            {/* onChange={onChangeInput}  value ={inputText} onFocus={inputFocus}*/}
+                        <label style={textStyle}>성명</label><input id="name" ref={nameInput} type="text" style={inputStyle} placeholder=" 이름을 입력하세요."></input>
                     </div>
                 </div>
                 <div style={formStyle}> 
                     <div style={{display:"flex", width:"100%", justifyContent:"space-around", alignItems:"center"}}>
-                        <label style={textStyle}>이메일</label><input id="email" value ={getInputValue("email")} onChange={onChangeInput} onFocus={emailFocus} ref={emailInput} type="email" style={inputStyle} placeholder=" 이메일을 입력하세요."></input>
+                            {/* value ={getInputValue("email")} onChange={onChangeInput} onFocus={emailFocus} */}
+                        <label style={textStyle}>이메일</label><input id="email"  ref={emailInput} type="email" style={inputStyle} placeholder=" 이메일을 입력하세요."></input>
                     </div>
                 </div>
                 
                 <div style={formStyle}> 
                     <div style={{display:"flex", width:"100%", justifyContent:"space-around", alignItems:"center"}}>
-                        <label style={textStyle}>연락처</label><input id="phone" value ={getInputValue("phone")} onChange={onChangeInput} onFocus={phoneFocus} ref={phoneInput} type="number"style={inputStyle} placeholder=" 연락처를 '_' 없이 입력하세요."></input>
+                            {/* value ={getInputValue("phone")} onChange={onChangeInput} onFocus={phoneFocus} */}
+                        <label style={textStyle}>연락처( ID )</label><input id="phone"  ref={phoneInput} type="text" style={inputStyle} placeholder=" 연락처를 '_' 없이 입력하세요."></input>
                     </div>
                 </div>
                 <div style={formStyle}> 
                     <div style={{display:"flex", width:"100%", justifyContent:"space-around", alignItems:"center"}}>
-                        <label style={textStyle}>비밀번호</label> <input id="pass" value ={getInputValue("pass")} onChange={onChangeInput} onFocus={passInputFocus} ref={passwordInput} type="password" style={inputStyle} placeholder=" 비밀번호를 입력하세요."></input>
+                            {/* value ={getInputValue("pass")} onChange={onChangeInput} onFocus={passInputFocus} */}
+                        <label style={textStyle}>비밀번호</label> <input id="pass"  ref={passwordInput} type="password" style={inputStyle} placeholder=" 비밀번호를 입력하세요."></input>
                     </div>
                 </div>
                 <div style={formStyle}> 
                     <div style={{display:"flex", width:"100%", justifyContent:"space-around", alignItems:"center"}}>
-                        <label style={textStyle}>비밀번호확인</label><input id="passCom" value ={getInputValue("passCom")} onChange={onChangeInput} onFocus={passComInputFocus}ref={passwordConInput} type="password" style={inputStyle} placeholder=" 비밀번호를 재입력하세요."></input>
+                            {/* value ={getInputValue("passCom")} onChange={onChangeInput} onFocus={passComInputFocus} */}
+                        <label style={textStyle}>비밀번호확인</label><input id="passCom" ref={passwordConInput} type="password" style={inputStyle} placeholder=" 비밀번호를 재입력하세요."></input>
                     </div>
                 </div>
                 <h1 style={{color:"white"}}>추가정보 입력</h1>
                 <div style={formStyle}> 
                     <div style={{display:"flex", width:"100%", justifyContent:"space-around", alignItems:"center"}}>
-                        <label style={textStyle}>연령</label><select onFocus={() => setKeyboardOpen(false)} ref={ageSelect} style={selectboxStyle}>
+                                {/* onFocus={() => setKeyboardOpen(false)} */}
+                        <label style={textStyle}>연령</label><select  ref={ageSelect} style={selectboxStyle}>
                                 <option value="">연령선택</option>
                             {ageCode && ageCode.map((code, index) => (
                                 <option key={index} value={code.code}>{code.value}</option>
@@ -373,7 +386,8 @@ export default function SignupMain({ history }) {
                 </div>
                 <div style={formStyle}>
                     <div style={{display:"flex", width:"100%", justifyContent:"space-around", alignItems:"center"}}>
-                        <label style={textStyle}>구직/직종</label><select onFocus={() => setKeyboardOpen(false)} ref={workCodeSelect}style={selectboxStyle}>
+                                {/* onFocus={() => setKeyboardOpen(false)} */}
+                        <label style={textStyle}>구직/직종</label><select  ref={workCodeSelect}style={selectboxStyle}>
                             <option  value="">희망직종 선택</option>
                             {worknetCode && worknetCode.map((code, index) => (
                                 <option key={index} value={code.code}>{code.value}</option>
@@ -433,7 +447,7 @@ export default function SignupMain({ history }) {
                 </div>
                     <button style={btnStyle} onClick={signUpBtnClick}>회원가입</button>
             </div>
-            <div className={`keyboardContainer ${!keyboardOpen ? "hidden" : ""}`}>
+            {/* <div className={`keyboardContainer ${!keyboardOpen ? "hidden" : ""}`}>
                 <Keyboard
                     keyboardRef={r => (keyboard.current = r)}
                     layoutName={layout}
@@ -448,11 +462,16 @@ export default function SignupMain({ history }) {
                           }
                     ]}
                  />
-            </div>
-            {/* <Footer /> */}
+            </div> */}
+ 
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>
+            <ForbiddenModal
+                isOpen = {isOpen}
+                close = {modalClose}
+                message= "입력하신 비밀번호 와 비밀번호확인이 일치하지 않습니다."
+                />
         </div>
     )
 }

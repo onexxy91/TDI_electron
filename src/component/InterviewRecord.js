@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Navbar from './Navbar'
-import Footer from './Footer';
 import VideoRecorder from "react-video-recorder";
 import renderActions from './default/render-action';
 import axios from 'axios';
@@ -12,7 +11,7 @@ import { useSelector } from 'react-redux';
 
 
 
-const INTERVIEW_CODE = process.env.REACT_APP_INTERVIEW_GROUP_CODE;
+//const INTERVIEW_CODE = process.env.REACT_APP_INTERVIEW_GROUP_CODE;
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
 const electron = window.require('electron');
@@ -33,7 +32,7 @@ const MIME_TYPES = [
     'video/mp4'
   ]
 export default function InterviewRecord({ location, history }) {
-    //console.log("InterviewRecord", location);
+    console.log("InterviewRecord", location);
     const initData = useSelector(state => state.initialReducer);
     const ADMIN_ID = initData.data.config.ADMIN_ID;
     const ipcRenderer = electron.ipcRenderer;
@@ -173,7 +172,7 @@ export default function InterviewRecord({ location, history }) {
         }
         filePath = `${ADMIN_ID}_${location.state.user.user_id}_${getToday()}`;
         getDutyDetail();
-        console.log("video11111", videoRef.current);
+        //console.log("video11111", videoRef.current);
         videoRef.current.turnOnCamera();
     }, [])
 
@@ -238,9 +237,9 @@ export default function InterviewRecord({ location, history }) {
 
         history.push("/");
     }
-    console.log("dutydetail=", state.dutyDetail.length)
+    //console.log("dutydetail=", state.dutyDetail.length)
     console.log("counts=", state.counts)
-    console.log("number=", number);
+    //console.log("number=", number);
 
     return (
         <div style={containerStyle}>
@@ -266,8 +265,8 @@ export default function InterviewRecord({ location, history }) {
                     isFlipped={false}
                     isReplayingVideo={false}
                     // isOnInitially
-                    countdownTime={3000}
-                    timeLimit={10000}
+                    countdownTime={initData.data.config.INTERVIEW_COUNTDOWN_TIME}
+                    timeLimit={60000} //state로 limit만들어서 초기값 주고 useeffec후 넣어주기 state.dutyDetail[state.conunts].interview_detail_time * 1000
                     mimeType="video/webm;codecs=vp8,opus"
                     constraints={{
                         audio: true,
@@ -279,7 +278,7 @@ export default function InterviewRecord({ location, history }) {
                         }
                     }}
                     onStopRecording={() => {
-                        console.log("onStop !");
+                        //console.log("onStop !");
                         number = number +1;
                         setState({
                                 ...state,
@@ -355,7 +354,6 @@ export default function InterviewRecord({ location, history }) {
                 
             </div>
             </div>
-            {/* <Footer /> */}
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>

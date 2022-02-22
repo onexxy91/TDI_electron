@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FcSearch } from 'react-icons/fc'
 import { FaArrowLeft, FaBars, FaChevronDown } from 'react-icons/fa'
-import { RiScissorsCutFill } from 'react-icons/ri'
+// import { RiScissorsCutFill } from 'react-icons/ri'
 import { AiOutlineHome } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import "./centerNews.css"
 import axios from 'axios'
-import Footer from './Footer'
 import CenterModal from './modal/CenterModal'
 import { useSelector } from 'react-redux'
 
@@ -85,7 +84,7 @@ export default function CenterNews({ history })  {
             <Navbar />
             <div className="menuBar">
                 <button onClick={goBack}><FaArrowLeft size="32" color="#ffff" /></button>
-                <p>센터소식</p>
+                <p>공지사항</p>
                 {/* <button><RiScissorsCutFill size="32" color="#ffff" /><br/>스크랩</button> */}
                 <Link to="/menuAll"><button className="allSeviceBtn"><FaBars size="32" color="#ffff"/><br/>메뉴보기</button></Link>
             </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
@@ -113,7 +112,7 @@ export default function CenterNews({ history })  {
                 : <button></button>
             }
             </div>
-            {/* <Footer /> */}
+            
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>

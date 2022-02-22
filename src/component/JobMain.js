@@ -4,7 +4,6 @@ import Navbar from "./Navbar";
 import {FaArrowLeft, FaRegWindowMinimize, FaBars} from 'react-icons/fa'
 import {AiOutlineHome} from 'react-icons/ai'
 import { Link } from 'react-router-dom';
-import Footer from './Footer';
 
 export default function JobMain({ history }) {
     console.log("shitory", history)
@@ -27,16 +26,19 @@ export default function JobMain({ history }) {
                 <Link className="half-link" to="/youthJobInfo">
                     <button className="youthBtn"><FaRegWindowMinimize size="30" color="#ff9999"/><br/>청년</button>
                 </Link>
-                <Link className="half-link" to="/middleJobInfo">
+                {/* <Link className="half-link" to="/middleJobInfo">
                     <button className="middleBtn"><FaRegWindowMinimize size="30" color="#ff9999"/><br/>중장년</button>
+                </Link>   */}
+                <Link className="half-link" to="/hsJobInfo">
+                    <button className="middleBtn"><FaRegWindowMinimize size="30" color="#ff9999"/><br/>고졸 채용</button>
                 </Link>
-                <Link className="half-link" to="/womenJobInfo">
+                {/* <Link className="half-link" to="/womenJobInfo">
                     <button className="womenBtn"><FaRegWindowMinimize size="30" color="#ff9999"/><br/>여성</button>
-                </Link>
+                </Link> */}
                 <Link className="half-link" to="/disJobInfo">
                     <button className="disBtn"><FaRegWindowMinimize size="30" color="#ff9999"/><br/>장애인</button>
                 </Link>
-                <Link className="default-link" to="/smallJobInfo">
+                <Link className="half-link" to="/smallJobInfo">
                     <button className="smallBtn"><FaRegWindowMinimize size="30" color="#ff9999"/><br/>강소기업</button>
                 </Link>
             </div>
@@ -48,7 +50,6 @@ export default function JobMain({ history }) {
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>
-            {/* <Footer /> */}
         </div>
     )
 }

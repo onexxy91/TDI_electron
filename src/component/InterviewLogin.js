@@ -3,11 +3,11 @@ import { FaArrowLeft, FaBars, FaUnlockAlt } from 'react-icons/fa'
 import { AiOutlineHome } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
-import Footer from './Footer';
+
 import axios from 'axios';
-import Keyboard from 'react-hangul-virtual-keyboard';
+// import Keyboard from 'react-hangul-virtual-keyboard';
 import ForbiddenModal from './modal/ForbiddenModal';
-import "react-hangul-virtual-keyboard/build/css/index.css";
+// import "react-hangul-virtual-keyboard/build/css/index.css";
 import { useSelector } from 'react-redux'
 
 
@@ -21,17 +21,18 @@ if(IS_DEV === "true") {
     LOGIN_API_URL = `${PROXY}/api/univUserLogin.api`;
 }
 
-export default function InterviewLogin({ history }) {
+export default function InterviewLogin({ history, location }) {
     const initData = useSelector(state => state.initialReducer);
     const phoneRef = useRef(HTMLInputElement);
     const passRef = useRef(HTMLInputElement);
-    const keyboard = useRef();
+    // const keyboard = useRef();
     const [isOpen, setIsOpen] = useState(false);
-    const [layout, setLayout] = useState("default");
-    const [language, setLanguage] = useState("default");
-    const [inputs, setInputs] = useState({});
-    const [inputName, setInputName] = useState("default");
-    const [keyboardOpen, setKeyboardOpen] = useState(false);
+    //console.log(location.state.interview_type);
+    // const [layout, setLayout] = useState("default");
+    // const [language, setLanguage] = useState("default");
+    // const [inputs, setInputs] = useState({});
+    // const [inputName, setInputName] = useState("default");
+    // const [keyboardOpen, setKeyboardOpen] = useState(false);
     const ADMIN_ID = initData.data.config.ADMIN_ID;
     
     const divStyle = {
@@ -89,7 +90,7 @@ export default function InterviewLogin({ history }) {
     }
     useEffect(() => {
         phoneRef.current.focus();
-        setKeyboardOpen(true);
+        //setKeyboardOpen(true);
     }, [])
 
     //로그인 
@@ -112,7 +113,8 @@ export default function InterviewLogin({ history }) {
             history.push({
                 pathname: "/interviewCompany",
                 state: {
-                    user: result.data.result
+                    user: result.data.result,
+                    type:location.state.interview_type
                 }
             })
         }else{
@@ -125,56 +127,56 @@ export default function InterviewLogin({ history }) {
         setIsOpen(false);
     }
 
-    const onChangeAll = inputs => {
-        setInputs({ ...inputs });
-        console.log("Inputs changed", inputs);
-    };
+    // const onChangeAll = inputs => {
+    //     setInputs({ ...inputs });
+    //     console.log("Inputs changed", inputs);
+    // };
 
-    const handleShift = () => {
-        const newLayoutName = layout === "default" ? "shift" : "default";
-        setLayout(newLayoutName);
-      };
-    const handleEnter = () => {
-        setKeyboardOpen(false);
-    }
-    const  handleLanguageButton = () => {
-        console.log("here");
+    // const handleShift = () => {
+    //     const newLayoutName = layout === "default" ? "shift" : "default";
+    //     setLayout(newLayoutName);
+    //   };
+    // const handleEnter = () => {
+    //     setKeyboardOpen(false);
+    // }
+    // const  handleLanguageButton = () => {
+    //     console.log("here");
         
-        const languageToggle = language === "default" ? "english" : "default";
+    //     const languageToggle = language === "default" ? "english" : "default";
     
-        setLanguage(languageToggle);
-      }
-    const onKeyPress = button => {
-        console.log("Button pressed", button);
+    //     setLanguage(languageToggle);
+    //   }
+    // const onKeyPress = button => {
+    //     console.log("Button pressed", button);
     
-        /**
-         * If you want to handle the shift and caps lock buttons
-         */
-        if (button === "{shift}" || button === "{lock}") handleShift();
-        if (button === "{language}") handleLanguageButton();
-        if (button === "{enter}") handleEnter();
-      };
-      const onChangeInput = event => {
-        const inputVal = event.target.value;
+    //     /**
+    //      * If you want to handle the shift and caps lock buttons
+    //      */
+    //     if (button === "{shift}" || button === "{lock}") handleShift();
+    //     if (button === "{language}") handleLanguageButton();
+    //     if (button === "{enter}") handleEnter();
+    //   };
+    //   const onChangeInput = event => {
+    //     const inputVal = event.target.value;
 
-        setInputs({
-          ...inputs,
-          [inputName]: inputVal
-        });
+    //     setInputs({
+    //       ...inputs,
+    //       [inputName]: inputVal
+    //     });
     
-        keyboard.current.setInput(inputVal);
-      };
-      const inputFocus = () => {
-        setInputName("id");
-        setKeyboardOpen(true);
-      }
-      const passInputFocus = () => {
-        setInputName("pass");
-        setKeyboardOpen(true);
-      }
-      const getInputValue = inputName => {
-        return inputs[inputName] || "";
-      };
+    //     keyboard.current.setInput(inputVal);
+    //   };
+    //   const inputFocus = () => {
+    //     setInputName("id");
+    //     setKeyboardOpen(true);
+    //   }
+    //   const passInputFocus = () => {
+    //     setInputName("pass");
+    //     setKeyboardOpen(true);
+    //   }
+    //   const getInputValue = inputName => {
+    //     return inputs[inputName] || "";
+    //   };
     return (
         <div className="container" style={{backgroundColor: "#21D4FD",
         backgroundImage: "linear-gradient(19deg, #21D4FD 0%, #6271b9 100%)"}}>
@@ -188,15 +190,16 @@ export default function InterviewLogin({ history }) {
                 <div style={loginStyle}>
                     {/* <label>연락처</label> */}
                     <i><FaUnlockAlt size="40" color="grey"></FaUnlockAlt></i>
+                    {/* <label style={{fontSize:"2.2vh",  backgroundColor:"rgba(245, 235, 235)", marginRight:"5px"}}>ID</label> */}
                     <div style={{display:"flex", width:"100%", justifyContent:"center", alignItems:"center", }}>
                         {/* <label><FaPhoneAlt size="35" color="grey"></FaPhoneAlt></label> */}
-                        {/* value ={getInputValue("id")} onChange={onChangeInput} */}
-                        <input id="id" onFocus={inputFocus} ref={phoneRef} type="number"  style={inputStyle} placeholder="  &#xf098;  연락처를'_' 없이 입력하세요."></input>
+                        {/* value ={getInputValue("id")} onChange={onChangeInput} onFocus={inputFocus} */}
+                        <input id="id" ref={phoneRef} type="text"  style={inputStyle} placeholder="  &#xf098;  연락처를'_' 없이 입력하세요."></input>
                     </div>
                     <div style={{display:"flex", width:"100%", justifyContent:"center", alignItems:"center", }}>
                         {/* <i><FaUnlockAlt size="50" color="grey"></FaUnlockAlt></i> */}
-                        {/* onChange={onChangeInput} value={getInputValue("pass")} */}
-                        <input id="pass" ref={passRef} type="password" style={inputStyle} onFocus={passInputFocus} placeholder="  &#61475;  비밀번호"></input>
+                        {/* onChange={onChangeInput} value={getInputValue("pass")} onFocus={passInputFocus} */}
+                        <input id="pass" ref={passRef} type="password" style={inputStyle}  placeholder="  &#61475;  비밀번호"></input>
                     </div>
                     <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", width:"95%"}}>
                         <Link to="/signup"><button style={btnStyle}>회원가입</button></Link>
@@ -220,7 +223,6 @@ export default function InterviewLogin({ history }) {
                     ]}
                  />
             </div> */}
-            {/* <Footer /> */}
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>

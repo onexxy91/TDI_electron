@@ -69,7 +69,7 @@ export default function FunFunMain({ history }) {
                     <button style={btnStyle}><FaRegWindowMinimize size="30" color="#FBAB7E"/><br/>오늘의 영어 한마디</button>
                 </Link>
             </div>
-            {/* <Footer /> */}
+            
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>

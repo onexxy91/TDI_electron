@@ -1,4 +1,3 @@
-import React, {useRef, useState} from 'react'
 
 export default function JobTest10( props ) {
     console.log(props)

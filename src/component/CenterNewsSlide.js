@@ -77,8 +77,8 @@ const centerBtn = {
             )
         : (<Slider style={{width:'100vh', height:'6vh' }} {...setting}>
         {state.newsData.map((notice, index) => (
-            <div>
-                <button style={centerBtn} key={index}><MdNotificationsNone size="35" color="#ffff"/> {notice.title}</button>
+            <div key={index}>
+                <button style={centerBtn} ><MdNotificationsNone size="35" color="#ffff"/> {notice.title}</button>
             </div>
         ))}
       </Slider>)

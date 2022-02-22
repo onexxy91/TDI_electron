@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import logo from '../logo.svg';
-import { getData, initDataIpcMain } from '../redux/action/initAction';
+import { getData } from '../redux/action/initAction';
 import Home from './Home';
 import  { faceDetect } from './FaceDetector';
 

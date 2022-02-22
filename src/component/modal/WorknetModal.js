@@ -145,9 +145,9 @@ const WorknetModal = (props) => {
                     </div>
                 </div>
                 <div className="btnGroup">
-                    <button onClick={props.closeRecruit} className="closeBtn">스크랩</button>
-                    <button onClick={props.closeRecruit} className="closeBtn">닫기x</button>
-                    <button onClick={props.closeRecruit} className="closeBtn">프린트하기</button>
+                    {/* <button onClick={props.closeRecruit} className="closeBtn">스크랩</button> */}
+                    <button onClick={props.closeRecruit} className="closeBtn">닫기</button>
+                    {/* <button onClick={props.closeRecruit} className="closeBtn">프린트하기</button> */}
                 </div>
             </div>}
             

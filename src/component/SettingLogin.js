@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FaArrowLeft, FaBars, FaUnlockAlt } from 'react-icons/fa'
 import { Link, Router } from 'react-router-dom'
 import Navbar from './Navbar'
-import Keyboard from 'react-hangul-virtual-keyboard';
-import "react-hangul-virtual-keyboard/build/css/index.css";
+// import Keyboard from 'react-hangul-virtual-keyboard';
+// import "react-hangul-virtual-keyboard/build/css/index.css";
 import ForbiddenModal from './modal/ForbiddenModal'
 import { useSelector } from 'react-redux';
 
@@ -17,20 +17,16 @@ export default function SettingLogin({ history, location }) {
     const keyboard = useRef();
     const [layout, setLayout] = useState("default");
     const [language, setLanguage] = useState("english");
-    const [input, setInput] = useState("");
-    const [inputName, setInputName] = useState("default");
-    const [keyboardOpen, setKeyboardOpen] = useState(false);
+    // const [input, setInput] = useState("");
+    // const [inputName, setInputName] = useState("default");
+    // const [keyboardOpen, setKeyboardOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const ADMIN_ID = initData.data.config.ADMIN_ID;
     
     const goBack = () => {
         history.goBack()
     }
-    const options = {
-        type: "warning",
-        buttons: [],
-        message: "비밀번호가 틀립니다. "
-    }
+    
 
     const btnStyle = {
         width:"65%",
@@ -97,50 +93,50 @@ export default function SettingLogin({ history, location }) {
         inputRef.current.focus();
     }, [])
 
-    const onChange = input => {
-        /**
-      * Here we spread the inputs into a new object
-      * If we modify the same object, react will not trigger a re-render
-      */
-     setInput(input);
-     console.log("Inputs changed", input);
-     };
+    // const onChange = input => {
+    //     /**
+    //   * Here we spread the inputs into a new object
+    //   * If we modify the same object, react will not trigger a re-render
+    //   */
+    //  setInput(input);
+    //  console.log("Inputs changed", input);
+    //  };
  
-     const handleShift = () => {
-         const newLayoutName = layout === "default" ? "shift" : "default";
-         setLayout(newLayoutName);
-       };
-     const handleEnter = () => {
-         setKeyboardOpen(false);
-     }
-     const  handleLanguageButton = () => {
-         console.log("here");
+    //  const handleShift = () => {
+    //      const newLayoutName = layout === "default" ? "shift" : "default";
+    //      setLayout(newLayoutName);
+    //    };
+    //  const handleEnter = () => {
+    //      setKeyboardOpen(false);
+    //  }
+    //  const  handleLanguageButton = () => {
+    //      console.log("here");
          
-         const languageToggle = language === "default" ? "english" : "default";
+    //      const languageToggle = language === "default" ? "english" : "default";
      
-         setLanguage(languageToggle);
-       }
-     const onKeyPress = button => {
-         console.log("Button pressed", button);
+    //      setLanguage(languageToggle);
+    //    }
+    //  const onKeyPress = button => {
+    //      console.log("Button pressed", button);
      
-         /**
-          * If you want to handle the shift and caps lock buttons
-          */
-         if (button === "{shift}" || button === "{lock}") handleShift();
-         if (button === "{language}") handleLanguageButton();
-         if (button === "{enter}") handleEnter();
-       };
+    //      /**
+    //       * If you want to handle the shift and caps lock buttons
+    //       */
+    //      if (button === "{shift}" || button === "{lock}") handleShift();
+    //      if (button === "{language}") handleLanguageButton();
+    //      if (button === "{enter}") handleEnter();
+    //    };
 
-       const onChangeInput = event => {
-        const input = event.target.value;
-        setInput(input);
-        keyboard.current.setInput(input);
-       };
+    //    const onChangeInput = event => {
+    //     const input = event.target.value;
+    //     setInput(input);
+    //     keyboard.current.setInput(input);
+    //    };
 
-       const passInputFocus = () => {
-         setInputName("pass");
-         setKeyboardOpen(true);
-       }
+    //    const passInputFocus = () => {
+    //      setInputName("pass");
+    //      setKeyboardOpen(true);
+    //    }
       
     return (
         <div className="container"  style={{backgroundColor: "#0093E9",
@@ -169,8 +165,8 @@ export default function SettingLogin({ history, location }) {
             <div style={divStyle}>
                 <div style={boxStyle}>
                 <i><FaUnlockAlt size="40" color="grey"></FaUnlockAlt></i>
-                    {/* onChange={onChangeInput} value={input}*/}
-                    <input id="pass" ref={inputRef}  onFocus={passInputFocus}  style={inputStyle} type="password"></input>
+                    {/* onChange={onChangeInput} value={input} onFocus={passInputFocus}*/}
+                    <input id="pass" ref={inputRef} style={inputStyle} type="password"></input>
                     <button style={btnStyle} onClick={passwordConf}>확인</button>
                 </div>
             </div>

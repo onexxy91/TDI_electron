@@ -12,7 +12,7 @@ import SettingMenu from '../component/SettingMenu';
 import Centerintro from '../component/Centerintro';
 import FunFunMain from '../component/FunFunMain';
 import FaceDetector from '../component/FaceDetector';
-import test from '../component/Test';
+// import test from '../component/Test';
 import DisitalInterview from '../component/DisitalInterview';
 import InterviewLogin from '../component/InterviewLogin';
 import Signup from '../component/Signup';

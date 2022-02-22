@@ -1,7 +1,4 @@
-import React, {useRef, useState} from 'react'
-import {FaBars, FaArrowLeft} from 'react-icons/fa';
-import {AiOutlineHome} from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import React from 'react'
 
 export default function JobTest3( props ) {
     console.log(props)

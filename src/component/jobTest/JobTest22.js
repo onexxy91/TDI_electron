@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React from 'react'
 
 export default function JobTest22( props ) {
     console.log(props)
@@ -33,16 +33,7 @@ export default function JobTest22( props ) {
         fontFamily: "gmaget",
         
     }
-    const btnABStyle ={
-        border:"none", 
-        backgroundColor:"pink", 
-        color:"#ffff", 
-        borderRadius:"50%", 
-        width:"25%", 
-        height:"5vh",
-        fontSize:"30px",
-        fontWeight:"600",
-    }
+   
     const spanStyle = {
         fontSize:"3vh", 
         fontWeight:"600", 

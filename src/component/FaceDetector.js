@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
-import Footer from './Footer'
 import Navbar from './Navbar'
 import "@tensorflow/tfjs-core";
 import "@tensorflow/tfjs-converter";
@@ -13,11 +12,11 @@ import GuideModal from './modal/GuideModal';
 import axios from 'axios';
 import { AiOutlineHome } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 let WORKNET_PATH;
 let JOBKOREA_PATH;
-const WORKNET_CODE = process.env.REACT_APP_WORKNET_CODE;
-const JOBKOREA_CODE = process.env.REACT_APP_JOBKOREA_CODE;
+
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
 
@@ -44,6 +43,9 @@ export const faceDetect = async () => {
  };
 
 export default function FaceDetector({ history }) {
+    const initState = useSelector(state => state.initialReducer);
+    const WORKNET_CODE = initState.data.config.WORKNET_CODE;
+    const JOBKOREA_CODE = initState.data.config.JOBKOREA_CODE;
     const ipcRenderer = electron.ipcRenderer;
     const webcam = useRef(Webcam);
     const canvas = useRef(HTMLCanvasElement);
@@ -348,7 +350,7 @@ export default function FaceDetector({ history }) {
             <button onClick={startBtnClick} style={btnStyle}>시작하기</button>
             <FaceDetectorModal closeNews={close} selectedNews={selectedNews} />
             <GuideModal closeNews={close} restart={restart} face={face} celebrity={celebrity} image={image} recruitData={recruitData}/>
-            {/* <Footer /> */}
+            
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>

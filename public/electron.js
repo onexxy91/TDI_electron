@@ -11,6 +11,7 @@ function createWindow() {
   let mainWindow = null;
   const {width, height} = screen.getPrimaryDisplay().workAreaSize;
   console.log(width);
+  console.log(height);
   console.log(isDev);
   // console.log(config.host);
   // Create the browser window.
@@ -27,7 +28,7 @@ function createWindow() {
     if (width === 1920) { 
       mainWindow = new BrowserWindow({
       minWidth: 1920,
-      height: 1350,
+      minHeight: 1040,
       webPreferences: {
         nodeIntegration: true,
         worldSafeExecuteJavaScript: true, 

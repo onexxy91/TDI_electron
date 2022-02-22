@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React from 'react'
 
 export default function JobTest20( props ) {
     console.log(props)

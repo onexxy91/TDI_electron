@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import {FaArrowLeft, FaRegWindowMinimize, FaBars} from 'react-icons/fa'
 import {AiOutlineHome} from 'react-icons/ai'
-import Footer from './Footer'
+
 
 export default function DisitalInterview({ history }) {
     console.log(history);
@@ -45,17 +45,19 @@ export default function DisitalInterview({ history }) {
                 <Link to="/menuAll"><button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}}><FaBars size="45" color="#ffff"/><br/>메뉴</button></Link>
             </div>
             <div style={infobtnContainer}>
-                <Link  to="/interviewLogin">
+                <Link  to={{pathname:"/interviewLogin" ,
+                            state:{ interview_type:"R"} }}>
                     <button style={btnStyle}><FaRegWindowMinimize size="30" color="#8EC5FC"/><br/>실전면접</button>
                 </Link>
-                <Link  to="/">
+                <Link  to={{pathname:"/interviewLogin", 
+                            state:{ interview_type:"P"} }}>
                     <button style={btnStyle}><FaRegWindowMinimize size="30" color="#FBAB7E"/><br/>모의면접</button>
                 </Link>
             </div>
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>
-            {/* <Footer /> */}
+            
         </div>
     )
 }  

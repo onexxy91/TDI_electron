@@ -3,12 +3,12 @@ import { FaArrowLeft, FaBars } from 'react-icons/fa'
 import { AiOutlineHome } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
-import Footer from './Footer';
+
 import axios from 'axios';
 import { useSelector } from 'react-redux'
 
 
-const INTERVIEW_CODE = process.env.REACT_APP_INTERVIEW_GROUP_CODE;
+
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
 
@@ -23,6 +23,7 @@ export default function DisitalInterviewDutyList({ location, history}) {
     const [dutyList, setDutyList] = useState([]);
     const initData = useSelector(state => state.initialReducer);
     const ADMIN_ID = initData.data.config.ADMIN_ID;
+    const INTERVIEW_CODE = initData.data.config.INTERVIEW_GROUP_CODE;
 
     console.log("interviewDutyList-", location)
     
@@ -54,7 +55,8 @@ export default function DisitalInterviewDutyList({ location, history}) {
             pathname: "/interviewCompany",
             state: {
                 user: location.state.user,
-                company: location.state.company
+                company: location.state.company,
+                type: location.state.type
             }
         })
     }
@@ -91,7 +93,8 @@ export default function DisitalInterviewDutyList({ location, history}) {
                             state: {
                                 user: location.state.user,
                                 company: location.state.company,
-                                duty: duty
+                                duty: duty,
+                                type:location.state.type
                             }
                          }}>
                             <button  style={listBtnStyle}>{duty.interview_duty_title}</button></Link>
@@ -99,7 +102,7 @@ export default function DisitalInterviewDutyList({ location, history}) {
                    }
                 </div>
             </div>
-            {/* <Footer /> */}
+            
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>

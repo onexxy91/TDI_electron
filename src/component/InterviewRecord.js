@@ -7,6 +7,8 @@ import { getToday } from './utilities';
 import { AiOutlineHome } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import InterviewTipModal from './modal/InterviewTipModal';
+import ForbiddenModal from './modal/ForbiddenModal';
 
 
 
@@ -24,18 +26,19 @@ if(IS_DEV === "true") {
     DUTY_DETAIL_API = `${PROXY}/api/testInterviewDutyDetailList.api`;
 }
 let filePath;
-const MIME_TYPES = [
-    'video/webm;codecs="vp8,opus"',
-    'video/webm;codecs=h264',
-    'video/webm;codecs=vp9',
-    'video/webm',
-    'video/mp4'
-  ]
+// const MIME_TYPES = [
+//     'video/webm;codecs="vp8,opus"',
+//     'video/webm;codecs=h264',
+//     'video/webm;codecs=vp9',
+//     'video/webm',
+//     'video/mp4'
+//   ]
 export default function InterviewRecord({ location, history }) {
     console.log("InterviewRecord", location);
     const initData = useSelector(state => state.initialReducer);
     const ADMIN_ID = initData.data.config.ADMIN_ID;
     const ipcRenderer = electron.ipcRenderer;
+    const [isOpen, setIsOpen] = useState(false);
     const [state, setState] = useState({
         conunts: 0,
         dutyDetail: [],
@@ -43,6 +46,7 @@ export default function InterviewRecord({ location, history }) {
         startBtn: true,
         endBtn: false,
         recStart: false,
+        limitSec: 60000,
     })
     const videoRef = useRef();
     const audioRef = useRef();
@@ -113,7 +117,8 @@ export default function InterviewRecord({ location, history }) {
         height: "7vh",
         width: "100%",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        // backgroundColor: "blue"
         //글자수 제한 해야됨slice
         //질문 container 같이 
     }
@@ -154,25 +159,37 @@ export default function InterviewRecord({ location, history }) {
     }
     const getDutyDetail = async () => {
         const result = await axios.get(DUTY_DETAIL_API + `?interview_duty_id=${location.state.duty.interview_duty_id}`)
-        console.log(result.data.result)
+        console.log("getDutyDetail", result.data.result)
+        if (result.data.result.length <= 0){
+            history.push({
+                pathname: "/interviewDutyList",
+                state: {
+                    user: location.state.user,
+                    company: location.state.company,
+                    type: location.state.type
+                }
+            })
+            return;
+        }
         setState({
             ...state,
             dutyDetail: result.data.result,
             counts: result.data.result.length,
-            btnHide: false
+            btnHide: false,
+            limitSec: result.data.result[0].interview_detail_time * 1000
         })
     }
     useEffect(() => {
         if (location.state === undefined) {
             history.push("/");
-            return
+            return;
         }
         if (number !== 0) {
             number = 0;
         }
         filePath = `${ADMIN_ID}_${location.state.user.user_id}_${getToday()}`;
         getDutyDetail();
-        //console.log("video11111", videoRef.current);
+        
         videoRef.current.turnOnCamera();
     }, [])
 
@@ -192,6 +209,7 @@ export default function InterviewRecord({ location, history }) {
 
     }
     const buttonStatus = () => {
+        //console.log("state", state);
         setState({
             ...state,
             btnHide: true,
@@ -200,7 +218,7 @@ export default function InterviewRecord({ location, history }) {
     }
     // 버튼 정리, 다음인터뷰 눌르면 종료 후 바로 스타트 되게 settime줘서 
     const handleStartRec = () => {
-        console.log(" 녹화 스타트 !!!!!! ");
+        console.log(" 녹화 스타트 !!!!!! "); 
         setState({
             ...state,
             startBtn: false,
@@ -208,18 +226,17 @@ export default function InterviewRecord({ location, history }) {
         })
        // aRef.current.href = "";
        // aRef.current.download = "";
-
+       
         const delayTime = Math.round(audioRef.current.duration) * 1000
         //divRef.current.innerHTML = `<span style="white-space: pre-wrap; font-weight: 600; font-size: 20px;">${state.dutyDetail[state.counts -1].interview_detail_title}</span>`
         audioRef.current.play();
 
         setTimeout(() => videoRef.current.handleStartRecording(), delayTime);
-        setTimeout(() => buttonStatus() , delayTime + 3000);
+        setTimeout(() => buttonStatus() , delayTime + initData.data.config.INTERVIEW_COUNTDOWN_TIME);
     }
 
     const handleEndInterview = () => {
         console.log("면접종료");
-        console.log(number);
         const detail_id = state.dutyDetail[number-1].interview_detail_id;
         console.log("detail_id", detail_id);
 
@@ -227,27 +244,61 @@ export default function InterviewRecord({ location, history }) {
         state.dutyDetail.map((detail, index) => {
             detailIDList.push(detail.interview_detail_id);
         })
-        console.log(detailIDList);
+       // console.log(detailIDList);
 
         const user_id = location.state.user.user_id;
         const interview_id = location.state.company.interview_id;
         const interview_duty_id = location.state.duty.interview_duty_id;
-        ipcRenderer.send('asynchronous-videoComplate',interview_id, interview_duty_id, 
-        detailIDList, user_id, ADMIN_ID, filePath, "Y");
-
+        ipcRenderer.send('asynchronous-videoComplate',interview_id, interview_duty_id, detailIDList, user_id, ADMIN_ID, filePath, "Y");
         history.push("/");
     }
-    //console.log("dutydetail=", state.dutyDetail.length)
-    console.log("counts=", state.counts)
-    //console.log("number=", number);
+    const handleEndInterviewSelf = () => {
+        console.log("면접종료");
+        const detail_id = state.dutyDetail[number-1].interview_detail_id;
+        console.log("detail_id", detail_id);
+
+        let detailIDList = [];
+        state.dutyDetail.map((detail, index) => {
+            detailIDList.push(detail.interview_detail_id);
+        })
+       // console.log(detailIDList);
+
+        const user_id = location.state.user.user_id;
+        const interview_id = location.state.company.interview_id;
+        const interview_duty_id = location.state.duty.interview_duty_id;
+        ipcRenderer.send('asynchronous-videoComplateSelf',interview_id, interview_duty_id, 
+        detailIDList, user_id, ADMIN_ID, filePath, "Y");
+
+        setIsOpen(true);
+        //history.push("/");
+    }
+    const closeRecord = () => {
+        ipcRenderer.send('asynchronous-videoComplate',"", "", "", "", ADMIN_ID, filePath, "N");
+        history.push("/");
+    }
+    const closeModal = () =>{
+    setState({
+        ...state,
+        isOpen: false
+    })
+   }
+   const infoModalClose = () => {
+    setIsOpen(false);
+    closeModal();
+    history.push("/");
+}
 
     return (
         <div style={containerStyle}>
             <Navbar />
             <div style={divStyle}>
                 <div style={titleStyle}>
-                    {location.state && <span style={{whiteSpace: "pre-wrap", flex:"1", fontWeight:"600", color:"rgb(235,240,240)", fontSize:"25px"}}>{location.state.user.user_name}님 인터뷰</span>}
-                    {location.state && <span style={{whiteSpace: "pre-wrap", flex:"1", fontWeight:"600", color:"rgb(235,240,240)", fontSize:"25px"}}>{location.state.company.interview_title}/{location.state.duty.interview_duty_title}</span>}
+                    {location.state && <span style={{whiteSpace: "pre-wrap", fontWeight:"600", color:"rgb(235,240,240)", fontSize:"25px"}}>{location.state.user.user_name}님 인터뷰</span>}
+                    {location.state && <span style={{whiteSpace: "pre-wrap", fontWeight:"600", color:"rgb(235,240,240)", fontSize:"25px"}}>{location.state.company.interview_title}/{location.state.duty.interview_duty_title}</span>}
+                    {state.counts > 0 ?
+                        <span style={{whiteSpace: "pre-wrap", fontWeight:"600", color:"rgb(235,240,240)", fontSize:"25px"}}>총 질문수: {state.dutyDetail.length}/{number +1}</span>
+                        : <span></span>
+                    }
                 </div>
                 <div ref={divRef} style={questionDivStyle}>
                     { state.counts > 0 ? 
@@ -266,7 +317,7 @@ export default function InterviewRecord({ location, history }) {
                     isReplayingVideo={false}
                     // isOnInitially
                     countdownTime={initData.data.config.INTERVIEW_COUNTDOWN_TIME}
-                    timeLimit={60000} //state로 limit만들어서 초기값 주고 useeffec후 넣어주기 state.dutyDetail[state.conunts].interview_detail_time * 1000
+                    timeLimit={state.limitSec} //state로 limit만들어서 초기값 주고 useeffec후 넣어주기 state.dutyDetail[state.conunts].interview_detail_time * 1000
                     mimeType="video/webm;codecs=vp8,opus"
                     constraints={{
                         audio: true,
@@ -278,14 +329,26 @@ export default function InterviewRecord({ location, history }) {
                         }
                     }}
                     onStopRecording={() => {
-                        //console.log("onStop !");
+                        //console.log("onStop !", state.counts);
                         number = number +1;
-                        setState({
+                        //console.log("number", number);
+                        if (state.counts == 1) {
+                            setState({
                                 ...state,
                                 counts: state.counts -1,
                                 btnHide: false,
                                 startBtn: true
                             })
+                        }else {
+                            setState({
+                                ...state,
+                                counts: state.counts -1,
+                                btnHide: false,
+                                startBtn: true,
+                                limitSec: state.dutyDetail[number].interview_detail_time * 1000
+                            })
+                        }
+                        
                     }}
                     // onStartRecording={() => {
                     //     console.log("start", videoRef);
@@ -324,7 +387,8 @@ export default function InterviewRecord({ location, history }) {
                                     ...state,
                                     btnHide: false,
                                     startBtn: false,
-                                    endBtn: true
+                                    endBtn: true,
+                                    isOpen: true
                                 })
                             }
                             // }else {
@@ -346,8 +410,8 @@ export default function InterviewRecord({ location, history }) {
                     }
                     { state.startBtn === true && state.counts > 0 ? (<div style={ButtonBorderStyle}><button style={startBtnStyle} onClick={handleStartRec}></button></div>)
                     :<div></div>
-                    }
-                    {state.counts === 0 && state.endBtn === true ? (<button onClick={handleEndInterview} style={btnStyle}>면접종료</button>)
+                    }                                                     
+                    {state.counts === 0 && state.endBtn === true ? (<button onClick={closeRecord} style={btnStyle}>면접종료</button>)
                     :<div></div>
                     }
                 </div>
@@ -357,6 +421,12 @@ export default function InterviewRecord({ location, history }) {
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>
+            <InterviewTipModal type={location.state.type} closeModal={closeModal} uploadSelf={handleEndInterviewSelf} upload={handleEndInterview} isOpen={state.isOpen} dutyDetail={state.dutyDetail} company={location.state.company} duty={location.state.duty}/>
+            <ForbiddenModal
+                isOpen = {isOpen}
+                close = {infoModalClose}
+                message= "회원가입시 입력한 이메일 주소로 영상을 보냈습니다. 확인 해주십시오."
+                />
         </div>
     )
 }

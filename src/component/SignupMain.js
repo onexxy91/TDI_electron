@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FaArrowLeft, FaBars } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-
 import { AiOutlineHome } from 'react-icons/ai'
 import Navbar from './Navbar'
 //import Keyboard from 'react-hangul-virtual-keyboard';
@@ -11,10 +10,10 @@ import Navbar from './Navbar'
 //import Hangul from "hangul-js";
 //import { isConstructorDeclaration } from 'typescript';
 import ForbiddenModal from './modal/ForbiddenModal';
+import Multiselect from 'multiselect-react-dropdown';
 
 let SIGNUP_API;
 let DETAIL_SIGN_API;
-
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
 //let buttonArray = [];
@@ -27,7 +26,7 @@ if(IS_DEV === "true") {
     SIGNUP_API = `${PROXY}/api/insertUnivUser.api`;
     DETAIL_SIGN_API = `${PROXY}/api/insertUnivUserDetail.api`;
 }
-
+let failMsg = "";
 export default function SignupMain({ history }) {
     const state = useSelector(state => state.initialReducer);
     // const keyboard = useRef();
@@ -45,8 +44,14 @@ export default function SignupMain({ history }) {
     const crrCode = state.data.crrCode;
     const gndrCode = state.data.gndrCode;
     const worknetRegion = state.data.worknetRegion
-    const worknetCode = state.data.worknetCode
 
+    // const source = {region: "강원"}
+    // const a = Object.assign(worknetRegion[0],source);
+
+    // console.log(a);
+
+    const worknetCode = state.data.worknetCode
+    const WORKNET_CODE = state.data.config.WORKNET_CODE;
     const nameInput = useRef(HTMLInputElement);
     const emailInput = useRef(HTMLInputElement);
     const phoneInput = useRef(HTMLInputElement);
@@ -60,7 +65,7 @@ export default function SignupMain({ history }) {
     const crrSelect = useRef(HTMLSelectElement);
     const gndrSelect = useRef(HTMLSelectElement);
 
-    const containerStyle ={
+    const containerStyle = {
         display: "flex",
         flexDirection: "column",
         flexWrap: "nowrap",
@@ -124,7 +129,7 @@ export default function SignupMain({ history }) {
         fontFamily: "gmaget",
         fontSize: "17px",
     }
-    const btnStyle ={
+    const btnStyle = {
         width:"99%",
         minHeight: "7vh",
         backgroundColor: "#0093E9 ",
@@ -198,6 +203,7 @@ export default function SignupMain({ history }) {
         
         if (password.value !== passwordConf.value) {
             //alert("비밀번호와 비밀번호 확인이 일치하지않습니다.");
+            failMsg = "입력하신 비밀번호 와 비밀번호확인이 일치하지 않습니다.";
             setIsOpen(true);
             passwordConf.focus();
             return;
@@ -209,7 +215,9 @@ export default function SignupMain({ history }) {
             console.log(detailResult.data);
             history.push("/disitalInterview");
         }else {
-            alert(result.data.result_msg);
+            //alert(result.data.result_msg);
+            failMsg = result.data.result_msg;
+            setIsOpen(true);
         }
     }
     const modalClose = () => {
@@ -351,7 +359,7 @@ export default function SignupMain({ history }) {
                 <div style={formStyle}> 
                     <div style={{display:"flex", width:"100%", justifyContent:"space-around", alignItems:"center"}}>
                             {/* value ={getInputValue("email")} onChange={onChangeInput} onFocus={emailFocus} */}
-                        <label style={textStyle}>이메일</label><input id="email"  ref={emailInput} type="email" style={inputStyle} placeholder=" 이메일을 입력하세요."></input>
+                        <label for="email" style={textStyle}>이메일</label><input id="email" ref={emailInput} type="email" style={inputStyle} placeholder=" 이메일을 입력하세요."></input>
                     </div>
                 </div>
                 
@@ -409,12 +417,40 @@ export default function SignupMain({ history }) {
                     <div style={{display:"flex", width:"100%", justifyContent:"space-around", alignItems:"center"}}>
                         <label style={textStyle}>근무 희망지역</label><select ref={regionSelect} style={selectboxStyle}>
                             <option  value="">근무희망지역 선택</option>
-                            {worknetRegion && worknetRegion.map((code, index) => (
-                                <option key={index} value={code.code}>{code.value}</option>
-                            ))}
+                            {worknetRegion && worknetRegion.map((code, index) => {
+                                if (code.code === WORKNET_CODE){
+                                    return (
+                                        <option key={index} value={code.code} selected>{code.value}</option>    
+                                    )
+                                }else {
+                                    return (
+                                        <option key={index} value={code.code}>{code.value}</option>
+                                    )
+                                }
+                            })}
                             </select>
                     </div>
                 </div>
+                {/* <div style={formStyle}>
+                    <div style={{display:"flex", width:"100%", justifyContent:"space-around", alignItems:"center"}}>
+                        <label style={textStyle}>근무 희망지역</label>
+                        <Multiselect ref={regionSelect} style={{chips:{
+                                                                fontFamily: "gmaget",
+                                                                fontSize: "18px",
+                                                            },searchBox:{
+                                                                    height: "7vh",
+                                                                    width: "75vh",
+                                                                    borderTopRightRadius: "8px",
+                                                                    borderBottomRightRadius: "8px",
+                                                                    borderTopLeftRadius: "8px",
+                                                                    borderBottomLeftRadius: "8px",
+                                                                    border:"1px solid #21D4FD",
+                                                                    backgroundColor: "rgba(240, 240, 245)",
+                                                                    fontFamily: "gmaget",
+                                                                    fontSize: "19px",
+                        }}} options={worknetRegion} groupBy="code" closeOnSelect="true" singleSelect displayValue='value'  showCheckbox={true} /> 
+                    </div>
+                </div> */}
                 <div style={formStyle}>
                     <div style={{display:"flex", width:"100%", justifyContent:"space-around", alignItems:"center"}}>
                         <label style={textStyle}>희망급여</label><select ref={salSelect}style={selectboxStyle}>
@@ -470,7 +506,7 @@ export default function SignupMain({ history }) {
             <ForbiddenModal
                 isOpen = {isOpen}
                 close = {modalClose}
-                message= "입력하신 비밀번호 와 비밀번호확인이 일치하지 않습니다."
+                message= {failMsg}
                 />
         </div>
     )

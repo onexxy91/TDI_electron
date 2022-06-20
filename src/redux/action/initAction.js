@@ -46,7 +46,7 @@ const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 // }
 
 export const getData = async (config) => {
-    console.log(config);
+    //console.log(config);
 
     if (IS_DEV === "true") {
     const  [ageCode, eduCode, salCode, gndrCode, 
@@ -65,7 +65,7 @@ export const getData = async (config) => {
       , axios.get('/api/codeList.api?comm_cd=WRKJOB')//워크넷 직무
       , axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${config.CITY_NAME}&appid=${WEATHER_API_KEY}&units=metric&lang=kr`) ]);
         
-        console.log("newWeather =" + JSON.stringify(newWeather.data));
+    //console.log("newWeather =" + JSON.stringify(newWeather.data));
 
         const data = {
             ageCode: ageCode.data.result,
@@ -105,7 +105,7 @@ export const getData = async (config) => {
           , axios.get(`${PROXY}/api/codeList.api?comm_cd=WRKJOB`)
           , axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${config.CITY_NAME}&appid=${WEATHER_API_KEY}&units=metric&lang=kr`) ]);
            
-            console.log("newWeather =" + JSON.stringify(newWeather.data));
+            console.log("univFile =" + JSON.stringify(univFile.data));
 
             const data = {
                 ageCode: ageCode.data.result,

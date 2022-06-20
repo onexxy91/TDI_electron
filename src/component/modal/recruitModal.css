@@ -58,6 +58,7 @@
     font-weight: 600;
     margin-bottom: 5px;
     margin-top: 3vh;
+    width: 100%;
 }
 .row {
     display: flex;

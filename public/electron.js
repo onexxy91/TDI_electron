@@ -6,6 +6,7 @@ const request = require('request');
 const config = require(path.normalize('../config.json'));
 const N_API_URL = 'https://naveropenapi.apigw.ntruss.com/vision/v1/';
 const UPLOAD_URL = 'http://cms.innospeech.com/api/uploadUniversalInterview.api';
+const UPLOAD_SELF_URL = 'http://cms.innospeech.com/api/uploadUniversalSelfInterview.api';
 
 function createWindow() {
   let mainWindow = null;
@@ -135,14 +136,18 @@ ipcMain.on('asynchronous-video', async (event, filePath,  fileName, arg) => {
     console.log(error)
   }
 })
-// 인터뷰 파일 업로드 api
+// 인터뷰파일 최종업로드 api
 async function upload (adminID, userID, interviewID, interviewDutyID, detailIDList, filePath) {
+  let fileSize = 0;
   try {
     if(fs.existsSync(`./${filePath}`)) {
-      console.log("폴더가 있으면");
+      console.log("folder Y");
+      const files = fs.readdirSync(`./${filePath}`);
+      //console.log('files', files.length);
+
         fs.readdirSync(`./${filePath}`).forEach( async function(file, index){   
-          console.log("file", file);
-          console.log("index", index);
+          //console.log("file", file);
+          //console.log("index", index);
           var curPath = `./${filePath}/${file}`;
           const interview = fs.createReadStream(curPath);
 
@@ -151,7 +156,7 @@ async function upload (adminID, userID, interviewID, interviewDutyID, detailIDLi
             admin_id: adminID,
             user_id: userID,
             interview_id: interviewID,
-            interivew_duty_id: interviewDutyID,
+            interview_duty_id: interviewDutyID,
             interview_detail_id: detailIDList[index],
             key:filePath,
             interview: interview // FILE 이름
@@ -162,23 +167,117 @@ async function upload (adminID, userID, interviewID, interviewDutyID, detailIDLi
               'Content-Type' : 'multipart/form-data'
             }
             }, function(err,httpResponse,body){
-              console.log(httpResponse);
+              //console.log(httpResponse);
               console.log(body);
           });       
-        })
+        })//send end
+        fs.readdirSync(`./${filePath}`).forEach(function(file, index){   
+          var curPath = `./${filePath}/${file}`;
+            fs.unlinkSync(curPath);
+        });
+        fs.rmdirSync(`./${filePath}`);
+        //delete end
       }
   } catch (error) {
     console.log(error)
   }
 }
-// 인터뷰 완료시 호출
+// 인터뷰 최종 완료시 호출
 ipcMain.on('asynchronous-videoComplate', (event, interviewID, interviewDutyID, detailIDList, userID, adminID, filePath, flag) => {
   console.log(adminID);
   console.log(filePath);
+  console.log(detailIDList);
     try {
     if (flag === "Y") { 
         console.log("Upload Y");
         upload(adminID, userID, interviewID, interviewDutyID, detailIDList, filePath);
+    }else {
+      console.log("Upload N");
+      if(fs.existsSync(`./${filePath}`)) {
+        fs.readdirSync(`./${filePath}`).forEach(function(file, index){   
+          var curPath = `./${filePath}/${file}`;
+          // if (fs.lstatSync(curPath).isDirectory()) { // lstatSync: stat값을 반환함, isDirectory(): 디렉토리인지 파악
+          //   deleteFolderRecursive(curPath);          // 재귀(reCurse)
+          // } else {                                              // delete file
+            fs.unlinkSync(curPath);                     // unlinkSync: 파일 삭제
+          //}
+        });
+        fs.rmdirSync(`./${filePath}`);         
+      }
+    }
+  } catch (error) {
+      console.log(error)
+  }
+})
+//모의인터뷰 나에게보내기 업로드
+async function uploadSelf (adminID, userID, interviewID, interviewDutyID, detailIDList, filePath) {
+  try {
+    if(fs.existsSync(`./${filePath}`)) {
+      console.log("folder Y");
+      const files = fs.readdirSync(`./${filePath}`);
+      //console.log('files', files.length);
+
+        fs.readdirSync(`./${filePath}`).forEach( async function(file, index){   
+          //console.log("file", file);
+          //console.log("index", index);
+          var curPath = `./${filePath}/${file}`;
+          const interview = fs.createReadStream(curPath);
+
+          let _formData = {};
+          if ((files.length-1) == index) {
+                _formData = {
+                              group_id: adminID,
+                              admin_id: adminID,
+                              user_id: userID,
+                              interview_id: interviewID,
+                              interview_duty_id: interviewDutyID,
+                              interview_detail_id: detailIDList[index],
+                              key:filePath,
+                              interview: interview, // FILE 이름
+                              endVal: 'true'
+                };
+          }else {
+                _formData = {
+                              group_id: adminID,
+                              admin_id: adminID,
+                              user_id: userID,
+                              interview_id: interviewID,
+                              interview_duty_id: interviewDutyID,
+                              interview_detail_id: detailIDList[index],
+                              key:filePath,
+                              interview: interview, // FILE 이름
+                              endVal: 'false'
+                };
+          }
+          
+          await request.post({url:UPLOAD_SELF_URL, formData:_formData, 
+            headers: {
+              'Content-Type' : 'multipart/form-data'
+            }
+            }, function(err,httpResponse,body){
+              console.log(body);
+          });       
+        })//send fin
+
+        fs.readdirSync(`./${filePath}`).forEach(function(file, index){   
+          var curPath = `./${filePath}/${file}`;
+          fs.unlinkSync(curPath);// unlinkSync: 파일 삭제
+        });
+        fs.rmdirSync(`./${filePath}`);  
+        // file,dir delete end
+      }
+  } catch (error) {
+    console.log(error)
+  }
+}
+//모의인터뷰 완료 후 나에게보내기
+ipcMain.on('asynchronous-videoComplateSelf', (event, interviewID, interviewDutyID, detailIDList, userID, adminID, filePath, flag) => {
+  //console.log(adminID);
+  //console.log(filePath);
+    try {
+    if (flag === "Y") { 
+        console.log("Upload Y");
+        uploadSelf(adminID, userID, interviewID, interviewDutyID, detailIDList, filePath);
     }else {
       console.log("Upload N");
       if(fs.existsSync(`./${filePath}`)) {
@@ -216,6 +315,7 @@ app.whenReady().then(createWindow);
 // explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
+    ipcMain.removeAllListeners();
     app.quit();
   }
 });

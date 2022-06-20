@@ -26,9 +26,10 @@ export default function CenterNews({ history })  {
         newsData: [],
         isLoading: true,
         cur_page: 1,
-        selectedNews: undefined
+        selectedNews: undefined,
+        isOpen: false
     })
-    console.log(initData);
+    //console.log(initData);
     
     const admin_id = initData.data.config.ADMIN_ID;
     const inputRef = useRef();
@@ -39,13 +40,15 @@ export default function CenterNews({ history })  {
     const closeNews = () => {
         setState({
             ...state,
-            selectedNews: undefined
+            selectedNews: undefined,
+            isOpen: false
         })
     }
     const showNews = (news) => {
         setState({
             ...state,
-            selectedNews: news
+            selectedNews: news,
+            isOpen: true
         })
     }
     const searchNews = async () => {
@@ -55,6 +58,7 @@ export default function CenterNews({ history })  {
             ...state,
             newsData: centerNotice.data.result
         })
+        console.log("newData", centerNotice);
     }
     const pagePlus = async () => {
         const centerNotice = await axios.get(`${center_news_api}?group_id=${admin_id}&admin_id=${admin_id}&page=${state.cur_page +1}&path=DID`);
@@ -67,6 +71,7 @@ export default function CenterNews({ history })  {
     //param client별 변경 해야함  ok
     const getCenterNotice = async () => {
         const centerNotice = await axios.get(`${center_news_api}?group_id=${admin_id}&admin_id=${admin_id}&page=${state.cur_page}&path=DID`);
+        console.log(centerNotice);
         setState({
             ...state,
             isLoading: false,
@@ -107,16 +112,16 @@ export default function CenterNews({ history })  {
                 ))}
             </div>
             <div className="plus">
-            {state.newsData === 10 ?
-                <button onClick={pagePlus}><FaChevronDown size="34" color="rgb(54, 51, 47, 0.8)"/></button> 
-                : <button></button>
-            }
+                {state.newsData.length > 0 ?
+                    <button onClick={pagePlus}><FaChevronDown size="34" color="rgb(54, 51, 47, 0.8)"/></button> 
+                    : <button></button>
+                }
             </div>
             
             <div className="footer">
                 <Link to="/" style={{textDecoration:"none"}}><span style={{color:"white", fontSize:"large", display:"flex", justifyContent:"center", alignItems:"flex-end", marginRight:"7px"}}><AiOutlineHome size="32" color="#ffff"/>Home</span></Link>
             </div>
-            <CenterModal closeNews={closeNews} selectedNews={state.selectedNews}/>
+            <CenterModal closeNews={closeNews} isOpen={state.isOpen} selectedNews={state.selectedNews}/>
         </div>)
         }
         </section>)

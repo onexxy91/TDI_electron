@@ -1,6 +1,6 @@
 {
   "name": "electron-forge",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",
@@ -23,6 +23,7 @@
     "fs": "^0.0.1-security",
     "global": "^4.4.0",
     "hangul-js": "^0.2.6",
+    "multiselect-react-dropdown": "^2.0.22",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-background-slider": "^2.0.0",
@@ -66,7 +67,7 @@
     ]
   },
   "build": {
-    "productName": "HelloElectron",
+    "productName": "TDiClient",
     "appId": "com.innospeech.client",
     "asar": false,
     "protocols": {

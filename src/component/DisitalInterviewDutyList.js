@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { FaArrowLeft, FaBars } from 'react-icons/fa'
+import React, { useEffect, useState } from 'react'
+import { FaArrowLeft } from 'react-icons/fa'
 import { AiOutlineHome } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
@@ -86,10 +86,11 @@ export default function DisitalInterviewDutyList({ location, history}) {
                 {/* <Link to="/menuAll"><button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}}><FaBars size="45" color="#ffff"/><br/>메뉴</button></Link> */}
             </div>
             <div style={divStyle}>
-                <div className="interviewList">
+                                {/* joball.css */}
+                <div className="interviewList"> 
                    {dutyList.map((duty, index) => (
                         <Link style={{height:"25%"}} key={index} to ={{
-                            pathname:"/interviewRecord",
+                            pathname:"/interviewDutyDetail",
                             state: {
                                 user: location.state.user,
                                 company: location.state.company,

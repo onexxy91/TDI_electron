@@ -12,12 +12,14 @@ import { AiOutlineHome } from 'react-icons/ai';
 import RecruitModal from './modal/RecruitModal';
 import WorknetModal from './modal/WorknetModal';
 import SmallModal from './modal/SmallModal';
+import PublicRecruitModal from './modal/PublicRecruitModal';
 // import Keybord from 'react-hangul-virtual-keyboard';
 
 let JOBKOREA_PATH;
 let WORKNET_PATH;
 let WORKNET_SMALL_PATH;
 let OPEN_JOB_API;
+let PNJOB_PATH;
 const IS_DEV = process.env.REACT_APP_ISDEV;
 const PROXY = process.env.REACT_APP_PROXY;
 
@@ -26,13 +28,19 @@ if(IS_DEV === "true") {
     WORKNET_PATH = "/api/getWorknetRecruit.api?recruitFlag=list";
     WORKNET_SMALL_PATH = "/api/getWorknetSmallGiantRecruit.api?";
     OPEN_JOB_API = "/api/jobKoreaStarterList.api";
+    PNJOB_PATH = "/api/pnJobRecruitInfo.api";
 }else {
-   JOBKOREA_PATH = `${PROXY}/api/jobKoreaRecruitList.api?`;
+    JOBKOREA_PATH = `${PROXY}/api/jobKoreaRecruitList.api?`;
     WORKNET_PATH = `${PROXY}/api/getWorknetRecruit.api?recruitFlag=list`;
     WORKNET_SMALL_PATH = `${PROXY}/api/getWorknetSmallGiantRecruit.api?`;
     OPEN_JOB_API = `${PROXY}/api/jobKoreaStarterList.api`;
+    PNJOB_PATH = `${PROXY}/api/pnJobRecruitInfo.api`;
 }
 
+const publicJobGubun = [
+    {title: "채용제목", value:"subject"},
+    {title: "회사명", value:"company"}
+]
 
 let time = 0;
 let timeoutIntval = null;
@@ -49,7 +57,7 @@ export default function JobAll({ history }) {
     const worknetRegion = initData.data.worknetRegion;
     const worknetCode = initData.data.worknetCode;
 
-
+    console.log(WORKNET_CODE);
    
     const [state, setState] = useState({
         recruitData:[],
@@ -105,6 +113,7 @@ export default function JobAll({ history }) {
                 break;
             case '/youthJobInfo' :
                 recruitData = await axios.get(`${WORKNET_PATH}&cur_page=${state.cur_page + 1}&page_size=10&pref_code=13&area_code=${WORKNET_CODE}`);
+                console.log(recruitData);
                 jobSiteType = "worknet";
                 pref_code = "13";
                 break;
@@ -131,8 +140,11 @@ export default function JobAll({ history }) {
                 recruitData = await axios.get(`${OPEN_JOB_API}?ctgr_code=12&page=${state.cur_page + 1}&path=DID`);
                 jobSiteType = "jobkoreaOpen";
                 break;
+            case '/pnJobInfo' :
+                recruitData = await axios.get(`${PNJOB_PATH}?pageno=${state.cur_page + 1}&display=10`);
+                jobSiteType = "public";
         }
-        //console.log("recruit", recruitData.data.result);
+        console.log("recruit", recruitData);
         setState({
             ...state,
             loading: false,
@@ -146,15 +158,15 @@ export default function JobAll({ history }) {
        // 페이지 전환 인터벌 
     const timeoutFunc = () => {
         time = time +1
-        console.log("timeout", time);
-        if (time === 10) {
+        //console.log("timeout", time);
+        if (time === 50) {
             clearInterval(timeoutIntval);
             history.push("/");
             time = 0;
         }
     }
     const setTimezero = () => {
-        console.log("타임제로");
+        //console.log("타임제로");
         time = 1;
     }
 
@@ -165,7 +177,7 @@ export default function JobAll({ history }) {
    // 페이지 전환 인터벌
     useEffect (() => {
         timeoutIntval = setInterval(timeoutFunc, 6000);
-        console.log("인터벌 시작 ");
+        //console.log("인터벌 시작 ");
         window.addEventListener("click", setTimezero);
         return () => {
            // console.log("??");
@@ -196,7 +208,9 @@ export default function JobAll({ history }) {
             case "/smallJobInfo" :
                 return (<p>강소기업</p>)
             case "/openJobInfo" :
-                return (<p>공채속보</p>)    
+                return (<p>공채속보</p>)
+            case "/pnJobInfo" :
+                return (<p>공사공단</p>)    
             default : (<p></p>)
         }
     }
@@ -205,6 +219,8 @@ export default function JobAll({ history }) {
             return (<span className="cName">{recruit.cName}</span>)
         }else if(state.jobSiteType === "worknet") {
             return (<span className="cName">{recruit.company}</span>)
+        }else if(state.jobSiteType === "public") {
+            return (<span className ="cName">{recruit.comany} </span>)
         }else {
             return (<span className="cName">{recruit.indTpNm}</span>)
         }
@@ -214,6 +230,8 @@ export default function JobAll({ history }) {
             return (<span className="endDate"> 마감일: {recruit.endDate}</span>)
         } else if (state.jobSiteType === "worknet") {
             return (<span className="endDate"> 마감일: {recruit.closeDt}</span>)
+        } else if (state.jobSiteType === "public") {
+            return (<span className="endDate"> 마감일: {recruit.endDate}</span>)
         } else {
             return null;
         }
@@ -227,10 +245,21 @@ export default function JobAll({ history }) {
     }
     
     //강소기업, 전국공채속보 추가해야함 
-    const onSearch = async () => {
-        const regione = regionRef.current.value;
-        const code = codeRef.current.value;
-        const input = inputRef.current.value;
+    const onSearch = async (type) => {
+        let regione = "";
+        let code = "";
+        let input = "";
+        if (type === "public"|| type === "worknetsmall") {
+            regione = regionRef.current.value;
+            input = inputRef.current.value;
+        } else if(type === "jobkoreaOpen") {
+
+        } else {
+            regione = regionRef.current.value;
+            code = codeRef.current.value;
+            input = inputRef.current.value;
+        }
+
         let recruitData = "";
         // console.log("code", code);
         if (state.jobSiteType === "jobkorea") {
@@ -239,19 +268,28 @@ export default function JobAll({ history }) {
             }else {
                 recruitData = await axios.get(`${JOBKOREA_PATH}cur_page=${state.cur_page}&page_size=10&area_code=${regione}&job_code=${code}&keyword=${input}&edu_code=${state.pref_code}`);
             }
-            console.log(recruitData);
+            //console.log(recruitData);
         } else if (state.jobSiteType === "worknet") {
             recruitData = await axios.get(`${WORKNET_PATH}&cur_page=${state.cur_page}&page_size=10&pref_code=${state.pref_code}&area_code=${regione}&job_code=${code}&keyword=${input}`);
         } else if (state.jobSiteType === "worknetsmall") {
             recruitData = await axios.get(`${WORKNET_SMALL_PATH}cur_page=${state.cur_page}&page_size=20&area_code=${regione}&keyword=${input}`);
+        } else if(state.jobSiteType === "public") {
+            recruitData = await axios.get(`${PNJOB_PATH}?pageno=${state.cur_page}&display=10&search_text=${input}&gubun_type=${regione}`)
         } else {
             recruitData = await axios.get(`${OPEN_JOB_API}?ctgr_code=12&page=1&path=DID`);
         }
         
-        setState({
-            ...state,
-            recruitData: recruitData.data.result
-        })
+        if (recruitData.data.result_code == 500) {
+            setState({
+                ...state,
+                recruitData: []
+            })
+        }else {
+            setState({
+                ...state,
+                recruitData: recruitData.data.result
+            })
+        }
         //inputRef.current.value = "";
     }
     return (<section>
@@ -267,9 +305,9 @@ export default function JobAll({ history }) {
                 <Link to="/menuAll"><button className="allSeviceBtn"><FaBars size="32" color="#ffff"/><br/>메뉴보기</button></Link>
             </div>
             <div className="search">
-                <select ref={regionRef}>
-                    {state.jobSiteType === "jobkorea" ? 
-                    regioncode.map((code, index) => {
+                    {state.jobSiteType === "jobkorea" ?
+                     <select ref={regionRef}>
+                    {regioncode.map((code, index) => {
                         if (code.code === JOBKOREA_CODE) { //config 값으로 대체 해야함
                             return (
                                 <option key={index} value={code.code} selected>{code.value}</option>
@@ -279,39 +317,67 @@ export default function JobAll({ history }) {
                                 <option key={index} value={code.code}>{code.value}</option>
                             )
                         }
-                }) : worknetRegion.map((code, index) => {
-                        if (code.code === WORKNET_CODE) { //config 값으로 대체 해야함
+                    })} </select> : 
+                    state.jobSiteType === "worknet" ?
+                    <select ref={regionRef}>
+                         {worknetRegion.map((code, index) => {
+                            if (code.code === WORKNET_CODE) { //config 값으로 대체 해야함
+                                return (
+                                    <option key={index} value={code.code} selected>{code.value}</option>
+                                )
+                            }else {
+                                return (
+                                    <option key={index} value={code.code}>{code.value}</option>
+                                )
+                            }
+                        })}</select> : 
+                        state.jobSiteType === "public" ?
+                        <select ref={regionRef}>
+                        {publicJobGubun.map((code, index) => {
                             return (
-                                <option key={index} value={code.code} >{code.value}</option>
+                                <option key={index} value={code.value}>{code.title}</option>
                             )
-                        }else {
-                            return (
-                                <option key={index} value={code.code}>{code.value}</option>
-                            )
-                        }
-                    })}
-                </select>
-                <select ref={codeRef}>
-                <option value="">직종</option>
-                    {state.jobSiteType === "jobkorea" ?
-                        jobKoCode.map((code, index) => (
-                            <option value={code.code}>{code.value}</option>
-                        )) : state.jobSiteType === "worknet" ?
-                             worknetCode.map((code, index) => (
-                            <option key={index} value={code.code}>{code.value}</option>
-                        )) : <div></div>
+                        })}</select> 
+                        : state.jobSiteType === "worknetsmall" ?
+                        <select ref={regionRef}>
+                            {worknetRegion.map((code, index) => {
+                            if (code.code === WORKNET_CODE) { //config 값으로 대체 해야함
+                                return (
+                                    <option key={index} value={code.code} selected>{code.value}</option>
+                                )
+                            }else {
+                                return (
+                                    <option key={index} value={code.code}>{code.value}</option>
+                                )
+                            }
+                        })}</select>:<div></div>
                     }
-                </select>
+                
+                    {state.jobSiteType === "jobkorea" ?
+                     <select ref={codeRef}>
+                        <option value="">직종</option>
+                        {jobKoCode.map((code, index) => (
+                           <option key={index} value={code.code}>{code.value}</option>
+                        ))} 
+                    </select> : state.jobSiteType === "worknet" ?
+                            <select ref={codeRef}>
+                            <option value="">직종</option>
+                            {worknetCode.map((code, index) => (
+                            <option key={index} value={code.code}>{code.value}</option>
+                        ))} 
+                    </select> : <div></div>
+                    }
+                
                 <input className="searchInput" ref={inputRef} type="text" placeholder="검색어 입력" />
-                <button onClick={onSearch} className="centerde"><FcSearch size="28" color="#ffff"/></button>
+                <button onClick={() => onSearch(state.jobSiteType)} className="centerde"><FcSearch size="28" color="#ffff"/></button>
             </div>
             <div className="info"> 
             {state.recruitData < 1 ? (<div className="notInfo">
                 <BsSearch size="70" color="#ffff"/>
                 <span>등록된 데이터가 없습니다.</span>
                 </div>) :
-                 state.recruitData.map((recruit) => (
-                    <button className="list" onClick={() => showRecruit(recruit)}>
+                 state.recruitData.map((recruit, index) => (
+                    <button key={index} className="list" onClick={() => showRecruit(recruit)}>
                       <div className="list-title">
                           {getRecruitTitleType(recruit)}
                       </div>
@@ -325,7 +391,7 @@ export default function JobAll({ history }) {
             </div>
             {state.recruitData < 1 ? (<div className="plus"></div>) :
             (<div className="plus">
-            <button onClick={getjobkoreaRecruit}><FaChevronDown size="34" color="rgb(54, 51, 47, 0.8)"/></button>
+                <button onClick={getjobkoreaRecruit}><FaChevronDown size="34" color="rgb(54, 51, 47, 0.8)"/></button>
             </div>) 
             }
             <div className="footer">
@@ -338,8 +404,11 @@ export default function JobAll({ history }) {
                 : state.jobSiteType === "jobkorea" || state.jobSiteType === "jobkoreaOpen" ?
                 (<RecruitModal closeRecruit ={closeRecruit}
                     selectedRecruit={state.selectedRecruit} />)
-                : (<SmallModal closeRecruit={closeRecruit}
+                : state.jobSiteType === "public" ?
+                (<PublicRecruitModal closeRecruit={closeRecruit}
                         selectedRecruit={state.selectedRecruit} />)
+                :(<SmallModal closeRecruit={closeRecruit}
+                    selectedRecruit={state.selectedRecruit} />)
             }
         </div>)
         }

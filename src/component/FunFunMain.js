@@ -76,7 +76,7 @@ export default function FunFunMain({ history }) {
             <ForbiddenModal
                 isOpen = {isOpen}
                 close = {modalClose}
-                message= "업데이트 또는 지원불가 메뉴입니다."
+                message= "PC버전 지원불가 메뉴입니다."
                 />
         </div>
     )

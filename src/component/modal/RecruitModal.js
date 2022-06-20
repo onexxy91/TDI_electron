@@ -28,7 +28,7 @@ const RecruitModal = (props) => {
                     </div>
                     <div className="row">
                         <span id="text">모집인원</span>
-                        <span id="value"></span>
+                        <span id="value">하단 상세요강 참고</span>
                     </div>
                     <div className="row">
                         <span id="text">신입/경력구분</span>
@@ -36,7 +36,7 @@ const RecruitModal = (props) => {
                     </div>
                     <div className="row">
                         <span id="text">경력</span>
-                        <span id="value">{props.selectedRecruit.careerYearCnt}</span>
+                        <span id="value">하단 상세요강 참고</span>
                     </div>
                     <div className="row">
                         <span id="text">학력</span>
@@ -66,7 +66,7 @@ const RecruitModal = (props) => {
                     </div>
                     <div className="row">
                         <span id="text">접수방법</span>
-                        <span id="value">{props.selectedRecruit.jkQr}</span>
+                        <span id="value">하단 상세요강 참고</span>
                     </div>
                     <span className="subTitle">상세요강</span>
                     <div className="jobiframe">

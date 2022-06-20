@@ -22,8 +22,8 @@ export default function Signup({ history }) {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
-        alignItems: "flex-start",
-        width: "35%",
+        alignItems: "center",
+        width: "38%",
         height: "60vh",
         backgroundColor: "rgb(255, 255, 255)",
         borderRadius:"5px",
@@ -33,11 +33,12 @@ export default function Signup({ history }) {
         history.goBack();
     }
     const textStyle = {
-        fontSize:"21px",
+        fontSize:"20px",
         whiteSpace: "pre-wrap",
-        marginLeft: "2ch",
+        width:"100%",
         color: "rgb(90, 92, 80)",
-        fontFamily: "gmaget"
+        fontFamily: "gmaget",
+        marginLeft: "1ch"
     }
     const btnStyle ={
         width:"20vh",

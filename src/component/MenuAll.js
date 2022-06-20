@@ -33,6 +33,7 @@ export default function MenuAll({ history }) {
                         {/* <Link to="/womenJobInfo"><li><button>여성</button></li></Link> */}
                         <Link to="/disJobInfo"> <li><button>장애인</button></li></Link>
                         <Link to="/smallJobInfo"><li><button>강소기업</button></li></Link>
+                        <Link to="/pnJobInfo"><li><button>공사공단</button></li></Link>
                         <Link to="/openJobInfo"><li><button>전국공채속보</button></li></Link>
                     </ul>
                 </div>
@@ -40,8 +41,8 @@ export default function MenuAll({ history }) {
                     <h2><FaRegSmileWink size="38" color="#ffff" />  FUN!FUN!</h2>
                     <ul>
                         <Link to="/faceDetector"><li><button>안면인식 맞춤정보</button></li></Link>
-                        <li><button>나만의 사원증 만들기</button></li>
-                        <li><button>크로마키 촬영</button></li>
+                        {/* <li><button>나만의 사원증 만들기</button></li>
+                        <li><button>크로마키 촬영</button></li> */}
                         <Link to="/everyQuiz"><li><button>오늘의 퀴즈</button></li></Link>
                         <Link to="/jobTest"><li><button>직업테스트</button></li></Link>
                         <Link to="/todayEng"><li><button>오늘의 영어 한마디</button></li></Link>

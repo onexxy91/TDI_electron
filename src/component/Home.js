@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { BiTimer } from 'react-icons/bi';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { MdAssignmentInd, MdHelpOutline } from 'react-icons/md';
-import { RiLightbulbFlashLine } from 'react-icons/ri';
+import { RiLightbulbFlashLine, RiFileList2Line } from 'react-icons/ri';
 import CenterNewsSlide from "./CenterNewsSlide";
 
 
@@ -16,15 +16,17 @@ const btnLink = new Array('/jobInfo'
     , '/realJobInfo' 
     , '/centerNews'
     , '/funfun'
-    , '/custom1'
-    , '/custom2'); 
+    , '/customAPI1'
+    , '/customAPI2'); 
 
 export default function Home() {
     const state = useSelector(state => state.initialReducer);
     console.log("home", state.data.placard);
     const divRef = useRef(HTMLDivElement);
     const custom_API_FIR = state.data.config.CUSTOM_API_FIR;
+    const custom_API_FIR_NAME = state.data.config.CUSTOM_API_FIR_NAME;
     const custom_API_SEC = state.data.config.CUSTOM_API_SEC;
+    const custom_API_SEC_NAME = state.data.config.CUSTOM_API_SEC_NAME;
 
     const style ={
         display: "flex",
@@ -66,27 +68,34 @@ useEffect(() => {
                {/* <Slide /> */}
         </div>
         <div className="centerSlide">
-            <Link style={{textDecoration: "none",}}to="/centerNews"><CenterNewsSlide /></Link>
+            <Link style={{textDecoration: "none",}} to="/centerNews"><CenterNewsSlide /></Link>
         </div>
         {/* <div className="menuBtnContainer">
             {univFile.menu_btn_arr.map((menuBtn, index)=> (
                 // <Link key={index} to={btnLink[index]}><button><img src={menuBtn.menu_image}></img></button></Link>
                 <Link key={index} to={btnLink[index]}><button>채용정보</button></Link>
             ))}
-        </div> */}
+        </div> */} 
          <div className="menuBtnContainer">    
-            <Link to={btnLink[0]}><button><MdAssignmentInd size="50" color="#ffff"></MdAssignmentInd><br/>채용정보</button></Link>
-            <Link to={btnLink[1]}><button><BiTimer size="50" color="#ffff"></BiTimer><br/>시간제일자리</button></Link>
-            <Link to={btnLink[2]}><button><FaRegPaperPlane size="40" color="#ffff"></FaRegPaperPlane><br/>공지사항</button></Link>
-        </div>
+            {/* <Link to={btnLink[0]}><button><MdAssignmentInd size="50" color="#ffff"></MdAssignmentInd><br/>채용정보</button></Link> */}
+            <Link to={btnLink[0]}><button><img  src={univFile.menu_btn_arr[0].menu_image}></img></button></Link>
+            <Link to={btnLink[1]}><button><img src={univFile.menu_btn_arr[1].menu_image}></img></button></Link>
+            <Link to={btnLink[2]}><button><img  src={univFile.menu_btn_arr[2].menu_image}></img></button></Link>
+            {/* <Link to={btnLink[1]}><button><BiTimer size="50" color="#ffff"></BiTimer><br/>시간제일자리</button></Link> */}
+            {/* <Link to={btnLink[2]}><button><FaRegPaperPlane size="40" color="#ffff"></FaRegPaperPlane><br/>공지사항</button></Link> */}
+        </div> 
         <div className="menuBtnContainer1">    
-            <Link to={btnLink[3]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>FUN! FUN!</button></Link>
+            {/* <Link to={btnLink[3]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>FUN! FUN!</button></Link> */}
+            <Link to={btnLink[3]}><button><img style={{width:"77%"}} src={univFile.menu_btn_arr[3].menu_image}></img></button></Link>
+            {/* <Link to={btnLink[2]}><button><img  style={{width:"77%"}} src={univFile.menu_btn_arr[2].menu_image}></img></button></Link> */}
             {custom_API_FIR !== "" ?
-                <Link to={btnLink[4]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>customBtn1</button></Link>
+                <Link to={{ pathname:btnLink[4],
+                            state:{api_url: custom_API_FIR} }}><button><img style={{width:"74%"}} src={univFile.menu_btn_arr[4].menu_image}></img></button></Link>
                 :<button style={{ display: "none"}}></button>
             }
-            {custom_API_SEC !== "" ?
-                <Link to={btnLink[5]}><button><RiLightbulbFlashLine size="50" color="#ffff"/><br/>customBtn2</button></Link>
+            {custom_API_SEC !== "" ? 
+                <Link to={{pathname:btnLink[5],
+                            state:{api_url: custom_API_SEC} }}><button><img style={{width:"73%"}}src={univFile.menu_btn_arr[5].menu_image}></img></button></Link>
                 :<button style={{ display: "none"}}></button>
             }
         </div>

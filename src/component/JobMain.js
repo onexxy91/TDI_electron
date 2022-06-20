@@ -5,6 +5,7 @@ import {FaArrowLeft, FaRegWindowMinimize, FaBars} from 'react-icons/fa'
 import {AiOutlineHome} from 'react-icons/ai'
 import { Link } from 'react-router-dom';
 
+
 export default function JobMain({ history }) {
     console.log("shitory", history)
     const goBack = () => {
@@ -12,7 +13,9 @@ export default function JobMain({ history }) {
     }
     
     return ( 
-        <div className="bontainer" style={{backgroundImage: 'url(./web-3967926_1280.jpg)' }}>
+        // <div className="bontainer" style={{backgroundImage: 'url(./web-3967926_1280.jpg)' }}>
+        <div className="bontainer" style={{backgroundColor: "#0093E9",
+        backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)"}}>
             <Navbar />
             <div className="titleContainer">
             <button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}} onClick={goBack}><FaArrowLeft size="45" color="#ffff" /><br/>뒤로</button>
@@ -20,7 +23,7 @@ export default function JobMain({ history }) {
                 <Link to="/menuAll"><button style={{backgroundColor:"rgb(255,255,255,0)", fontSize:"2vh", fontFamily: "gmaget"}}><FaBars size="45" color="#ffff"/><br/>메뉴</button></Link>
             </div>
             <div className="infobtnContainer">
-                <Link className="default-link" to="/jobAll">
+                <Link className="half-link" to="/jobAll">
                     <button className="allBtn"><FaRegWindowMinimize size="30" color="#ff9999"/><br/>전체</button>
                 </Link>
                 <Link className="half-link" to="/youthJobInfo">
@@ -40,6 +43,9 @@ export default function JobMain({ history }) {
                 </Link>
                 <Link className="half-link" to="/smallJobInfo">
                     <button className="smallBtn"><FaRegWindowMinimize size="30" color="#ff9999"/><br/>강소기업</button>
+                </Link>
+                <Link className="half-link" to="/pnJobInfo">
+                    <button className="smallBtn"><FaRegWindowMinimize size="30" color="#ff9999"/><br/>공사공단</button>
                 </Link>
             </div>
             <div className="kongchaeContainer">

@@ -56,7 +56,7 @@ export default function InterviewLogin({ history, location }) {
         borderTopLeftRadius: "8px",
         borderBottomLeftRadius: "8px",
         border:"none",
-        fontSize:"25px",
+        fontSize:"2vh",
         fontFamily: "FontAwesome, gmaget"
         
     }

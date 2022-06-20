@@ -316,6 +316,8 @@ export default function FaceDetector({ history }) {
             }else if (paseAge <= 39 && gender === "여성") {
                 recruitKind = "여성"
                 recruitData = await axios.get(`${WORKNET_PATH}&cur_page=1&page_size=10&pref_code=12&area_code=${WORKNET_CODE}`);
+            }else if(paseAge < 20) {
+                //
             }else {
                // console.log("전체")
                 recruitData = await axios.get(`${JOBKOREA_PATH}cur_page=1&page_size=10&area_code=${JOBKOREA_CODE}`);

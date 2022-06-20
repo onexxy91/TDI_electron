@@ -23,6 +23,9 @@ import EveryDayQuiz from './component/EveryDayQuiz'
 import './App.css';
 import InterviewRecord from './component/InterviewRecord';
 import JobTest from './component/jobTest/JobTest';
+import CustomAPI1 from './component/CustomAPI1';
+import CustomAPI2 from './component/CustomAPI2';
+import DisitalInterviewDutyDetail from './component/DisitalInterviewDutyDetail';
 
 
 function App() {
@@ -96,7 +99,8 @@ function App() {
                            '/disJobInfo',
                            '/smallJobInfo',
                            '/openJobInfo',
-                           '/hsJobInfo'
+                           '/hsJobInfo',
+                           '/pnJobInfo'
                            ]} exact component={JobAll} />
               <Route path="/centerNews" exact component={CenterNews} />
               <Route path="/setting" component={SettingLogin} />
@@ -111,10 +115,13 @@ function App() {
               <Route path="/signup" component={Signup} />
               <Route path="/signupMain" component={SignupMain} />
               <Route path="/interviewDutyList" component={DisitalInterviewDutyList} />
+              <Route path="/interviewDutyDetail" component={DisitalInterviewDutyDetail} />
               <Route path="/interviewRecord" component={InterviewRecord} />
               <Route path="/todayEng" component={TodayEng} />
               <Route path="/jobTest" component={JobTest} />
               <Route path="/everyQuiz" component={EveryDayQuiz} />
+              <Route path="/customAPI1" component={CustomAPI1} />
+              <Route path="/customAPI2" component={CustomAPI2} />
               {/* <Route path="/test" component={test} /> */}
             </Switch>
           </section>

@@ -14,7 +14,7 @@ const ment = [
 ]
 const GuideModal = (props) =>{
     const initData = useSelector(state => state.initialReducer);
-    const regioncode = initData.data.region;
+    const city_name = initData.data.config.CITY_NAME_KOR;
     const [selectedRecruit, setSelectedRecruit] = useState(undefined);
 
     const guideModalStyle = {
@@ -139,7 +139,7 @@ const GuideModal = (props) =>{
                         </div>
                         <div style={{ display:"flex", justifyContent: "flex-start", alignItems: "center", width:"100%", height:"3vh", background: "rgb(109,101,237)",
                             background: "linear-gradient(0deg, rgba(109,101,237,0.277468487394958) 100%, rgba(237,186,76,0.8155637254901961) 100%)", marginBottom:"1px"}}>
-                            <span style={spanStyle}>지역: 화성시</span>
+                            <span style={spanStyle}>지역: {city_name}</span>
                         </div>
                         <div style={{ display:"flex", justifyContent: "flex-start", alignItems: "center", width:"100%",  height:"3vh", background: "rgb(109,101,237)",
                             background: "linear-gradient(0deg, rgba(109,101,237,0.277468487394958) 100%, rgba(237,186,76,0.8155637254901961) 100%)",}}>
@@ -168,7 +168,7 @@ const GuideModal = (props) =>{
                         </div>
                         <div style={{ display:"flex", justifyContent: "center", alignItems: "center", width:"100%", height:"3vh", background: "rgb(109,101,237)",
                             background: "linear-gradient(0deg, rgba(109,101,237,0.277468487394958) 100%, rgba(237,186,76,0.8155637254901961) 100%)", marginBottom:"1px"}}>
-                            {props.recruitData && <span style={spanStyle}>(화성시, {props.recruitData.kind})</span>}
+                            {props.recruitData && <span style={spanStyle}>({city_name}, {props.recruitData.kind})</span>}
                         </div>
                         <div style={{ display:"flex", justifyContent: "center", alignItems: "center", width:"100%",  height:"3vh", background: "rgb(109,101,237)",
                             background: "linear-gradient(0deg, rgba(109,101,237,0.277468487394958) 100%, rgba(237,186,76,0.8155637254901961) 100%)",}}>

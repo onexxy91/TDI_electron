@@ -1,15 +1,15 @@
 import React, { useEffect, useRef } from "react"
 import "./home.css"
-// import Slide from "./Slide"
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
-//import background_imag from "../univ_background_2.png";
-import { BiTimer } from 'react-icons/bi';
-import { FaRegPaperPlane } from 'react-icons/fa';
-import { MdAssignmentInd, MdHelpOutline } from 'react-icons/md';
-import { RiLightbulbFlashLine, RiFileList2Line } from 'react-icons/ri';
+import { MdHelpOutline } from 'react-icons/md';
 import CenterNewsSlide from "./CenterNewsSlide";
+// import Slide from "./Slide"
+//import background_imag from "../univ_background_2.png";
+//import { BiTimer } from 'react-icons/bi';
+//import { FaRegPaperPlane } from 'react-icons/fa';
+//import { RiLightbulbFlashLine, RiFileList2Line } from 'react-icons/ri';
 
 
 const btnLink = new Array('/jobInfo'
